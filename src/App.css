@@ -224,5 +224,25 @@ a {
 }
 
 @media screen and (max-width: 500px) {
+    .content {
+        padding: 0;
+    }
 
+    .routers {
+        margin-top: 20px;
+    }
+
+    .ag-body-viewport.ag-layout-normal::-webkit-scrollbar {
+        width: 2px;
+    }
+
+    .ag-body-viewport.ag-layout-normal::-webkit-scrollbar-track {
+
+    }
+
+    .ag-body-viewport.ag-layout-normal::-webkit-scrollbar-thumb {
+        background-color: gray;
+        outline: inherit;
+        border-radius: 0;
+    }
 }

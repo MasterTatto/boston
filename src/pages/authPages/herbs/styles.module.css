@@ -35,3 +35,21 @@
     line-height: 22px;
     color: #272933;
 }
+
+@media screen and (max-width: 500px) {
+    .herbs {
+        padding: 0 10px;
+        padding-bottom: 20px;
+    }
+
+    .header {
+        flex-direction: column;
+        width: 100%;
+        align-items: flex-start;
+
+    }
+
+    .search_pacient {
+        max-width: 100%;
+    }
+}

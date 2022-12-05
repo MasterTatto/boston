@@ -31,7 +31,7 @@ const App = observer(() => {
 
     return (
         <div className="App">
-            {<SideBar/>}
+            <SideBar/>
 
             <div className={'content'}>
                 <Header/>
