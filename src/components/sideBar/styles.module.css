@@ -1,0 +1,199 @@
+.side_bar {
+    max-width: 355px;
+    width: 355px;
+    min-width: 355px;
+    background: #F8F8FC;
+    height: 100%;
+    padding: 15px 20px;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 20px;
+}
+
+.logo {
+    width: 186px;
+    height: 50px;
+}
+
+.action_box {
+    margin-top: 40px;
+}
+
+.added_patients {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.empty {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 17px;
+    color: #272933;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    transition: .3s all;
+    margin-top: 35px;
+}
+
+.title {
+    font-family: 'Montserrat Alternates', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    color: #272933;
+}
+
+.search_pacient {
+    margin-top: 15px;
+}
+
+.search_pacient span input {
+    border-radius: 15px;
+}
+
+.search_pacient span button {
+    border-bottom-right-radius: 15px !important;
+    border-top-right-radius: 15px !important;
+}
+
+.drop_item {
+    display: flex;
+    align-items: center;
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #272933;
+}
+
+.drop_item svg {
+    margin-right: 8px;
+    height: 20px;
+    width: 20px;
+}
+
+.drop_item_remove {
+    color: #E76B50;
+}
+
+.dots {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+    /*border: .1px solid;*/
+    width: fit-content;
+    position: relative;
+    height: 20px;
+}
+
+.dots span {
+    /*position: absolute;*/
+    margin: 0;
+    padding: 0;
+    height: 5px;
+    font-size: 25px;
+    font-weight: 600;
+    margin-top: -10px;
+}
+
+.patient_items {
+    margin-top: 24px;
+    height: 100%;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+.patient_items::-webkit-scrollbar {
+    width: 0.4em;
+    border-radius: 20px;
+}
+
+.patient_items::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+}
+
+.patient_items::-webkit-scrollbar-thumb {
+    background-color: #67AC46;
+    outline: 1px solid #67AC46;
+    border-radius: 20px;
+}
+
+.item {
+    width: 100%;
+    height: 85px;
+    margin-top: 12px;
+    background: #FFFFFF;
+    box-shadow: 2px 2px 4px rgba(81, 88, 126, 0.12);
+    border-radius: 8px;
+    padding: 10px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.action_box_item {
+    display: flex;
+    align-items: center;
+}
+
+.action_box_item svg path {
+    fill: #272933;
+    height: 18px;
+    width: 18px;
+}
+
+.action_box_item svg {
+    margin-left: 11px;
+    cursor: pointer;
+    height: 18px;
+    width: 18px;
+}
+
+.action_box_item .ant-dropdown {
+    left: 125px !important;
+}
+
+.item_name {
+    font-family: 'Montserrat Alternates', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    color: #272933;
+}
+
+.item_email {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    margin-top: 6px;
+    color: #272933;
+}
+
+.selected {
+    background-color: #67AC46;
+    color: #fff
+}
+
+.selected p {
+    color: #fff
+}
+
+.selected .action_box_item svg path {
+    fill: #fff;
+    height: 18px;
+    width: 18px;
+}

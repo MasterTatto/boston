@@ -1,0 +1,17 @@
+.loader {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.wrapper span {
+    font-size: 125px !important;
+}
+
+.wrapper span i {
+    height: 60px !important;
+    width: 60px !important;
+    background-color: #67AC46 !important;
+}

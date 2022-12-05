@@ -1,0 +1,117 @@
+.info_box {
+    padding-left: 40px;
+    max-width: 375px;
+    min-width: 375px;
+    width: 375px;
+}
+
+.info_name {
+    font-family: 'Montserrat Alternates', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    color: #272933;
+}
+
+.info_box_wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 5px;
+}
+
+.info_number, .info_email {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    color: #272933;
+}
+
+.allergic {
+    margin-top: 10px;
+    display: flex;
+}
+
+.allergic_box {
+    display: flex;
+    width: 100%;
+    margin-left: 5px;
+    flex-wrap: wrap;
+}
+
+.allergic_item:after {
+    content: ',';
+}
+
+.allergic_item:last-child:after {
+    content: '.';
+}
+
+.allergic_title {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    color: #272933;
+}
+
+.allergic_item {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 20px;
+    color: #fa2727;
+    margin-left: 5px;
+}
+
+.info_note {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #272933;
+    margin-top: 12px;
+    max-height: 68px;
+    overflow-y: auto;
+}
+
+.info_note::-webkit-scrollbar {
+    width: 0.4em;
+    border-radius: 20px;
+}
+
+.info_note::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+}
+
+.info_note::-webkit-scrollbar-thumb {
+    background-color: #67AC46;
+    outline: 1px solid #67AC46;
+    border-radius: 20px;
+}
+
+.edit {
+    margin-top: 20px;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #67AC46;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    transition: .3s all;
+}
+
+.edit svg {
+    margin-right: 8px;
+}

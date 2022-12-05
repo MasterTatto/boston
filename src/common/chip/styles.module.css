@@ -1,0 +1,28 @@
+.chip {
+    border: .1px solid #67AC46;
+    padding: 4px 8px;
+    border-radius: 12px;
+    margin-right: 5px;
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 12px;
+    color: #272933;
+    transition: .3s all;
+    cursor: default;
+    margin-top: 5px;
+}
+
+.chip:hover {
+    background-color: #67AC46;
+    color: #fff;
+}
+
+.chip span {
+    color: darkred;
+    margin-left: 6px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+}

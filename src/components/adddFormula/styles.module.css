@@ -1,0 +1,245 @@
+.btn {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    color: #8C8C8C;
+    border: 1.5px solid #8C8C8C;
+    border-radius: 8px;
+    height: 44px;
+    max-width: 130px;
+    width: 100%;
+}
+
+.add {
+    color: #FFFFFF;
+    background: #67AC46;
+    border: none !important;
+}
+
+.add:hover {
+    color: #fff !important;
+    border: none !important;
+    background: rgba(103, 172, 70, 0.7);
+}
+
+.btn_box {
+    justify-content: space-between;
+    max-width: 280px;
+    width: 100%;
+    display: flex;
+    margin-top: 25px;
+}
+
+.title {
+    font-family: 'Montserrat Alternates', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    color: #272933;
+}
+
+.content {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 24px;
+}
+
+.left_content {
+    max-width: 280px;
+    width: 100%;
+}
+
+.right_content {
+    width: 100%;
+    margin-left: 50px;
+    margin-top: -3px;
+}
+
+.input_box {
+    width: 100%;
+}
+
+.label {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 10px;
+    line-height: 12px;
+    color: #272933;
+    margin-left: 10px;
+
+}
+
+.input_box input {
+    margin-top: 3px;
+    border: 1px solid #D4D4D6;
+    border-radius: 15px;
+    height: 34px;
+}
+
+.input_box span input {
+    border: 1px solid #D4D4D6;
+    border-radius: 15px;
+    height: 32px;
+    margin-top: -4px;
+}
+
+.input_box span {
+    border-radius: 15px;
+    height: 34px;
+    margin-top: 5px;
+}
+
+.text_area textarea {
+    border-radius: 15px !important;
+    height: 102px;
+    margin-top: 3px;
+}
+
+.text_area {
+    margin-top: 16px;
+}
+
+.input_number {
+    margin-top: 5px;
+    max-width: 130px;
+    width: 100%;
+}
+
+.controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    height: 100%;
+    width: 100%;
+    user-select: none;
+    position: absolute;
+    border: 1px solid #e0e0e0;
+    top: 0;
+}
+
+.after {
+    left: 0;
+    border-left: none;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.before {
+    left: 0;
+    border-right: none;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+
+.herb_chose {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.patient_formula_box {
+    width: 100%;
+}
+
+.input_box_number {
+    margin-left: 20px;
+    max-width: 120px;
+    width: 100%;
+}
+
+.added_herb {
+    margin-top: 10px;
+}
+
+.table {
+    margin-top: 15px;
+    width: 100%;
+}
+
+.table_header {
+    display: flex;
+    align-items: center;
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    color: #272933;
+    padding-right: 10px;
+}
+
+.code {
+    max-width: 56px;
+    width: 100%;
+}
+
+.name {
+    max-width: 290px;
+    width: 100%;
+}
+
+.parts {
+    display: flex;
+    align-items: flex-end;
+    width: 100%;
+    justify-content: flex-end;
+}
+
+.items_box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    flex-direction: column;
+    margin-top: 12px;
+    overflow-y: auto;
+    max-height: 150px;
+    height: 100%;
+    padding-right: 5px;
+}
+
+.items_box::-webkit-scrollbar {
+    width: 0.4em;
+    border-radius: 20px;
+}
+
+.items_box::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+}
+
+.items_box::-webkit-scrollbar-thumb {
+    background-color: #67AC46;
+    outline: 1px solid #67AC46;
+    border-radius: 20px;
+}
+
+.item {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #272933;
+    display: flex;
+    border-bottom: 1px solid #272933;
+    padding-bottom: 8px;
+    margin-top: 8px;
+    width: 100%;
+}
+
+.item .name {
+    font-weight: 500;
+}
+
+.item .parts svg {
+    margin-left: 10px;
+    cursor: pointer;
+}
+

@@ -1,0 +1,35 @@
+.header {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navigate {
+    display: flex;
+    align-items: center;
+}
+
+.navigate a {
+    margin-right: 40px;
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #272933;
+}
+
+.logout {
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: rgba(39, 41, 51, 0.7);
+}
+
+.selected  {
+    color: #67AC46 !important;
+}

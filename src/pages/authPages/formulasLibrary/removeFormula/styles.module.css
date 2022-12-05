@@ -1,0 +1,51 @@
+.btn {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    color: #8C8C8C;
+    border: 1.5px solid #8C8C8C;
+    border-radius: 8px;
+    height: 44px;
+    max-width: 130px;
+    width: 100%;
+}
+
+.add {
+    color: #FFFFFF;
+    background: #E76B50;
+    border: none !important;
+}
+
+.add:hover {
+    color: #fff !important;
+    border: none !important;
+    background: rgba(231, 107, 80, 0.73);
+}
+
+.btn_box {
+    justify-content: space-between;
+    width: 100%;
+    display: flex;
+    margin-top: 25px;
+}
+
+.title {
+    font-family: 'Montserrat Alternates', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    color: #272933;
+}
+
+.description {
+    font-family: 'Montserrat',sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #272933;
+    margin-top: 24px;
+}

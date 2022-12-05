@@ -1,0 +1,266 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    max-width: 750px;
+    width: 100%;
+    overflow-y: auto;
+}
+
+.main::-webkit-scrollbar {
+    width: 0.4em;
+    border-radius: 20px;
+}
+
+.main::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+}
+
+.main::-webkit-scrollbar-thumb {
+    background-color: #67AC46;
+    outline: 1px solid #67AC46;
+    border-radius: 20px;
+}
+
+.btn_box {
+    justify-content: space-between;
+    width: 100%;
+    display: flex;
+    margin-top: 25px;
+}
+
+.btn {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    color: #8C8C8C;
+    border: none;
+    border-radius: 8px;
+    height: 44px;
+    padding: 12px 24px;
+}
+
+.cancel {
+    border: 1.5px solid #8C8C8C;
+}
+
+.add {
+    color: #FFFFFF;
+    background: #67AC46;
+}
+
+.add:hover {
+    color: #fff !important;
+    border: none !important;
+    background: rgba(103, 172, 70, 0.75);
+}
+
+.title {
+    font-family: 'Montserrat Alternates', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    color: #272933;
+}
+
+.input_box {
+    width: 100%;
+    margin-top: 16px;
+}
+
+.label {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 10px;
+    line-height: 12px;
+    margin-bottom: 15px;
+    color: #272933;
+    margin-left: 10px;
+}
+
+.input_box input {
+    margin-top: 5px;
+    border: 1px solid #D4D4D6;
+    border-radius: 15px;
+    height: 34px;
+}
+
+.input_box span input {
+    /*margin-top: 5px;*/
+    border: 1px solid #D4D4D6;
+    border-radius: 15px;
+    height: 32px;
+    margin-top: -4px;
+}
+
+.input_box span {
+    border-radius: 15px;
+    height: 34px;
+    margin-top: 5px;
+}
+
+.patient_formula_box {
+    margin-top: 16px;
+}
+
+.create_new {
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.calculate_herbs {
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.plus {
+    cursor: pointer;
+}
+
+.input_number {
+    display: flex;
+    align-items: center;
+}
+
+.controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    height: 100%;
+    width: 100%;
+    user-select: none;
+    position: absolute;
+    border: 1px solid #e0e0e0;
+    top: 0;
+}
+
+.after {
+    left: 0;
+    border-left: none;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.before {
+    left: 0;
+    border-right: none;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+
+.input_box_number label {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 10px;
+    line-height: 12px;
+    margin-bottom: 15px;
+    color: #272933;
+    margin-left: 10px;
+}
+
+.input_number {
+    margin-top: 5px;
+    max-width: 130px;
+    width: 100%;
+}
+
+.calculate_herbs_left {
+    display: flex;
+    align-items: center;
+}
+
+.input_box_number_2 {
+    margin-left: 20px;
+}
+
+.total_gramms {
+    margin-top: 16px;
+}
+
+.total_gramm_title, .total_gramms_answer {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #272933;
+}
+
+.total_gramms_answer {
+    font-weight: 500;
+    font-size: 16px;
+    color: black;
+    margin-top: 5px;
+}
+
+.notes_box {
+    margin-top: 40px;
+}
+
+.text_area textarea {
+    border-radius: 15px !important;
+    height: 102px;
+    margin-top: 5px;
+}
+
+.payment_box {
+    margin-top: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.notes_box_select {
+    max-width: 275px;
+    width: 100%;
+}
+
+.markup {
+    margin-top: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.markup_item_title, .markup_item_answer {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #272933;
+}
+
+.markup_item_answer {
+    color: #000;
+    font-weight: 500;
+    font-size: 16px;
+    margin-top: 5px;
+}
+
+.alergen_formula {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 10px;
+    line-height: 12px;
+    margin-bottom: 15px;
+    color: #272933;
+    margin-left: 10px;
+    margin-top: 5px;
+}
+
+.alergen_formula_items {
+    color: #fa2727;
+    font-size: 13px;
+    margin-left: 3px;
+}

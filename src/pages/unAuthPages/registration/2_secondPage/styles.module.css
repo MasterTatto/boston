@@ -1,0 +1,45 @@
+.second_page {
+    max-width: 280px;
+    width: 100%;
+}
+
+.title {
+    font-family: 'Montserrat Alternates', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #272933;
+    margin-bottom: 19px;
+}
+
+.label {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 10px;
+    line-height: 12px;
+    color: #272933;
+    margin-left: 10px;
+}
+
+.box {
+    width: 100%;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.box input {
+    margin-top: 5px;
+    border: 1px solid #D4D4D6;
+    border-radius: 15px;
+    height: 34px;
+}
+
+@media screen and (max-width: 500px) {
+    .second_page{
+        max-width: 100%;
+        margin-top: 25px;
+    }
+}

@@ -1,0 +1,22 @@
+.added_title {
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #67AC46;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    transition: .3s all;
+}
+
+.added_title span {
+    font-size: 25px;
+    margin-right: 11px;
+}
+
+.added_title:hover {
+    color: rgba(103, 172, 70, 0.74);
+}

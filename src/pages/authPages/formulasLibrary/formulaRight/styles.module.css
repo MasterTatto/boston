@@ -1,0 +1,47 @@
+.formula_right {
+    padding-left: 40px;
+}
+
+.formula_name {
+    font-family: 'Montserrat Alternates', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    color: #272933;
+}
+
+.title_components {
+    font-family: 'Montserrat Alternates', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #272933;
+    margin-top: 12px;
+}
+
+.component {
+    display: flex;
+    align-items: center;
+    margin-top: 8px;
+}
+
+.component_part {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #272933;
+}
+
+.component_name {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #272933;
+    margin-left: 10px;
+}
