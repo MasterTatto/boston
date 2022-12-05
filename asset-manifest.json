@@ -1,22 +1,23 @@
 {
   "files": {
-    "main.css": "/boston/static/css/main.c43b3307.css",
-    "main.js": "/boston/static/js/main.cee44e58.js",
-    "static/media/trash.svg": "/boston/static/media/trash.a867530fa7c58f49d4bbd7642e949114.svg",
-    "static/media/remove.svg": "/boston/static/media/remove.c51ddca0934a24da19b8499de9cfffc1.svg",
-    "static/media/copy.svg": "/boston/static/media/copy.b319913811a924557d58535ef341677e.svg",
-    "static/media/edit_text.svg": "/boston/static/media/edit_text.e506801553f8b44b8055963c4ee5c6a8.svg",
-    "static/media/edit.svg": "/boston/static/media/edit.ba7c696eeaced6c83487398c158703a0.svg",
+    "main.css": "/boston/static/css/main.967f6aa2.css",
+    "main.js": "/boston/static/js/main.3cc245b3.js",
+    "static/media/trash.svg": "/boston/static/media/trash.9a362b37b2cdcdc85c1d67c7e104abbe.svg",
+    "static/media/remove.svg": "/boston/static/media/remove.ebc65ac77d479ce02308ea799edf4c92.svg",
+    "static/media/copy.svg": "/boston/static/media/copy.860a4bb386fa05732465742f7d725faa.svg",
+    "static/media/edit_text.svg": "/boston/static/media/edit_text.a989814ac6a898f26c3957b7455fe965.svg",
+    "static/media/edit.svg": "/boston/static/media/edit.06391e02c142d623d1e45a4b8f416103.svg",
     "index.html": "/boston/index.html",
-    "static/media/plus_formula.svg": "/boston/static/media/plus_formula.8826040abf4e6af0105ac7b488a800f0.svg",
-    "static/media/arrow.svg": "/boston/static/media/arrow.d9c6937ff51c103d01b094f1c80c318d.svg",
-    "static/media/plus.svg": "/boston/static/media/plus.981f216bc78b870b851e99c891e90928.svg",
-    "static/media/minus.svg": "/boston/static/media/minus.020fdda81a375e24c1774f24e52608a2.svg",
-    "main.c43b3307.css.map": "/boston/static/css/main.c43b3307.css.map",
-    "main.cee44e58.js.map": "/boston/static/js/main.cee44e58.js.map"
+    "static/media/plus_formula.svg": "/boston/static/media/plus_formula.4d82a178c970411287bd0a93f48d3859.svg",
+    "static/media/arrow_select.svg": "/boston/static/media/arrow_select.69520ad6c65bef721cc42bf9351479b7.svg",
+    "static/media/arrow.svg": "/boston/static/media/arrow.eb1db24e0504c22d6f469939ea2e5b7d.svg",
+    "static/media/plus.svg": "/boston/static/media/plus.aff5297114618249d2a789e3cf161937.svg",
+    "static/media/minus.svg": "/boston/static/media/minus.c102b915d9531d94b0ffbf0697014866.svg",
+    "main.967f6aa2.css.map": "/boston/static/css/main.967f6aa2.css.map",
+    "main.3cc245b3.js.map": "/boston/static/js/main.3cc245b3.js.map"
   },
   "entrypoints": [
-    "static/css/main.c43b3307.css",
-    "static/js/main.cee44e58.js"
+    "static/css/main.967f6aa2.css",
+    "static/js/main.3cc245b3.js"
   ]
 }
