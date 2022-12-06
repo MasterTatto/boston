@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/boston/static/css/main.43fbcc3d.css",
-    "main.js": "/boston/static/js/main.10a8fb8d.js",
+    "main.css": "/boston/static/css/main.192d241a.css",
+    "main.js": "/boston/static/js/main.f7eda851.js",
     "static/media/trash.svg": "/boston/static/media/trash.9a362b37b2cdcdc85c1d67c7e104abbe.svg",
     "static/media/remove.svg": "/boston/static/media/remove.ebc65ac77d479ce02308ea799edf4c92.svg",
     "static/media/copy.svg": "/boston/static/media/copy.860a4bb386fa05732465742f7d725faa.svg",
@@ -13,11 +13,11 @@
     "static/media/arrow.svg": "/boston/static/media/arrow.eb1db24e0504c22d6f469939ea2e5b7d.svg",
     "static/media/plus.svg": "/boston/static/media/plus.aff5297114618249d2a789e3cf161937.svg",
     "static/media/minus.svg": "/boston/static/media/minus.c102b915d9531d94b0ffbf0697014866.svg",
-    "main.43fbcc3d.css.map": "/boston/static/css/main.43fbcc3d.css.map",
-    "main.10a8fb8d.js.map": "/boston/static/js/main.10a8fb8d.js.map"
+    "main.192d241a.css.map": "/boston/static/css/main.192d241a.css.map",
+    "main.f7eda851.js.map": "/boston/static/js/main.f7eda851.js.map"
   },
   "entrypoints": [
-    "static/css/main.43fbcc3d.css",
-    "static/js/main.10a8fb8d.js"
+    "static/css/main.192d241a.css",
+    "static/js/main.f7eda851.js"
   ]
 }
