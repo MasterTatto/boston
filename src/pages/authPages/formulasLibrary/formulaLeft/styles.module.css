@@ -50,7 +50,7 @@
     cursor: pointer;
     width: fit-content;
     position: relative;
-    height: 20px;
+    height: 28px;
     user-select: none;
 }
 
@@ -64,15 +64,28 @@
 }
 
 .formula {
+    margin-top: 12px;
+    cursor: pointer;
+    /*display: flex;*/
+    /*align-items: center;*/
+    /*!*justify-content: space-between;*!*/
+    /*flex-direction: column;*/
+    /*padding: 16px;*/
+    /*margin-top: 12px;*/
+    /*background: #F8F8FC;*/
+    /*box-shadow: 2px 2px 4px rgba(81, 88, 126, 0.12);*/
+    /*border-radius: 12px;*/
+    /*cursor: pointer;*/
+    /*transition: 0.3s all;*/
+    /*height: 70px;*/
+    /*overflow: hidden;*/
+}
+
+.wrapper {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 16px;
-    margin-top: 12px;
-    background: #F8F8FC;
-    box-shadow: 2px 2px 4px rgba(81, 88, 126, 0.12);
-    border-radius: 12px;
-    cursor: pointer;
+    width: 100%;
 }
 
 .formula_name {
@@ -95,13 +108,97 @@
 }
 
 .selected {
-    background-color: #67AC46;
+    border: 2px solid #67AC46;
+    border-radius: 15px;
 }
 
-.selected .formula_name, .selected .formula_note {
-    color: #fff;
-}
+/*.open_box {*/
+/*    !*display: none;*!*/
+/*    user-select: none;*/
+/*    user-focus: none;*/
+/*}*/
 
-.selected .menu .dots {
-    color: #fff;
+/*.selected .formula_name, .selected .formula_note {*/
+/*    color: #fff;*/
+/*}*/
+
+/*.selected .menu .dots {*/
+/*    color: #fff;*/
+/*}*/
+
+/*.test, .arrow {*/
+/*    display: none;*/
+/*}*/
+
+
+@media screen and (max-width: 500px) {
+    .formula_left {
+        overflow-y: unset;
+        padding-right: 0;
+        margin-top: 20px;
+    }
+
+    .selected {
+        border: none;
+        border-radius: 15px;
+    }
+
+    .title_components {
+        font-family: 'Montserrat Alternates', sans-serif;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 17px;
+        color: #272933;
+        margin-top: 12px;
+    }
+
+    .component {
+        display: flex;
+        align-items: center;
+        margin-top: 8px;
+    }
+
+    .component_part {
+        font-family: 'Montserrat', sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 17px;
+        color: #272933;
+    }
+
+    .component_name {
+        font-family: 'Montserrat', sans-serif;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 17px;
+        color: #272933;
+        margin-left: 10px;
+    }
+
+    .action {
+        display: flex;
+        align-items: center;
+    }
+
+    .arrow {
+        margin-left: 10px;
+        display: flex;
+    }
+
+    .arrow svg path {
+        color: #272933;
+        fill: #272933;
+        height: 5px;
+        width: 5px;
+    }
+
+    .arrow svg {
+        color: #272933;
+        fill: #272933;
+        height: 15px;
+        width: 15px;
+    }
 }

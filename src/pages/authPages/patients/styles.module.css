@@ -16,6 +16,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+
 }
 
 .header_bottom {
@@ -39,3 +40,218 @@
     width: 100%;
     padding-bottom: 15px;
 }
+
+.patients {
+    display: none;
+}
+
+@media screen and (max-width: 500px) {
+    .header_top {
+        font-family: 'Montserrat Alternates', sans-serif;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 20px;
+        color: #272933;
+        margin-top: 10px;
+        width: 100%;
+    }
+
+    .content_box {
+        margin: 0 auto;
+        padding: 0 10px;
+        height: fit-content;
+        padding-bottom: 50px;
+    }
+
+    .header_bottom {
+        max-width: 100%;
+    }
+
+    .patients {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        margin-bottom: 30px;
+    }
+
+    .patients_serach {
+        width: 100%;
+        height: 34px;
+        background: #FFFFFF;
+        /* #D4D4D6 */
+        justify-content: space-between;
+        display: flex;
+        align-items: center;
+        border: 1px solid #D4D4D6;
+        border-radius: 15px;
+        padding: 8.5px 12px;
+    }
+
+    .patient_name {
+        font-family: 'Montserrat', sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 17px;
+        color: #272933;
+    }
+
+    .show_more {
+        font-family: 'Montserrat', sans-serif;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 15px;
+        text-decoration-line: underline;
+        color: #8C8C8C;
+        cursor: pointer;
+        margin-right: 40px;
+    }
+
+    .action_box {
+        display: flex;
+        align-items: center;
+        position: relative;
+    }
+
+    .action_box svg path {
+        color: #8C8C8C;
+        fill: #8C8C8C;
+
+        /*transform: rotate(40deg);*/
+    }
+
+    .action_box svg {
+        position: absolute;
+        right: 0;
+        transform: rotate(90deg);
+        cursor: pointer;
+    }
+
+    .item {
+        width: 100%;
+        height: 85px;
+        margin-top: 12px;
+        background: #FFFFFF;
+        box-shadow: 2px 2px 4px rgba(81, 88, 126, 0.12);
+        border-radius: 8px;
+        padding: 10px 12px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        cursor: pointer;
+    }
+
+    .selected {
+        background-color: #67AC46;
+        color: #fff
+    }
+
+    .selected p {
+        color: #fff
+    }
+
+    .selected .action_box_item svg path {
+        fill: #fff;
+        height: 18px;
+        width: 18px;
+    }
+
+    .item_name {
+        font-family: 'Montserrat Alternates', sans-serif;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 20px;
+        color: #272933;
+    }
+
+    .item_email {
+        font-family: 'Montserrat', sans-serif;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 20px;
+        margin-top: 6px;
+        color: #272933;
+    }
+
+    .action_box_item {
+        display: flex;
+        align-items: center;
+    }
+
+    .action_box_item svg path {
+        fill: #272933;
+        height: 18px;
+        width: 18px;
+    }
+
+    .action_box_item svg {
+        margin-left: 11px;
+        cursor: pointer;
+        height: 18px;
+        width: 18px;
+    }
+
+    .action_box_item .ant-dropdown {
+        left: 125px !important;
+    }
+
+    .dots {
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+        padding: 0;
+        cursor: pointer;
+        width: fit-content;
+        position: relative;
+        height: 20px;
+    }
+
+    .dots span {
+        margin: 0;
+        padding: 0;
+        height: 5px;
+        font-size: 25px;
+        font-weight: 600;
+        margin-top: -10px;
+    }
+
+    .empty {
+        font-family: 'Montserrat', sans-serif;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 24px;
+        line-height: 17px;
+        color: #272933;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        transition: .3s all;
+        margin-top: 35px;
+    }
+
+    .drop_item {
+        display: flex;
+        align-items: center;
+        font-family: 'Montserrat', sans-serif;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 17px;
+        color: #272933;
+    }
+
+    .drop_item svg {
+        margin-right: 8px;
+        height: 20px;
+        width: 20px;
+    }
+
+    .drop_item_remove {
+        color: #E76B50;
+    }
+}
+

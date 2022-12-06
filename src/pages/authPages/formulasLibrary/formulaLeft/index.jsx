@@ -5,20 +5,24 @@ import {observer} from "mobx-react-lite";
 import {ReactComponent as Edit} from "../../../../assets/edit.svg";
 import {ReactComponent as Copy} from "../../../../assets/copy.svg";
 import {ReactComponent as Plus} from "../../../../assets/plus_formula.svg";
+import {ReactComponent as Arrow} from "../../../../assets/arrow_select.svg";
 import classNames from "classnames";
 import {ReactComponent as Remove} from "../../../../assets/remove.svg";
-import {Dropdown} from "antd";
+import {Collapse, Dropdown} from "antd";
 import {useNavigate} from "react-router-dom";
+import FormulaRight from "../formulaRight";
+import {useWindowSize} from "../../../../utils/useWindowSize";
 
 const FormulaLeft = observer(({formulas, selectedFormula, setSelectedFormula, choseTypeModal, setRemoveModal}) => {
     const store = useStore()
-
+    const size = useWindowSize();
     const navigate = useNavigate()
 
     const getCurrentFormula = async (id) => {
         await store.formula.getCurrentFormula(id)
     }
 
+    // collapsible="disabled"
     const items = (id) => [
         {
             label: <div className={s.drop_item} onClick={() => choseTypeModal('edit', true)}>
@@ -55,36 +59,59 @@ const FormulaLeft = observer(({formulas, selectedFormula, setSelectedFormula, ch
         },
     ];
 
+    const genExtra = (id) => (
+            <Dropdown
+                menu={{
+                    items: items(id)
+                }}
+                trigger={['click']}
+                placement="bottomRight"
+            >
+                <div className={s.dots} onClick={(e) => e.preventDefault()}>
+                    <span>.</span>
+                    <span>.</span>
+                    <span>.</span>
+                </div>
+            </Dropdown>
+
+        )
+    ;
+
     return (
         <div className={s.formula_left}>
             {formulas.map((el) => {
-                return <div className={classNames(s.formula, selectedFormula === el.formula_id && s.selected)}
-                            key={el.formula_id} onClick={async () => {
+                return <div
+                    className={classNames(s.formula, selectedFormula === el.formula_id && s.selected)}
+                    key={el.formula_id} onClick={async () => {
                     setSelectedFormula(el.formula_id)
                     await getCurrentFormula(el.formula_id)
                 }}>
-                    <div>
-                        <p className={s.formula_name}>{el.formula_name}</p>
-                        <p className={s.formula_note}>{el.notes}</p>
-                    </div>
-
-                    <div className={s.menu}>
-                        <Dropdown
-                            menu={{
-                                items: items(el.formula_id)
-                            }}
-                            trigger={['click']}
-                            placement="bottomRight"
-                        >
-                            <div className={s.dots} onClick={(e) => e.preventDefault()}>
-                                <span>.</span>
-                                <span>.</span>
-                                <span>.</span>
+                    <Collapse
+                        collapsible={size.width > 500 && "disabled"}
+                        expandIconPosition={'end'}>
+                        <Collapse.Panel header={
+                            <div>
+                                <p className={s.formula_name}>{el.formula_name}</p>
+                                <p className={s.formula_note}>{el.notes}</p>
                             </div>
-                        </Dropdown>
-                    </div>
+                        } key="1" extra={genExtra(el.formula_id)}>
+
+                            <div className={s.test}>
+                                <p className={s.title_components}>Composition of the formula</p>
+
+                                {store.formula.currentFormula?.components?.map((el, i) => {
+                                    return <div className={s.component} key={el.component_id}>
+                                        <p className={s.component_part}>x{el.parts}</p>
+                                        <p className={s.component_name}>{el.herb_name}</p>
+                                    </div>
+                                })}
+                            </div>
+                        </Collapse.Panel>
+                    </Collapse>
                 </div>
+
             })}
+
         </div>
     );
 });

@@ -230,7 +230,7 @@ const AddedPrescriptionPatient = observer(() => {
                         </div>
                     </div>
 
-                    <div>
+                    <div className={s.take_gram_box}>
                         <div className={classNames(s.input_box_number)}>
                             <label className={s.label}>Take grams</label>
                             <div className={s.input_number}>
@@ -295,21 +295,22 @@ const AddedPrescriptionPatient = observer(() => {
                             />
                         </div>
                     </div>
+                    <>
+                        <div className={s.markup_item}>
+                            <p className={s.markup_item_title}>Herbs cost:</p>
+                            <p className={s.markup_item_answer}>{herbsCoast}</p>
+                        </div>
 
-                    <div className={s.markup_item}>
-                        <p className={s.markup_item_title}>Herbs cost:</p>
-                        <p className={s.markup_item_answer}>{herbsCoast}</p>
-                    </div>
+                        <div className={s.markup_item}>
+                            <p className={s.markup_item_title}>Fulfillment fee:</p>
+                            <p className={s.markup_item_answer}>{localStorage.getItem('fulfillment_fee') || 1}</p>
+                        </div>
 
-                    <div className={s.markup_item}>
-                        <p className={s.markup_item_title}>Fulfillment fee:</p>
-                        <p className={s.markup_item_answer}>{localStorage.getItem('fulfillment_fee') || 1}</p>
-                    </div>
-
-                    <div className={s.markup_item}>
-                        <p className={s.markup_item_title}>Total price:</p>
-                        <p className={s.markup_item_answer}>{totalPrice}</p>
-                    </div>
+                        <div className={s.markup_item}>
+                            <p className={s.markup_item_title}>Total price:</p>
+                            <p className={s.markup_item_answer}>{totalPrice}</p>
+                        </div>
+                    </>
                 </div>
 
                 <div className={s.notes_box}>

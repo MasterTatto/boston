@@ -93,6 +93,10 @@
     color: #272933;
 }
 
+@media screen and (max-width: 500px) {
+
+}
+
 .formula_items {
     display: flex;
     align-items: flex-start;
@@ -173,4 +177,17 @@
     margin-right: 8px;
     height: 20px;
     width: 20px;
+}
+
+
+@media screen and (max-width: 500px) {
+    .content_accordion {
+        padding-right: 0;
+
+    }
+
+    .content_accordion {
+        margin-top: 15px;
+        overflow-y: unset;
+    }
 }

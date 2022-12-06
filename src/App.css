@@ -223,13 +223,31 @@ a {
     margin-top: 0 !important;
 }
 
+.ant-collapse-item-disabled .ant-collapse-header .ant-collapse-expand-icon {
+    display: none !important;
+}
+
+.ant-collapse-item-disabled {
+    cursor: pointer !important;
+}
+
+.ant-collapse-item-disabled .ant-collapse-header {
+    cursor: pointer !important;
+}
+
 @media screen and (max-width: 500px) {
     .content {
         padding: 0;
+        height: fit-content;
+    }
+
+    .ant-collapse-item-disabled .ant-collapse-header .ant-collapse-expand-icon {
+        display: block !important;
     }
 
     .routers {
         margin-top: 20px;
+        /*height: fit-content;*/
     }
 
     .ag-body-viewport.ag-layout-normal::-webkit-scrollbar {
@@ -244,5 +262,9 @@ a {
         background-color: gray;
         outline: inherit;
         border-radius: 0;
+    }
+
+    .ant-input-number-group-wrapper {
+        width: 100% !important;
     }
 }

@@ -40,6 +40,7 @@
     .herbs {
         padding: 0 10px;
         padding-bottom: 20px;
+        height: calc(100vh - 70px);
     }
 
     .header {

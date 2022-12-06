@@ -264,3 +264,82 @@
     font-size: 13px;
     margin-left: 3px;
 }
+
+@media screen and (max-width: 500px) {
+    .main {
+        padding: 0 10px;
+        overflow-y: unset;
+    }
+
+    .btn_box {
+        padding-bottom: 50px;
+    }
+
+    .calculate_herbs_left {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .calculate_herbs {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .input_box_number {
+        max-width: 100%;
+        width: 100%;
+        margin-top: -10px;
+    }
+
+    .input_number {
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .input_box_number_2 {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+
+    .take_gram_box {
+        max-width: 100%;
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .markup {
+        display: flex;
+        flex-direction: column;
+        margin-top: 40px;
+    }
+
+    .markup_item {
+        display: flex;
+        width: 100%;
+        margin-top: 10px;
+        align-items: flex-end;
+    }
+
+    .markup_item_answer {
+        margin-left: 5px;
+    }
+
+    .payment_box {
+        flex-direction: column;
+        max-width: 100%;
+    }
+
+    .notes_box_select {
+        max-width: 100%;
+    }
+
+    .btn_box{
+        flex-direction: column;
+    }
+
+    .cancel{
+        margin-top: 10px;
+    }
+}
