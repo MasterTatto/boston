@@ -1,0 +1,186 @@
+.left_side {
+    max-width: 650px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.title {
+    font-family: 'Montserrat Alternates', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    color: #272933;
+}
+
+.date {
+    display: flex;
+    align-items: center;
+}
+
+.arrow {
+    margin: 0 13px;
+    height: 2px;
+    width: 12px;
+    background: #8C8C8C;
+}
+
+.table {
+    width: 100%;
+    overflow-x: auto;
+    height: 100%;
+    margin-top: 25px;
+}
+
+.header_table {
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+    justify-content: space-between;
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    text-align: left;
+    color: #272933;
+}
+
+.number_table {
+    min-width: 56px;
+    max-width: 56px;
+}
+
+.empty {
+    min-width: 56px;
+    max-width: 56px;
+    margin-right: 25px;
+}
+
+.type_table {
+    min-width: 260px;
+    max-width: 260px;
+}
+
+.date_table {
+    min-width: 116px;
+    max-width: 116px;
+}
+
+.amount_table {
+    min-width: 136px;
+    max-width: 136px;
+}
+
+.table_items {
+    margin-top: 5px;
+    overflow-y: auto;
+    height: calc(100% - 40px);
+}
+
+.table_items::-webkit-scrollbar {
+    width: 0.4em;
+    height: 5px;
+    border-radius: 20px;
+}
+
+.table_items::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+}
+
+.table_items::-webkit-scrollbar-thumb {
+    background-color: #67AC46;
+    outline: 1px solid #67AC46;
+    border-radius: 20px;
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(39, 41, 51, 0.2);
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #272933;
+    height: 55px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: .3s all;
+    flex-direction: column;
+    padding: 18px 0;
+}
+
+.item_first {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 55px;
+}
+
+.hidden_item {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+.row {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    margin-top: 12px;
+    justify-content: space-between;
+}
+
+.item .type_table {
+    font-weight: 500;
+    transition: .3s all;
+}
+
+.item .amount_table {
+    font-weight: 600;
+}
+
+.row .name {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #272933;
+    /*max-width: 288px;*/
+    /*min-width: 288px;*/
+}
+
+.row .answer {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #272933;
+    /*max-width: 200px;*/
+    /*min-width: 200px;*/
+}
+
+.item_first:hover .type_table {
+    color: #67AC46;
+}
+
+

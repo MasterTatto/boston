@@ -7,6 +7,7 @@ import s from "./styles.module.css";
 import AddedPrescriptionPatient from "../pages/authPages/prescriptionCreate";
 import PatientRight from "../pages/authPages/patients/patient_right";
 import Registration from "../pages/unAuthPages/registration";
+import PaymentHistory from "../pages/authPages/paymentHistory";
 
 export const unAuthRoutes = [
     {path: '/login', element: <Login/>},
@@ -17,6 +18,7 @@ export const authRoutes = [
     {path: '/patients', element: <Patients/>},
     {path: '/formulas-library', element: <FormulasLibrary/>},
     {path: '/herbs-list', element: <Herbs/>},
+    {path: '/payment-history', element: <PaymentHistory/>},
     {
         path: '/formulas-library/create-prescription', element: <div className={s.create_prescription_patient}>
             <AddedPrescriptionPatient/>

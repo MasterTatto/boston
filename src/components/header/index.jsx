@@ -22,6 +22,7 @@ const Header = () => {
         {title: 'Patients', link: 'patients'},
         {title: 'Formulas library', link: 'formulas-library'},
         {title: 'Herbs list', link: 'herbs-list'},
+        {title: 'Payment history', link: 'payment-history'},
     ]
 
     const items = (id) => [...links.map((el) => ({

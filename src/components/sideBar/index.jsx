@@ -21,6 +21,7 @@ const SideBar = observer(() => {
         (['/patients/create-prescription', '/patients'].includes(location.pathname) && '/patients') ||
         (['/formulas-library', '/formulas-library/create-prescription'].includes(location.pathname) && '/formulas-library') ||
         (['/herbs-list'].includes(location.pathname) && location.pathname) ||
+        (['/payment-history'].includes(location.pathname) && location.pathname) ||
         '/'
     //type null = close
     //type add = addModal
