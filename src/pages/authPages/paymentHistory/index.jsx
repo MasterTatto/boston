@@ -27,7 +27,7 @@ const PaymentHistory = () => {
     return (
         <div className={s.main}>
             <LeftSide history={history} chooseDay={chooseDay} setHistory={setHistory}/>
-            <RightSide/>
+            <RightSide balance={history?.current_balance || 0}/>
         </div>
     );
 };

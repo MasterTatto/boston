@@ -52,6 +52,14 @@ const Patients = observer(() => {
     const [search, setSearch] = useState('')
     const [patients, setPatients] = useState([])
     const [selectedPatient, setSelectedPatient] = useState()
+    const [prescriptionID, setPrescriptionID] = useState(null)
+    const [prescriptionItems, setPrescriptionItems] = useState([])
+
+    const getCurrentPrescription = async (id) => {
+        setPrescriptionID(id)
+        await store.history.getCurrentPrescription(id)
+        setPrescriptionItems(store.history.prescription)
+    }
 
     const removePatient = async () => {
         await store.patients.deletePatients(store.patients.patient.patient_id, setOpenRemoveModal)
@@ -90,29 +98,17 @@ const Patients = observer(() => {
 
     useEffect(() => {
         const getAllPrescriptions = async () => {
+            setPrescriptionID(null)
             await store.patients.getPrescription(store.patients.patient.patient_id)
             setAllPrescriptions(store.patients.allPrescription)
         }
         getAllPrescriptions()
     }, [store.patients.patient.patient_id])
 
-    // useEffect(() => {
-    //     const getAllPatients = async () => {
-    //         await store.patients.getAllPatients()
-    //         setSelectedPatient(store.patients.allPatients.length > 0 ? store.patients.allPatients[0]?.patient_id : null)
-    //         if (store.patients.allPatients.length > 0) {
-    //             await store.patients.getPatients(store.patients.allPatients[0]?.patient_id)
-    //             await store.patients.getPrescription(store.patients.allPatients[0]?.patient_id)
-    //         }
-    //     }
-    //
-    //     getAllPatients()
-    //
-    // }, [])
-
     useEffect(() => {
         setPatients(store.patients.allPatients)
     }, [store.patients.isLoading])
+
     return (
         <>
             {openAddedModal !== null && <AddedPatientsModal handleOk={handleOk} openAddedModal={openAddedModal}
@@ -197,12 +193,13 @@ const Patients = observer(() => {
                         </div>
                     </div>
 
-                    <PatientLeft setSearch={setSearch} search={search} setHiddenCopy={setHiddenCopy}
+                    <PatientLeft getCurrentPrescriptionHandler={getCurrentPrescription} setSearch={setSearch} search={search}
+                                 setHiddenCopy={setHiddenCopy}
                                  allPrescriptions={allPrescriptions}
                                  hiddenCopy={hiddenCopy}/>
                 </div>
 
-                <PatientRight/>
+                <PatientRight patients={patients} prescription={prescriptionItems.find((f) => f.prescription_id === prescriptionID)}/>
             </div>}
         </>
     );

@@ -74,7 +74,7 @@ const Header = () => {
                         placement="bottomRight"
                     >
                         <div className={s.selected_box}>
-                            <p>{links.find(f => `/${f.link}` === currentLocation)?.title}</p>
+                            <p>{links?.find(f => `/${f.link}` === currentLocation)?.title}</p>
                             <Arrow/>
                         </div>
                     </Dropdown>

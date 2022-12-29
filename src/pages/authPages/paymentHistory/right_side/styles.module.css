@@ -1,0 +1,110 @@
+.right_side {
+    max-width: 290px;
+    width: 100%;
+    margin-left: 40px;
+}
+
+.text_balance, .balance {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #272933;
+}
+
+.balance {
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 21px;
+    color: #67AC46;
+    margin-top: 3px;
+}
+
+.description_balance {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #272933;
+    margin-top: 8px;
+}
+
+.detalis {
+    margin-top: 40px;
+}
+
+.detalis_title {
+    font-family: 'Montserrat Alternates', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #272933;
+}
+
+.input_box {
+    width: 100%;
+    margin-top: 12px;
+}
+
+.label {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 10px;
+    line-height: 12px;
+    margin-bottom: 15px;
+    color: #272933;
+    margin-left: 10px;
+
+}
+
+.input_box input {
+    margin-top: 5px;
+    border: 1px solid #D4D4D6;
+    border-radius: 15px;
+    height: 34px;
+}
+
+.input_box span input {
+    /*margin-top: 5px;*/
+    border: 1px solid #D4D4D6;
+    border-radius: 15px;
+    height: 32px;
+    margin-top: -4px;
+}
+
+.input_box span {
+    border-radius: 15px;
+    height: 34px;
+    margin-top: 5px;
+}
+
+.input_box input[disabled] {
+    color: #8C8C8C !important;
+}
+
+.edit {
+    margin-top: 13px;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #67AC46;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    transition: .3s all;
+}
+
+.edit svg {
+    margin-right: 8px;
+}
+
+.edit_dave {
+    margin-left: 8px;
+}

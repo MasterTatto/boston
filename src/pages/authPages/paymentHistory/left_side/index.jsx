@@ -3,11 +3,28 @@ import s from './styles.module.css'
 import {DatePicker} from "antd";
 import classNames from "classnames";
 import {makeRandomID} from "../../../../utils/randomID";
+import Item from "./item";
+import {useStore} from "../../../../useStore";
 
 const LeftSide = ({history, chooseDay, setHistory}) => {
+    const store = useStore()
 
+    const [patients, setPatients] = useState([])
     const [from, setFrom] = useState(null)
     const [to, setTo] = useState(null)
+
+    const getCurrentPrescription = async (id) => {
+        await store.history.getCurrentPrescription(id)
+    }
+
+    useEffect(() => {
+        const getAllPatients = async () => {
+            await store.patients.getAllPatients()
+            setPatients(store.patients.allPatients)
+        }
+
+        getAllPatients()
+    }, [])
 
     useEffect(() => {
         if (from && to) {
@@ -44,58 +61,42 @@ const LeftSide = ({history, chooseDay, setHistory}) => {
                     <p className={s.type_table}>Transaction Type</p>
                     <p className={s.date_table}>Date</p>
                     <p className={s.amount_table}>Amount</p>
+                    <p className={s.amount_table}>Current balance</p>
                 </div>
 
                 <div className={s.table_items}>
                     {history?.rows.map((el, i) => {
+                        const currentItem = store.history.prescription?.find(f => f.prescription_id === el.prescription_id)
+
                         return (
-                            <div className={s.item} style={{
-                                height: el.isOpen && '180px'
-                            }} onClick={() => setHistory({
-                                ...history,
-                                rows: history.rows.map((histor) => histor.date === el.date ? ({
-                                    ...histor,
-                                    isOpen: !histor.isOpen
-                                }) : histor)
-                            })}>
+                            <div className={classNames(s.item, el.isOpen && s.active)} onClick={async () => {
+                                if (!el?.prescription_id) return
+                                await getCurrentPrescription(el.prescription_id)
+                                setHistory({
+                                    ...history,
+                                    rows: history.rows.map((histor) => histor.prescription_id === el.prescription_id ? ({
+                                        ...histor,
+                                        isOpen: !histor.isOpen
+                                    }) : histor)
+                                })
+                            }}>
                                 <div className={s.item_first}>
                                     <p className={s.number_table}>{i + 1}</p>
                                     <p className={s.type_table} style={{
                                         color: el.isOpen && '#67AC46'
                                     }}>{el.type}</p>
                                     <p className={s.date_table}>{el.date}</p>
+                                    <p className={s.amount_table}>{`$${el.amount}`}</p>
                                     <p className={s.amount_table}>{`$${el.balance}`}</p>
                                 </div>
 
-                                <div className={s.hidden_item} onClick={(e) => {
-                                    e.preventDefault()
-                                    e.stopPropagation()
-                                }}>
-                                    <div className={s.row}>
-                                        <p className={s.number_table}/>
-                                        <p className={classNames(s.type_table, s.name)}>Date:</p>
-                                        <p className={classNames(s.date_table, s.answer)}>{el.date}</p>
-                                        <p className={s.amount_table}/>
-                                    </div>
-                                    <div className={s.row}>
-                                        <p className={s.number_table}/>
-                                        <p className={classNames(s.type_table, s.name)}>Pacient:</p>
-                                        <p className={classNames(s.date_table, s.answer)}>{el.prescription_id}</p>
-                                        <p className={s.amount_table}/>
-                                    </div>
-                                    <div className={s.row}>
-                                        <p className={s.number_table}/>
-                                        <p className={classNames(s.type_table, s.name)}>Herbs cost:</p>
-                                        <p className={classNames(s.date_table, s.answer)}>{el.amount}</p>
-                                        <p className={s.amount_table}/>
-                                    </div>
-                                    <div className={s.row}>
-                                        <p className={s.number_table}/>
-                                        <p className={classNames(s.type_table, s.name)}>Fulfillment fee:</p>
-                                        <p className={classNames(s.date_table, s.answer)}>{6}</p>
-                                        <p className={s.amount_table}/>
-                                    </div>
-                                </div>
+                                {el?.prescription_id && <Item patients={patients} onHidden={() => setHistory({
+                                    ...history,
+                                    rows: history.rows.map((histor) => histor.prescription_id === el.prescription_id ? ({
+                                        ...histor,
+                                        isOpen: !histor.isOpen
+                                    }) : histor)
+                                })} content={currentItem}/>}
                             </div>
                         )
                     })}

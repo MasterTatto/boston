@@ -1,5 +1,5 @@
 .content_accordion {
-    margin-top: 36px;
+    margin-top: 24px;
     height: calc(100% - 100px);
     overflow-y: auto;
     padding-right: 10px;
@@ -8,6 +8,7 @@
 .content_accordion::-webkit-scrollbar {
     width: 0.4em;
     border-radius: 20px;
+
 }
 
 .content_accordion::-webkit-scrollbar-track {
@@ -91,6 +92,20 @@
     font-size: 14px;
     line-height: 17px;
     color: #272933;
+}
+
+.collaps {
+    padding: 16px;
+    background: #F8F8FC;
+    box-shadow: 2px 2px 4px rgba(81, 88, 126, 0.12);
+    border-radius: 12px;
+    width: 100%;
+    height: 78px;
+    margin-top: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 @media screen and (max-width: 500px) {

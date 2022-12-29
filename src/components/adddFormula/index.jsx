@@ -106,7 +106,7 @@ const AddedFormula = observer(({openModal, setOpenModal, type, setData}) => {
                                 onChange={(e) => {
                                     // getCurrentFormula(e)
                                     // getCurrentFormula(e)
-                                    setHerb(allHerbs.find(f => f.herb_code === e))
+                                    setHerb(allHerbs?.find(f => f.herb_code === e))
                                 }}
                                 options={allHerbs.map((el) => ({
                                     value: el.herb_code,
@@ -141,7 +141,7 @@ const AddedFormula = observer(({openModal, setOpenModal, type, setData}) => {
                     <div className={s.added_herb}>
                         <AddedTextPlus title={'Add herb'}
                                        onClick={() => {
-                                           if (chooseHerbs.find(f => f.herb_code === herb.herb_code) || !herb.herb_code) {
+                                           if (chooseHerbs?.find(f => f.herb_code === herb.herb_code) || !herb.herb_code) {
                                                return
                                            }
                                            setChooseHerbs([{...herb, parts: part}, ...chooseHerbs])

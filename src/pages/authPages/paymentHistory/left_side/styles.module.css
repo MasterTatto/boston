@@ -1,5 +1,5 @@
 .left_side {
-    max-width: 650px;
+    max-width: 690px;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -35,7 +35,7 @@
 
 .table {
     width: 100%;
-    overflow-x: auto;
+    overflow-y: auto;
     height: 100%;
     margin-top: 25px;
 }
@@ -52,6 +52,7 @@
     line-height: 15px;
     text-align: left;
     color: #272933;
+    padding-right: 25px;
 }
 
 .number_table {
@@ -76,14 +77,14 @@
 }
 
 .amount_table {
-    min-width: 136px;
-    max-width: 136px;
+    width: 100%;
 }
 
 .table_items {
     margin-top: 5px;
     overflow-y: auto;
     height: calc(100% - 40px);
+    padding-right: 15px;
 }
 
 .table_items::-webkit-scrollbar {
@@ -123,21 +124,70 @@
     padding: 18px 0;
 }
 
+.active {
+    height: 840px;
+}
+
 .item_first {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 55px;
+    /*height: 55px;*/
 }
 
 .hidden_item {
     display: flex;
     width: 100%;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
+    flex-direction: row;
+    position: relative;
+    height: 100%;
+}
+
+.hidden_left {
+    display: flex;
     flex-direction: column;
-    margin-top: 10px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.hidden_right {
+    max-width: 200px;
+    width: 100%;
+    margin-top: 24px;
+}
+
+.component_box h3 {
+    font-family: 'Montserrat Alternates', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #272933;
+}
+
+.status {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+    color: #272933;
+}
+
+.status_answer {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+    color: #67AC46;
+}
+
+.status_answer:first-letter {
+    text-transform: uppercase;
 }
 
 .row {
@@ -183,4 +233,80 @@
     color: #67AC46;
 }
 
+.hidden_left_item {
+    padding: 12px 0;
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    border-bottom: 1px solid rgba(39, 41, 51, 0.2);;
+}
 
+.hidden_left_item_left, .hidden_left_item_right {
+    width: 50%;
+}
+
+.hidden_left_item_left p, .hidden_left_item_right p {
+    margin-top: 12px;
+}
+
+.hidden_left_item_last {
+    border-bottom: none;
+}
+
+.quest {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #272933;
+}
+
+.answer {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #272933;
+}
+
+.hidden_box {
+    display: flex;
+    align-items: center;
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #67AC46;
+    /*margin-top: 12px;*/
+}
+
+.component_item {
+    display: flex;
+    align-items: center;
+}
+
+.herb_part {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #272933;
+}
+
+.herb_name {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #272933;
+    margin-left: 10px;
+}
+
+.component_item {
+    margin-top: 8px;
+}
