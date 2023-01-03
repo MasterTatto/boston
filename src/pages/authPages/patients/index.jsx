@@ -15,6 +15,7 @@ import InfoPatient from "../../../components/infoPatient";
 import {ReactComponent as Edit} from "../../../assets/edit.svg";
 import {ReactComponent as Remove} from "../../../assets/remove.svg";
 import RemovePatientModal from "../../../components/sideBar/removePatientModal";
+import MobilePatients from "./mobile";
 
 const Patients = observer(() => {
     const store = useStore()
@@ -111,96 +112,101 @@ const Patients = observer(() => {
 
     return (
         <>
-            {openAddedModal !== null && <AddedPatientsModal handleOk={handleOk} openAddedModal={openAddedModal}
-                                                            setOpenAddedModal={setOpenAddedModal}/>}
+            <MobilePatients/>
+            <div className={s.desktop_patient}>
+                {openAddedModal !== null && <AddedPatientsModal handleOk={handleOk} openAddedModal={openAddedModal}
+                                                                setOpenAddedModal={setOpenAddedModal}/>}
 
-            {openRemoveModal &&
-                <RemovePatientModal removePatient={removePatient} openRemoveModal={openRemoveModal}
-                                    setOpenRemoveModal={setOpenRemoveModal}/>}
+                {openRemoveModal &&
+                    <RemovePatientModal removePatient={removePatient} openRemoveModal={openRemoveModal}
+                                        setOpenRemoveModal={setOpenRemoveModal}/>}
 
-            {openInfo && <InfoPatient openInfo={openInfo} setOpenInfo={setOpenInfo}/>}
-            {store.patients.pageLoading ? <Loader/> : <div className={s.patient_page}>
+                {openInfo && <InfoPatient openInfo={openInfo} setOpenInfo={setOpenInfo}/>}
+                {store.patients.pageLoading ? <Loader/> : <div className={s.patient_page}>
 
-                <div className={s.content_box}>
+                    <div className={s.content_box}>
 
-                    <div className={s.header}>
-                        <div className={s.patients}>
-                            <div className={s.header_top}>
-                                <p className={s.header_title}>Patients</p>
-                                <AddedTextPlus title={'Add patient'}
-                                               onClick={() => setOpenAddedModal('add')}/>
-                            </div>
-                            <div className={classNames(s.header_bottom, s.header_bottom_2)}>
-                                <div className={s.patients_serach}>
-                                    <p className={s.patient_name}>{store.patients.patient.patient_name}</p>
-                                    <div className={s.action_box}>
-                                        <p className={s.show_more} onClick={() => setOpenInfo(true)}>Show Info</p>
-                                        <Arrow onClick={() => setShowFullPatient(!showFullPatient)}/>
+                        <div className={s.header}>
+                            <div className={s.patients}>
+                                <div className={s.header_top}>
+                                    <p className={s.header_title}>Patients</p>
+                                    <AddedTextPlus title={'Add patient'}
+                                                   onClick={() => setOpenAddedModal('add')}/>
+                                </div>
+                                <div className={classNames(s.header_bottom, s.header_bottom_2)}>
+                                    <div className={s.patients_serach}>
+                                        <p className={s.patient_name}>{store.patients.patient.patient_name}</p>
+                                        <div className={s.action_box}>
+                                            <p className={s.show_more} onClick={() => setOpenInfo(true)}>Show Info</p>
+                                            <Arrow onClick={() => setShowFullPatient(!showFullPatient)}/>
+                                        </div>
                                     </div>
                                 </div>
+
+                                {showFullPatient && <div>
+                                    {patients.length !== 0 ? <div className={s.patient_items}>
+                                        {patients.map((el) => <div key={el.patient_id} onClick={async () => {
+                                            setSelectedPatient(el.patient_id)
+                                            if (el.patient_id !== selectedPatient) {
+                                                setShowFullPatient(false)
+                                                await store.patients.getPatients(el.patient_id)
+                                            }
+
+                                        }}
+                                                                   className={classNames(s.item, store.patients.patient.patient_id === el.patient_id && s.selected)}>
+                                            <div className={s.info_box_item}>
+                                                <p className={s.item_name}>{el.patient_name}</p>
+                                                <p className={s.item_email}>{el.email}</p>
+                                            </div>
+
+                                            <div className={s.action_box_item}>
+
+                                                <Dropdown
+                                                    menu={{
+                                                        items: items(el.patient_id)
+                                                    }}
+                                                    trigger={['click']}
+                                                    placement="bottomRight"
+                                                >
+                                                    <div className={s.dots} onClick={(e) => e.preventDefault()}>
+                                                        <span>.</span>
+                                                        <span>.</span>
+                                                        <span>.</span>
+                                                    </div>
+                                                </Dropdown>
+                                                <Arrow/>
+                                            </div>
+
+                                        </div>)}
+                                    </div> : <h2 className={s.empty}>No patients</h2>}
+                                </div>}
                             </div>
 
-                            {showFullPatient && <div>
-                                {patients.length !== 0 ? <div className={s.patient_items}>
-                                    {patients.map((el) => <div key={el.patient_id} onClick={async () => {
-                                        setSelectedPatient(el.patient_id)
-                                        if (el.patient_id !== selectedPatient) {
-                                            setShowFullPatient(false)
-                                            await store.patients.getPatients(el.patient_id)
-                                        }
-
-                                    }}
-                                                               className={classNames(s.item, store.patients.patient.patient_id === el.patient_id && s.selected)}>
-                                        <div className={s.info_box_item}>
-                                            <p className={s.item_name}>{el.patient_name}</p>
-                                            <p className={s.item_email}>{el.email}</p>
-                                        </div>
-
-                                        <div className={s.action_box_item}>
-
-                                            <Dropdown
-                                                menu={{
-                                                    items: items(el.patient_id)
-                                                }}
-                                                trigger={['click']}
-                                                placement="bottomRight"
-                                            >
-                                                <div className={s.dots} onClick={(e) => e.preventDefault()}>
-                                                    <span>.</span>
-                                                    <span>.</span>
-                                                    <span>.</span>
-                                                </div>
-                                            </Dropdown>
-                                            <Arrow/>
-                                        </div>
-
-                                    </div>)}
-                                </div> : <h2 className={s.empty}>No patients</h2>}
-                            </div>}
+                            <div className={s.header_top}>
+                                <p className={s.header_title}>Prescriptions</p>
+                                <AddedTextPlus title={'Add prescription'}
+                                               onClick={() => navigate('/patients/create-prescription', {
+                                                   state: {
+                                                       navigateBack: '/patients'
+                                                   }
+                                               })}/>
+                            </div>
+                            <div className={s.header_bottom}>
+                                <Input.Search onSearch={setSearch} placeholder="Find Prescription"/>
+                            </div>
                         </div>
 
-                        <div className={s.header_top}>
-                            <p className={s.header_title}>Prescriptions</p>
-                            <AddedTextPlus title={'Add prescription'}
-                                           onClick={() => navigate('/patients/create-prescription', {
-                                               state: {
-                                                   navigateBack: '/patients'
-                                               }
-                                           })}/>
-                        </div>
-                        <div className={s.header_bottom}>
-                            <Input.Search onSearch={setSearch} placeholder="Find Prescription"/>
-                        </div>
+                        <PatientLeft getCurrentPrescriptionHandler={getCurrentPrescription} setSearch={setSearch}
+                                     search={search}
+                                     setHiddenCopy={setHiddenCopy}
+                                     allPrescriptions={allPrescriptions}
+                                     hiddenCopy={hiddenCopy}/>
                     </div>
 
-                    <PatientLeft getCurrentPrescriptionHandler={getCurrentPrescription} setSearch={setSearch} search={search}
-                                 setHiddenCopy={setHiddenCopy}
-                                 allPrescriptions={allPrescriptions}
-                                 hiddenCopy={hiddenCopy}/>
-                </div>
-
-                <PatientRight patients={patients} prescription={prescriptionItems.find((f) => f.prescription_id === prescriptionID)}/>
-            </div>}
+                    <PatientRight patients={patients}
+                                  prescription={prescriptionItems.find((f) => f.prescription_id === prescriptionID)}/>
+                </div>}
+            </div>
         </>
     );
 });

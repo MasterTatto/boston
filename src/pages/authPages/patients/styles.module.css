@@ -7,6 +7,18 @@
     color: #272933;
 }
 
+.mobile_patient {
+    width: 100%;
+    height: 100%;
+    display: none;
+}
+
+.desktop_patient {
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
 .content_box {
     max-width: 600px;
     width: 100%;
@@ -46,6 +58,14 @@
 }
 
 @media screen and (max-width: 500px) {
+    .mobile_patient {
+        display: flex;
+    }
+
+    .desktop_patient {
+        display: none;
+    }
+
     .header_top {
         font-family: 'Montserrat Alternates', sans-serif;
         font-style: normal;
