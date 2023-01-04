@@ -1,0 +1,180 @@
+.qest {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    color: #8C8C8C;
+}
+
+.answer {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #272933;
+    margin-top: 3px;
+}
+
+.answer2 {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    /* identical to box height */
+
+
+    /* Black */
+
+    color: #272933;
+}
+
+.answer_type_2 {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+    color: #272933;
+}
+
+.top, .bottom {
+    display: flex;
+}
+
+.bottom {
+    margin-top: 16px;
+}
+
+.item {
+    border-bottom: 1px solid rgba(39, 41, 51, 0.2);
+    padding: 15px 0;
+}
+
+.top_f, .bottom_f {
+    width: 30%;
+}
+
+.bottom_s {
+    width: 40%;
+}
+
+.hidden_first {
+    max-height: 0;
+    overflow: hidden;
+    transition: .3s all;
+}
+
+.selected {
+    color: #67AC46;
+}
+
+.hidden_left_item {
+    padding: 12px 0;
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+}
+
+.hidden_left_item_left, .hidden_left_item_right {
+    width: 50%;
+}
+
+.status {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+    color: #272933;
+}
+
+.quest {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #272933;
+}
+
+.hidden_left_item_left p, .hidden_left_item_right p {
+    margin-top: 12px;
+}
+
+.status_answer {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+    color: #67AC46;
+}
+
+.status_answer:first-letter {
+    text-transform: uppercase;
+}
+
+.more {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #67AC46;
+    display: flex;
+    align-items: center;
+}
+
+.more svg {
+    margin-right: 3px;
+    transition: .3s all;
+}
+
+.rotate svg {
+    transform: rotate(180deg);
+}
+
+.component_box h3 {
+    font-family: 'Montserrat Alternates', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #272933;
+}
+
+.component_item {
+    display: flex;
+    align-items: center;
+    margin-top: 8px;
+}
+
+.herb_part {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #272933;
+}
+
+.herb_name {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #272933;
+    margin-left: 10px;
+}
+
+.hidden_right {
+    margin-top: 17px;
+}
+
+.hidden_content {
+    max-height: 0;
+    overflow: hidden;
+    transition: .3s all;
+}

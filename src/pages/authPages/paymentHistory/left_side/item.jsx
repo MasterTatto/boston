@@ -6,6 +6,7 @@ import {getFormatedDate} from "../../../../utils/getFormatDate";
 
 const Item = ({content, onHidden, patients}) => {
     const patient = patients.find(f => f.patient_id === content?.patient_id)
+
     return (
         <div className={s.hidden_item} onClick={(e) => {
             e.preventDefault()

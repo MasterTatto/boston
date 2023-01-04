@@ -3,6 +3,7 @@ import s from './styles.module.css'
 import LeftSide from "./left_side";
 import RightSide from "./right_side";
 import {useStore} from "../../../useStore";
+import MobilePaymentHistory from "./mobile_payment_history";
 
 const PaymentHistory = () => {
     const store = useStore()
@@ -25,10 +26,14 @@ const PaymentHistory = () => {
     }, [])
     console.log(history)
     return (
-        <div className={s.main}>
-            <LeftSide history={history} chooseDay={chooseDay} setHistory={setHistory}/>
-            <RightSide balance={history?.current_balance || 0}/>
-        </div>
+        <>
+            <MobilePaymentHistory/>
+            <div className={s.main}>
+                <LeftSide history={history} chooseDay={chooseDay} setHistory={setHistory}/>
+                <RightSide balance={history?.current_balance || 0}/>
+            </div>
+        </>
+
     );
 };
 
