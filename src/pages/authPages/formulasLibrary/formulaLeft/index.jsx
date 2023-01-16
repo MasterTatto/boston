@@ -23,46 +23,82 @@ const FormulaLeft = observer(({formulas, selectedFormula, setSelectedFormula, ch
     }
 
     // collapsible="disabled"
-    const items = (id) => [
-        {
-            label: <div className={s.drop_item} onClick={() => choseTypeModal('edit', true)}>
-                <Edit/>
-                <p>Edit formula</p>
-            </div>,
-            key: '0',
-        },
-        {
-            label: <div className={s.drop_item} onClick={() => navigate('/formulas-library/create-prescription', {
-                state: {
-                    navigateBack: '/formulas-library',
-                    formula_id: id
-                }
-            })}>
-                <Plus/>
-                <p>Create Prescription</p>
-            </div>,
-            key: '1',
-        },
-        {
-            label: <div className={s.drop_item} onClick={() => choseTypeModal('copy', true)}>
-                <Copy/>
-                <p>Copy formula</p>
-            </div>,
-            key: '2',
-        },
-        {
-            label: <div className={classNames(s.drop_item, s.drop_item_remove)} onClick={() => setRemoveModal(true)}>
-                <Remove/>
-                <p>Delete formula</p>
-            </div>,
-            key: '3',
-        },
-    ];
+    const items = (id, is_classic) => {
+        if (is_classic) {
+            return [
+                {
+                    label: <div className={s.drop_item} onClick={() => choseTypeModal('edit', true)}>
+                        <Edit/>
+                        <p>Edit formula</p>
+                    </div>,
+                    key: '0',
+                },
+                {
+                    label: <div className={s.drop_item}
+                                onClick={() => navigate('/formulas-library/create-prescription', {
+                                    state: {
+                                        navigateBack: '/formulas-library',
+                                        formula_id: id
+                                    }
+                                })}>
+                        <Plus/>
+                        <p>Create Prescription</p>
+                    </div>,
+                    key: '1',
+                },
+                {
+                    label: <div className={s.drop_item} onClick={() => choseTypeModal('copy', true)}>
+                        <Copy/>
+                        <p>Copy formula</p>
+                    </div>,
+                    key: '2',
+                },
+            ]
+        } else {
+            return [
+                {
+                    label: <div className={s.drop_item} onClick={() => choseTypeModal('edit', true)}>
+                        <Edit/>
+                        <p>Edit formula</p>
+                    </div>,
+                    key: '0',
+                },
+                {
+                    label: <div className={s.drop_item}
+                                onClick={() => navigate('/formulas-library/create-prescription', {
+                                    state: {
+                                        navigateBack: '/formulas-library',
+                                        formula_id: id
+                                    }
+                                })}>
+                        <Plus/>
+                        <p>Create Prescription</p>
+                    </div>,
+                    key: '1',
+                },
+                {
+                    label: <div className={s.drop_item} onClick={() => choseTypeModal('copy', true)}>
+                        <Copy/>
+                        <p>Copy formula</p>
+                    </div>,
+                    key: '2',
+                },
+                {
+                    label: <div className={classNames(s.drop_item, s.drop_item_remove)}
+                                onClick={() => setRemoveModal(true)}>
+                        <Remove/>
+                        <p>Delete formula</p>
+                    </div>,
+                    key: '3',
+                },
+            ]
+        }
+    };
 
-    const genExtra = (id) => (
+    const genExtra = (id, is_classic) => (
             <Dropdown
                 menu={{
-                    items: items(id)
+                    items: items(id, is_classic)
                 }}
                 trigger={['click']}
                 placement="bottomRight"
@@ -94,7 +130,7 @@ const FormulaLeft = observer(({formulas, selectedFormula, setSelectedFormula, ch
                                 <p className={s.formula_name}>{el.formula_name}</p>
                                 <p className={s.formula_note}>{el.notes}</p>
                             </div>
-                        } key="1" extra={genExtra(el.formula_id)}>
+                        } key="1" extra={genExtra(el.formula_id, el.is_classic)}>
 
                             <div className={s.test}>
                                 <p className={s.title_components}>Composition of the formula</p>

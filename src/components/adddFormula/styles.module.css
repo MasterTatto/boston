@@ -12,6 +12,15 @@
     width: 100%;
 }
 
+.error_mes {
+    font-size: 9px;
+    color: #f64b4c;
+    position: absolute;
+    right: 5px;
+    bottom: -15px;
+    height: fit-content !important;
+}
+
 .add {
     color: #FFFFFF;
     background: #67AC46;
@@ -61,6 +70,7 @@
 
 .input_box {
     width: 100%;
+    position: relative;
 }
 
 .label {
@@ -145,6 +155,7 @@
 
 .patient_formula_box {
     width: 100%;
+    position: relative;
 }
 
 .input_box_number {

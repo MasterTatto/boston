@@ -81,8 +81,11 @@ const AddedPatientsModal = observer(({openAddedModal, setOpenAddedModal, handleO
                                                 value={values.notes}/>
                             </div>
 
-                            <div>
+                            <div className={s.alergen}>
+                                <label className={s.label}>Allergen</label>
+
                                 <div className={s.checkbox_box}>
+
                                     <div className={s.alergen_item}>
                                         <Checkbox
                                             checked={values.allergens.includes('Nuts')}
@@ -150,6 +153,14 @@ const AddedPatientsModal = observer(({openAddedModal, setOpenAddedModal, handleO
                                         }
                                     }} onChange={(e) => setOtherValue(e.target.value)}
                                            value={othersValue}/>
+
+                                    <Button className={s.accept_other} onClick={() => {
+                                        setValues({...values, allergens: [...values.allergens, othersValue]})
+                                        setOtherValue('')
+                                    }
+                                    }>
+                                        ok
+                                    </Button>
                                 </div>
 
                                 <div className={s.chip_box}>

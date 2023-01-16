@@ -32,7 +32,7 @@ const FormulasLibrary = observer(() => {
     }
 
     useEffect(() => {
-        const classicData = data.filter((f) => f.formula_name.split('_')[0].includes('CL'))
+        const classicData = data.filter((f) => f.is_classic)
         const noClassicData = store.formula.formulas
         setData(classic ? classicData : noClassicData)
     }, [classic])

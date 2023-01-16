@@ -53,6 +53,19 @@ const AddedPrescriptionPatient = observer(() => {
     }
 
     useEffect(() => {
+        const getCurrentFormula = async () => {
+            console.log(values.formula_id)
+            if (values.formula_id === '') {
+                store.formula.setCurrentFormula({})
+            } else {
+                await store.formula.getCurrentFormula(values.formula_id)
+            }
+        }
+        getCurrentFormula()
+
+    }, [values.formula_id])
+
+    useEffect(() => {
         const getAllFormula = async () => {
             await store.patients.getAllFormula()
             setAllFormula(store.patients.allFormula)
@@ -149,9 +162,9 @@ const AddedPrescriptionPatient = observer(() => {
                         placeholder={''}
                         value={values.formula_id}
                         style={{width: '100%'}}
-                        onChange={(e) => {
+                        onChange={async (e) => {
                             // getCurrentFormula(e)
-                            getCurrentFormula(e)
+                            await getCurrentFormula(e)
                             setValues({...values, formula_id: e})
                         }}
                         options={allFormula.map((el) => ({

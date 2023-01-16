@@ -235,6 +235,21 @@ a {
     cursor: pointer !important;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none !important;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type=number] {
+    -moz-appearance: textfield !important; /* Firefox */
+}
+
+.ant-input-number-handler-wrap {
+    display: none !important;
+}
+
 @media screen and (max-width: 500px) {
     .content {
         padding: 0;

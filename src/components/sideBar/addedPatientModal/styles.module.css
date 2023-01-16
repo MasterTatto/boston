@@ -21,6 +21,20 @@
     width: 100%;
 }
 
+.accept_other {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    color: #8C8C8C;
+    padding: 4px;
+    border: 1.5px solid #8C8C8C;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
 .add {
     color: #FFFFFF;
     background: #67AC46;
@@ -86,11 +100,16 @@
     border-radius: 15px;
 }
 
+.alergen {
+    margin-top: 10px;
+}
+
 .checkbox_box {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: 20px;
+    /*margin-top: 20px;*/
+    margin-top: 5px;
     margin-bottom: 10px;
 }
 
@@ -123,7 +142,7 @@
     margin-left: 8px;
 }
 
-.chip_box{
+.chip_box {
     width: 100%;
     display: flex;
     flex-wrap: wrap;

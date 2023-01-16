@@ -13,11 +13,13 @@ const PatientLeft = observer(({
                                   search,
                                   setHiddenCopy,
                                   hiddenCopy,
-                                  allPrescriptions
+                                  allPrescriptions,
+                                  setCurrentID,
+                                  currentID
                               }) => {
     const navigate = useNavigate()
 
-    const [currentID, setCurrentID] = useState(null)
+    const store = useStore()
 
     const getCurrentPrescription = async (id) => {
         navigate('/patients/create-prescription', {state: {id: id}})
@@ -72,7 +74,8 @@ const PatientLeft = observer(({
                     return <div key={el.prescription_id} className={s.collaps} style={{
                         backgroundColor: currentID === el.prescription_id && '#67AC46'
                     }}
-                                onClick={() => {
+                                onClick={async () => {
+                                    await store.formula.getCurrentFormula(el?.formula_id)
                                     setCurrentID(el?.prescription_id)
                                     getCurrentPrescriptionHandler(el?.prescription_id)
                                 }}>

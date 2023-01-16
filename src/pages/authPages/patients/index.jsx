@@ -44,6 +44,7 @@ const Patients = observer(() => {
         },
     ];
 
+    const [currentID, setCurrentID] = useState(null)
     const [openRemoveModal, setOpenRemoveModal] = useState(false)
     const [showFullPatient, setShowFullPatient] = useState(false)
     const [openInfo, setOpenInfo] = useState(false)
@@ -99,8 +100,12 @@ const Patients = observer(() => {
 
     useEffect(() => {
         const getAllPrescriptions = async () => {
+            setShowFullPatient(false)
             setPrescriptionID(null)
             await store.patients.getPrescription(store.patients.patient.patient_id)
+            await getCurrentPrescription(store.patients.allPrescription[0]?.prescription_id)
+            await store.formula.getCurrentFormula(store.patients.allPrescription[0]?.formula_id)
+            setCurrentID(store.patients.allPrescription[0]?.prescription_id)
             setAllPrescriptions(store.patients.allPrescription)
         }
         getAllPrescriptions()
@@ -196,7 +201,8 @@ const Patients = observer(() => {
                             </div>
                         </div>
 
-                        <PatientLeft getCurrentPrescriptionHandler={getCurrentPrescription} setSearch={setSearch}
+                        <PatientLeft setCurrentID={setCurrentID} currentID={currentID}
+                                     getCurrentPrescriptionHandler={getCurrentPrescription} setSearch={setSearch}
                                      search={search}
                                      setHiddenCopy={setHiddenCopy}
                                      allPrescriptions={allPrescriptions}

@@ -56,6 +56,18 @@ export class FormulaStore {
         } catch (e) {
             console.log(e)
             this.setButtonLoading(false)
+            if (e.response.status === 500) {
+                toast.error('This name is taken', {
+                    position: "bottom-left",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: false,
+                    draggable: true,
+                    progress: undefined,
+                });
+                return
+            }
             if (e.response.data.errors) {
                 for (let key of Object.keys(e.response.data.errors)) {
                     toast.error(e.response.data.errors[key].message, {

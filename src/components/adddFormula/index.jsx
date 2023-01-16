@@ -21,6 +21,10 @@ const AddedFormula = observer(({openModal, setOpenModal, type, setData}) => {
         notes: '',
         components: []
     })
+    const [errors, setErrors] = useState({
+        formula_name: '',
+        components: ''
+    })
 
     const addedFormula = async () => {
         await store.formula.addedFormula({
@@ -68,7 +72,23 @@ const AddedFormula = observer(({openModal, setOpenModal, type, setData}) => {
             footer={<div className={s.btn_box}>
                 <Button onClick={() => setOpenModal(null, false)}
                         className={classNames(s.btn, s.cancel)}>Cancel</Button>
-                <Button onClick={type === 'edit' ? updateFormula : addedFormula}
+                <Button onClick={async () => {
+                    if (type === 'edit') {
+                        await updateFormula()
+                    } else {
+                        if (chooseHerbs.length === 0 || values.formula_name.length === 0) {
+                            setErrors({
+                                ...errors,
+                                components: chooseHerbs.length === 0 ? 'error' : '',
+                                formula_name: values.formula_name.length === 0 ? 'error' : ''
+                            })
+                        } else {
+                            await addedFormula()
+                        }
+
+                    }
+                }
+                }
                         loading={store.formula.buttonLoading}
                         className={classNames(s.btn, s.add)}>Add</Button>
             </div>}
@@ -83,8 +103,17 @@ const AddedFormula = observer(({openModal, setOpenModal, type, setData}) => {
                 }}>
                     <div className={s.input_box}>
                         <label className={s.label}>Formula name</label>
-                        <Input onChange={(e) => setValues({...values, formula_name: e.target.value})}
+                        <Input status={errors.formula_name} onFocus={() => {
+                            setErrors({...errors, formula_name: ''})
+                        }} onBlur={() => {
+                            if (values.formula_name.length >= 1) {
+                                setErrors({...errors, formula_name: ''})
+                            } else {
+                                setErrors({...errors, formula_name: 'error'})
+                            }
+                        }} onChange={(e) => setValues({...values, formula_name: e.target.value})}
                                value={values.formula_name}/>
+                        {errors.formula_name === 'error' && <span className={s.error_mes}>Required field</span>}
                     </div>
                     <div className={classNames(s.text_area)}>
                         <label className={s.label}>Note</label>
@@ -100,7 +129,11 @@ const AddedFormula = observer(({openModal, setOpenModal, type, setData}) => {
                         <div className={s.patient_formula_box}>
                             <label className={s.label}>Herb</label>
                             <Select
+                                status={errors.components}
                                 placeholder={''}
+                                onFocus={() => {
+                                    setErrors({...errors, components: ''})
+                                }}
                                 value={herb?.formula_id}
                                 style={{width: '100%'}}
                                 onChange={(e) => {
@@ -113,6 +146,7 @@ const AddedFormula = observer(({openModal, setOpenModal, type, setData}) => {
                                     label: el.herb_name,
                                 }))}
                             />
+                            {errors.components === 'error' && <span className={s.error_mes}>Required field</span>}
                         </div>
 
                         <div className={s.input_box_number}>

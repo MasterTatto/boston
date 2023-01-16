@@ -1,5 +1,7 @@
 .formula_right {
     padding-left: 40px;
+    max-width: 250px;
+    width: 100%;
 }
 
 .formula_name {

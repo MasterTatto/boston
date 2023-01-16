@@ -25,6 +25,8 @@ const PatientRight = observer(({prescription, patients}) => {
         }
     };
 
+    console.log(patients, 'patients')
+    console.log(prescription, 'prescription')
     return (
         <div className={s.info_box}>
             {openAddedModal !== null && <AddedPatientsModal handleOk={handleOk} openAddedModal={openAddedModal}
@@ -126,11 +128,11 @@ const PatientRight = observer(({prescription, patients}) => {
 
             </div>}
 
-            {prescription?.formula?.components?.length !== 0 && <div className={s.component_box}>
+            {store.formula.currentFormula?.components?.length !== 0 && <div className={s.component_box}>
                 <h3>Composition of the formula</h3>
 
                 <div className={s.component_items}>
-                    {prescription?.formula?.components?.map((el, i) => <div className={s.component_item} key={i}>
+                    {store.formula.currentFormula?.components?.map((el, i) => <div className={s.component_item} key={i}>
                         <p className={s.herb_part}>{`x${el.parts}`}</p>
                         <p className={s.herb_name}>{el.herb_name}</p>
                     </div>)}

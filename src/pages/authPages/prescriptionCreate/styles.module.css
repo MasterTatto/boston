@@ -5,6 +5,7 @@
     max-width: 750px;
     width: 100%;
     overflow-y: auto;
+    padding-right: 8px;
 }
 
 .main::-webkit-scrollbar {
@@ -127,6 +128,11 @@
 .input_number {
     display: flex;
     align-items: center;
+}
+
+.input_number input {
+    text-align: center !important;
+    margin-left: -1px;
 }
 
 .controls {
@@ -335,11 +341,11 @@
         max-width: 100%;
     }
 
-    .btn_box{
+    .btn_box {
         flex-direction: column;
     }
 
-    .cancel{
+    .cancel {
         margin-top: 10px;
     }
 }
