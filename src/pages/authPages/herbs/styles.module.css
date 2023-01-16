@@ -5,6 +5,16 @@
     flex-direction: column;
 }
 
+.choose_pagination {
+    position: absolute;
+    bottom: 14.5px;
+    right: 350px;
+}
+
+/*.choose_pagination select {*/
+/*    border: none;*/
+/*}*/
+
 .search_pacient {
     margin-top: 15px;
     max-width: 315px;
@@ -52,5 +62,10 @@
 
     .search_pacient {
         max-width: 100%;
+    }
+
+    .choose_pagination {
+        right: auto;
+        left: 5px;
     }
 }

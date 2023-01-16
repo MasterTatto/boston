@@ -67,7 +67,7 @@ const MobilePaymentHistory = observer(() => {
         <div className={s.mobile}>
             <div className={s.header}>
                 <div className={s.top_header}>
-                    <p className={s.title}>Payment history</p>
+                    <p className={s.title}>Account Statement</p>
                     <p className={classNames(s.balance, openBalanceInfo && s.rotate)}
                        onClick={() => setOpenBalanceInfo(!openBalanceInfo)}>Balance <Arrow/></p>
                 </div>

@@ -17,8 +17,8 @@ export class AuthStore {
         this.setButtonLoading(true)
         try {
             const res = await AuthService.login(email, password)
-
             localStorage.setItem('fulfillment_fee', res.data.user.fulfillment_fee ? res.data.user.fulfillment_fee : 1)
+            localStorage.setItem('name_user', res.data.user.name)
             localStorage.setItem('token', res.data.accessToken)
             localStorage.setItem('refreshToken', res.data.refreshToken)
             navigate('/patients')

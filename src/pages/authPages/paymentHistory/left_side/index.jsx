@@ -6,12 +6,10 @@ import {makeRandomID} from "../../../../utils/randomID";
 import Item from "./item";
 import {useStore} from "../../../../useStore";
 
-const LeftSide = ({history, chooseDay, setHistory}) => {
+const LeftSide = ({history, chooseDay, setHistory, from, setFrom, to, setTo}) => {
     const store = useStore()
 
     const [patients, setPatients] = useState([])
-    const [from, setFrom] = useState(null)
-    const [to, setTo] = useState(null)
 
     const getCurrentPrescription = async (id) => {
         await store.history.getCurrentPrescription(id)
@@ -36,10 +34,10 @@ const LeftSide = ({history, chooseDay, setHistory}) => {
     return (
         <div className={s.left_side}>
             <div className={s.header}>
-                <p className={s.title}>Payment history</p>
+                <p className={s.title}>Account Statement</p>
                 <div className={s.date}>
                     <DatePicker
-                        placeholder={'From'}
+                        placeholder={from}
                         onChange={(e) => {
                             const date = new Date(e)
                             setFrom(`${date.getFullYear()}-${date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1}-${date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()}`)
@@ -47,7 +45,7 @@ const LeftSide = ({history, chooseDay, setHistory}) => {
                     />
                     <div className={s.arrow}/>
                     <DatePicker
-                        placeholder={'To'}
+                        placeholder={to}
                         onChange={(e) => {
                             const date = new Date(e)
                             setTo(`${date.getFullYear()}-${date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1}-${date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()}`)

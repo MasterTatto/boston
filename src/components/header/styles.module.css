@@ -5,6 +5,22 @@
     justify-content: space-between;
 }
 
+.right_header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.right_header p {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #272933;
+    margin-right: 20px;
+}
+
 .navigate {
     display: flex;
     align-items: center;

@@ -14,6 +14,8 @@ const Header = () => {
     const {pathname} = useLocation()
     const navigate = useNavigate()
 
+    const userName = localStorage.getItem('name_user')
+
     const [currentLocation, setCurrentLocation] = useState('')
     const [openMenu, setOpenMenu] = useState(false)
 
@@ -22,7 +24,7 @@ const Header = () => {
         {title: 'Patients', link: 'patients'},
         {title: 'Formulas library', link: 'formulas-library'},
         {title: 'Herbs list', link: 'herbs-list'},
-        {title: 'Payment history', link: 'payment-history'},
+        {title: 'Account Statement', link: 'payment-history'},
     ]
 
     const items = (id) => [...links.map((el) => ({
@@ -57,8 +59,12 @@ const Header = () => {
                     </p></NavLink>)}
                 </div>
 
-                <div className={s.logout} onClick={() => store.auth.logout(navigate)}>
-                    Logout
+                <div className={s.right_header}>
+                    <p>{userName || 'undefined'}</p>
+
+                    <div className={s.logout} onClick={() => store.auth.logout(navigate)}>
+                        Logout
+                    </div>
                 </div>
             </div>
 

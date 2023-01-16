@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import s from './styles.module.css'
 import {Input, Table} from "antd";
 import {useStore} from "../../../useStore";
@@ -12,8 +12,15 @@ import RowText from "../../../common/rowText"; // Optional theme CSS
 const Herbs = observer(() => {
     const store = useStore()
 
+    const gridRef = useRef();
+
     const [allHerbs, setAllHerbs] = useState([])
     const [search, setSearch] = useState('')
+
+    const onPageSizeChanged = useCallback(() => {
+        const value = document.getElementById('page-size').value;
+        gridRef.current.api.paginationSetPageSize(Number(value));
+    }, []);
 
     useEffect(() => {
         const getAllHerbs = async () => {
@@ -25,7 +32,7 @@ const Herbs = observer(() => {
 
     const data = [...allHerbs.filter(item => {
         if (!search) return true
-        if (item.herb_name.toLowerCase().includes(search.toLowerCase())) {
+        if (item?.common_name?.toLowerCase()?.includes(search.toLowerCase()) || item?.latin_name?.toLowerCase()?.includes(search.toLowerCase())) {
             return true
         }
     })];
@@ -41,22 +48,23 @@ const Herbs = observer(() => {
             </div>
 
             {store.herbs.isLoading ? <Loader/> :
-                <div className="ag-theme-alpine table" style={{width: '100%', height: '100%'}}>
+                <div className="ag-theme-alpine table" style={{width: '100%', height: '100%', position: 'relative'}}>
                     <AgGridReact
                         style={{height: '100%', width: '100%'}}
                         rowData={data}
+                        ref={gridRef}
                         rowSelection={'multiple'}
                         pagination={true}
                         enableBrowserTooltips={true}
                         tooltipShowDelay={0}
                         tooltipHideDelay={2000}
                         // paginationAutoPageSize={true}
-                        paginationPageSize={20}
+                        paginationPageSize={25}
                         defaultColDef={{
                             editable: true,
                             sortable: true,
                             flex: 1,
-                            minWidth: 150,
+                            minWidth: 90,
                             filter: false,
                             floatingFilter: false,
                             resizable: true,
@@ -70,7 +78,7 @@ const Herbs = observer(() => {
                         <AgGridColumn
                             headerName={"Code"}
                             field="herb_code"
-                            editable={true}
+                            editable={false}
                             sortable={false}
                             filter={false}
                             cellRenderer="rowText"
@@ -81,7 +89,7 @@ const Herbs = observer(() => {
                         <AgGridColumn
                             headerName={"Name"}
                             field="herb_name"
-                            editable={true}
+                            editable={false}
                             sortable={false}
                             filter={false}
                             cellRenderer="rowText"
@@ -95,7 +103,7 @@ const Herbs = observer(() => {
                         <AgGridColumn
                             headerName={"Common Name"}
                             field="common_name"
-                            editable={true}
+                            editable={false}
                             sortable={false}
                             filter={false}
                             cellRenderer="rowText"
@@ -106,7 +114,7 @@ const Herbs = observer(() => {
                         <AgGridColumn
                             headerName={"Latin Name"}
                             field="latin_name"
-                            editable={true}
+                            editable={false}
                             sortable={false}
                             filter={false}
                             cellRenderer="rowText"
@@ -117,7 +125,7 @@ const Herbs = observer(() => {
                         <AgGridColumn
                             headerName={"Gram cost"}
                             field="gram_cost"
-                            editable={true}
+                            editable={false}
                             sortable={false}
                             filter={false}
                             cellRenderer="rowText"
@@ -128,7 +136,7 @@ const Herbs = observer(() => {
                         <AgGridColumn
                             headerName={"Allergens"}
                             field="allergens"
-                            editable={true}
+                            editable={false}
                             sortable={false}
                             filter={false}
                             cellRenderer="rowText"
@@ -137,6 +145,15 @@ const Herbs = observer(() => {
                         />
 
                     </AgGridReact>
+
+                    <div className={s.choose_pagination}>
+                        <select onChange={onPageSizeChanged} id="page-size">
+                            <option value="25" selected>25</option>
+                            <option value="50">50</option>
+                            <option value="75">75</option>
+                            <option value="100">100</option>
+                        </select>
+                    </div>
                 </div>}
         </div>
     );
