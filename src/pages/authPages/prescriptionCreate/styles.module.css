@@ -107,6 +107,7 @@
 
 .patient_formula_box {
     margin-top: 16px;
+    position: relative;
 }
 
 .create_new {
@@ -128,11 +129,21 @@
 .input_number {
     display: flex;
     align-items: center;
+    position: relative;
 }
 
 .input_number input {
     text-align: center !important;
     margin-left: -1px;
+}
+
+.error_mes {
+    font-size: 9px;
+    color: #f64b4c;
+    position: absolute;
+    right: 5px;
+    bottom: -15px;
+    height: fit-content !important;
 }
 
 .controls {
@@ -228,6 +239,7 @@
 .notes_box_select {
     max-width: 275px;
     width: 100%;
+    position: relative;
 }
 
 .markup {
