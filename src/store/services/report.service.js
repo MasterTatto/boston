@@ -2,10 +2,9 @@ import axiosConfig from "../../api";
 
 class ReportService {
 
-    async getAllHistory(from, to) {
+    async getAllHistory(from, to, classic) {
         const token = localStorage.getItem('token')
-
-        return await axiosConfig().get(`office/report?from=${from}&to=${to}`, {
+        return await axiosConfig().get(`office/report?from=${from}&to=${to}${classic ? '&payoutsonly=yes' : ''}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }

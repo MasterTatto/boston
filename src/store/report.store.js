@@ -11,10 +11,10 @@ export class ReportStore {
         makeAutoObservable(this)
     }
 
-    async getAllHistory(from, to) {
+    async getAllHistory(from, to,classic) {
         this.setIsLoading(true)
         try {
-            const res = await ReportService.getAllHistory(from, to)
+            const res = await ReportService.getAllHistory(from, to,classic)
             this.setAllReport({...res.data, rows: res.data.rows.map((el) => ({...el, isOpen: false}))})
             this.setIsLoading(false)
         } catch (e) {

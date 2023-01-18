@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import s from './styles.module.css'
-import {DatePicker} from "antd";
+import {DatePicker, Switch} from "antd";
 import classNames from "classnames";
 import {makeRandomID} from "../../../../utils/randomID";
 import Item from "./item";
@@ -10,6 +10,7 @@ const LeftSide = ({history, chooseDay, setHistory, from, setFrom, to, setTo}) =>
     const store = useStore()
 
     const [patients, setPatients] = useState([])
+    const [classic, setClassic] = useState(false)
 
     const getCurrentPrescription = async (id) => {
         await store.history.getCurrentPrescription(id)
@@ -26,9 +27,9 @@ const LeftSide = ({history, chooseDay, setHistory, from, setFrom, to, setTo}) =>
 
     useEffect(() => {
         if (from && to) {
-            chooseDay(from, to)
+            chooseDay(from, to, classic)
         }
-    }, [from, to])
+    }, [from, to, classic])
 
     makeRandomID()
     return (
@@ -52,14 +53,24 @@ const LeftSide = ({history, chooseDay, setHistory, from, setFrom, to, setTo}) =>
                         }}/>
                 </div>
             </div>
+            <div className={s.switch_box}>
+                <div className={s.switch}>
+                    <Switch value={classic} onChange={setClassic}/>
+                    <span className={s.switch_box_title}>Payouts only</span>
+                </div>
+            </div>
 
             <div className={s.table}>
                 <div className={s.header_table}>
                     <p className={s.number_table}>#</p>
                     <p className={s.type_table}>Transaction Type</p>
                     <p className={s.date_table}>Date</p>
-                    <p className={s.amount_table}>Amount</p>
-                    <p className={s.amount_table}>Current balance</p>
+                    <p className={s.amount_table} style={{
+                        alignItems: classic && 'center',
+                        justifyContent: classic && 'flex-end',
+                        display: classic && 'flex'
+                    }}>Amount</p>
+                    {!classic && <p className={s.amount_table}>Current balance</p>}
                 </div>
 
                 <div className={s.table_items}>
@@ -84,8 +95,12 @@ const LeftSide = ({history, chooseDay, setHistory, from, setFrom, to, setTo}) =>
                                         color: el.isOpen && '#67AC46'
                                     }}>{el.type}</p>
                                     <p className={s.date_table}>{el.date}</p>
-                                    <p className={s.amount_table}>{`$${el.amount}`}</p>
-                                    <p className={s.amount_table}>{`$${el.balance}`}</p>
+                                    <p style={{
+                                        alignItems: !el.balance && 'center',
+                                        justifyContent: !el.balance && 'flex-end',
+                                        display: !el.balance && 'flex'
+                                    }} className={s.amount_table}>{`$${el.amount}`}</p>
+                                    {el.balance && <p className={s.amount_table}>{`$${el.balance}`}</p>}
                                 </div>
 
                                 {el?.prescription_id && <Item patients={patients} onHidden={() => setHistory({

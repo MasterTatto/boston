@@ -288,6 +288,29 @@
     align-items: center;
 }
 
+.switch_box {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    /*justify-content: flex-end;*/
+    margin-top: 10px;
+}
+
+.switch {
+    display: flex;
+    align-items: center;
+}
+
+.switch_box_title {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #272933;
+    margin-left: 8px;
+}
+
 .herb_part {
     font-family: 'Montserrat', sans-serif;
     font-style: normal;

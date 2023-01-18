@@ -13,8 +13,8 @@ const PaymentHistory = () => {
     const [from, setFrom] = useState(null)
     const [to, setTo] = useState(null)
 
-    const chooseDay = async (from, to) => {
-        await store.history.getAllHistory(from, to)
+    const chooseDay = async (from, to, classic) => {
+        await store.history.getAllHistory(from, to, classic)
         setHistory(store.history.allReport)
     }
 
@@ -29,7 +29,7 @@ const PaymentHistory = () => {
 
             const toDate = `${date1.getFullYear()}-${date1.getMonth() + 1 < 10 ? `0${date1.getMonth() + 1}` : date1.getMonth() + 1}-${date1.getDate() < 10 ? `0${date1.getDate()}` : date1.getDate()}`
             const fromDate = `${date2.getFullYear()}-${date2.getMonth() + 1 < 10 ? `0${date2.getMonth() + 1}` : date2.getMonth() + 1}-${date2.getDate() < 10 ? `0${date2.getDate()}` : date2.getDate()}`
-
+            console.log(toDate)
             setTo(toDate)
             setFrom(fromDate)
 
