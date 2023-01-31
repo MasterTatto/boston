@@ -13,7 +13,7 @@ const HeaderAuth = () => {
 
             <div className={s.action}>
                 <p className={s.join} onClick={() => navigate('/registration')}>join now</p>
-                <a href="https://acuboston.com/" target={'_blank'}><p className={s.back_main}>back to main site <Arrow/>
+                <a href="https://acuboston.com/" target={'_blank'}><p className={s.back_main}>to main site <Arrow/>
                 </p></a>
             </div>
         </div>

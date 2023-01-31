@@ -16,8 +16,8 @@ const Footer = () => {
                 </div>
                 <div className={s.footer_right}>
                     <div className={s.footer_right_left}>
-                        <p>AcuBoston Herb Pharmacy serving</p>
-                        <p> the East Coast, South East & Mid-West Regions</p>
+                        <p>AcuBoston Herb Pharmacy serving USA</p>
+                        {/*<p> the East Coast, South East & Mid-West Regions</p>*/}
                     </div>
                     <div className={s.footer_right_right}>
                         <div className={s.icons}>
@@ -28,7 +28,7 @@ const Footer = () => {
                                                                                                  src={face}
                                                                                                  alt="facebook"/></a>
                         </div>
-                        <p>© 2022 AcuBoston.com</p>
+                        <p>© 2023 AcuBoston.com</p>
                     </div>
                 </div>
             </div>

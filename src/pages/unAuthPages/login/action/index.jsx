@@ -13,8 +13,10 @@ const ActionAuth = observer(() => {
     const navigate = useNavigate()
 
     const [values, setValues] = useState({
-        email: 'bpssoft@yahoo.com',
-        password: 'beeguy'
+        // email: 'bpssoft@yahoo.com',
+        email: '',
+        // password: 'beeguy'
+        password: ''
     })
 
     return (
@@ -27,8 +29,10 @@ const ActionAuth = observer(() => {
                     <p>is a Compounding Custom Herbal Prescriptions Pharmacy conforming to FDA GMP requirements.</p>
                 </div>
                 <div className={s.action_left_bottom}>
-                    {items.map((el) => {
-                        return <div className={s.item}>
+                    {items.map((el, i) => {
+                        return <div className={s.item} style={{
+                            padding: i === 2 && '5px'
+                        }}>
                             <div>{el.svg}</div>
                             <div className={s.text}>
                                 <p className={s.title}>{el.title}</p>
@@ -50,7 +54,8 @@ const ActionAuth = observer(() => {
 
                     <div className={s.input_box}>
                         <label className={s.label}>Password</label>
-                        <Input.Password value={values.password}/>
+                        <Input.Password value={values.password}
+                                        onChange={(e) => setValues({...values, password: e.target.value})}/>
                     </div>
 
                     <Button className={s.btn} onClick={async () => {

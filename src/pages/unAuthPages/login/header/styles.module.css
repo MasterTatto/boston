@@ -1,6 +1,6 @@
 .logo {
-    width: 186px;
-    height: 50px;
+    width: auto;
+    height: 75px;
 }
 
 .header {
@@ -87,5 +87,10 @@
         font-size: 14px;
         line-height: 17px;
         margin-left: 0;
+    }
+
+    .logo {
+        width: auto;
+        height: 50px;
     }
 }

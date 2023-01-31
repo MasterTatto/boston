@@ -7,25 +7,25 @@ export const items = [
     {
         svg: <Auth1/>,
         title: 'You can design custom TCM formulas',
-        subtitle: 'You can design for your patients custon herbal TCM formulas conforming to FDA GMP requrements.',
+        subtitle: 'Your own custom herbal formulas will conform to FDA GMP',
         id: 1
     },
     {
         svg: <Auth2/>,
         title: 'We Fulfill and Deliver',
-        subtitle: 'AHP can fulfill and deliver your TCM prescriptions to your patients.',
+        subtitle: 'We deliver your TCM herbal formulas to your patients',
         id: 2
     },
     {
-        svg: <Auth3/>,
-        title: 'Climate-control',
-        subtitle: 'AHP maintains a climate-controlled inventory of hundreds of fresh TCM ingredients of highest quality.',
+        svg: <Auth4/>,
+        title: 'You can select your sales commission',
+        subtitle: 'Select your sales commission for every prescription and track $ in your secure online account',
         id: 3
     },
     {
-        svg: <Auth4/>,
-        title: 'Select your commission',
-        subtitle: 'AHP will let you select your sales commission for every prescription and keep accumulating your commissions in your secure online account.',
+        svg: <Auth3/>,
+        title: 'We maintain climate control',
+        subtitle: 'We maintain a climate-controlled inventory of hundreds of fresh TCM ingredients of highest quality',
         id: 4
     },
 ]

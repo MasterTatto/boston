@@ -31,6 +31,16 @@ const SideBar = observer(() => {
     const [patients, setPatients] = useState([])
     const [selectedPatient, setSelectedPatient] = useState()
     const [search, setSearch] = useState('')
+    const [search2, setSearch2] = useState('')
+
+    useEffect(() => {
+        const delayDebounceFn = setTimeout(() => {
+            setSearch2(search)
+            // Send Axios request here
+        }, 300)
+
+        return () => clearTimeout(delayDebounceFn)
+    }, [search])
 
     const items = (id) => [
         {
@@ -122,14 +132,16 @@ const SideBar = observer(() => {
                     <AddedTextPlus title={'Add patient'} onClick={() => setOpenAddedModal('add')}/>
                 </div>
                 <div className={s.search_pacient}>
-                    <Input.Search placeholder="Find patient" onSearch={setSearch}/>
+                    <Input.Search placeholder="Find patient" value={search} onChange={(e) => {
+                        setSearch(e.target.value)
+                    }} onSearch={setSearch}/>
                 </div>
             </div>
 
             {patients.length !== 0 ? <div className={s.patient_items}>
                 {patients.filter(item => {
-                    if (!search) return true
-                    if (item.patient_name.toLowerCase().includes(search.toLowerCase())) {
+                    if (!search2) return true
+                    if (item.patient_name.toLowerCase().includes(search2.toLowerCase())) {
                         return true
                     }
                 })?.map((el) => <NavLink to={navigateHandle} key={el.patient_id} onClick={async () => {
