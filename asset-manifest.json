@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/boston/static/css/main.d9a47df0.css",
-    "main.js": "/boston/static/js/main.65dee1c2.js",
+    "main.css": "/boston/static/css/main.c66fa9b0.css",
+    "main.js": "/boston/static/js/main.64753756.js",
     "static/media/auth_img1.png": "/boston/static/media/auth_img1.2f95f20f3eef82d07640.png",
     "static/media/auth_img2.png": "/boston/static/media/auth_img2.38bfe729a0d3c298f79b.png",
     "static/media/backgroundHeader.png": "/boston/static/media/backgroundHeader.e87fae304b89ba00a997.png",
@@ -24,11 +24,11 @@
     "static/media/hidden_arrow.svg": "/boston/static/media/hidden_arrow.dda2ff8e521856af4096353ab27df995.svg",
     "static/media/plus.svg": "/boston/static/media/plus.aff5297114618249d2a789e3cf161937.svg",
     "static/media/minus.svg": "/boston/static/media/minus.c102b915d9531d94b0ffbf0697014866.svg",
-    "main.d9a47df0.css.map": "/boston/static/css/main.d9a47df0.css.map",
-    "main.65dee1c2.js.map": "/boston/static/js/main.65dee1c2.js.map"
+    "main.c66fa9b0.css.map": "/boston/static/css/main.c66fa9b0.css.map",
+    "main.64753756.js.map": "/boston/static/js/main.64753756.js.map"
   },
   "entrypoints": [
-    "static/css/main.d9a47df0.css",
-    "static/js/main.65dee1c2.js"
+    "static/css/main.c66fa9b0.css",
+    "static/js/main.64753756.js"
   ]
 }
