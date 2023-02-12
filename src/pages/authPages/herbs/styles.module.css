@@ -46,7 +46,7 @@
     color: #272933;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 1000px) {
     .herbs {
         padding: 0 10px;
         padding-bottom: 20px;

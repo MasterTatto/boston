@@ -19,25 +19,33 @@ const Header = () => {
     const [currentLocation, setCurrentLocation] = useState('')
     const [openMenu, setOpenMenu] = useState(false)
 
-
+    console.log(currentLocation)
     const links = [
         {title: 'Patients', link: 'patients'},
+        // {title: 'Patients', isHidden: true, link: 'patients/create-prescription'},
         {title: 'Formulas library', link: 'formulas-library'},
         {title: 'Herbs list', link: 'herbs-list'},
         {title: 'Account Statement', link: 'payment-history'},
     ]
 
     const items = (id) => [...links.map((el) => ({
-        label: <NavLink className={classNames(currentLocation === `/${el.link}` && s.selected)}
-                        to={el.link}
-                        key={el.title}>
+        label: <NavLink
+            //     style={{
+            //     display: el.isHidden && 'none',
+            //     height: el.isHidden && '0',
+            //     overflow: 'hidden',
+            //     border: '1px solid red'
+            // }}
+            className={classNames(currentLocation === `/${el.link}` && s.selected)}
+            to={el.link}
+            key={el.title}>
             <p>{el.title}</p>
         </NavLink>,
         key: el.link,
     })),
         {
             label: <p style={{
-                color: '#8C8C8C'
+                color: '#000'
             }
             } onClick={() => store.auth.logout(navigate)}>Logout</p>,
             key: '1',
@@ -80,7 +88,10 @@ const Header = () => {
                         placement="bottomRight"
                     >
                         <div className={s.selected_box}>
-                            <p>{links?.find(f => `/${f.link}` === currentLocation)?.title}</p>
+                            <p>{
+                                currentLocation === '/patients/create-prescription' && 'Patients' ||
+                                currentLocation === '/formulas-library/create-prescription' && 'Formulas library' ||
+                                links?.find(f => `/${f.link}` === currentLocation)?.title}</p>
                             <Arrow/>
                         </div>
                     </Dropdown>

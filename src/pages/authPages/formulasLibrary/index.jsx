@@ -18,6 +18,16 @@ const FormulasLibrary = observer(() => {
     const [data, setData] = useState([])
     const [selectedFormula, setSelectedFormula] = useState('')
     const [classic, setClassic] = useState(false)
+    const [search, setSearch] = useState('')
+    const [search2, setSearch2] = useState('')
+
+
+    const dataFiltered = [...data.filter(item => {
+        if (!search2) return true
+        if (item?.formula_name?.toLowerCase()?.includes(search2.toLowerCase())) {
+            return true
+        }
+    })];
 
     const choseTypeModal = (type, isOpen) => {
         setTypeModal(type)
@@ -36,6 +46,15 @@ const FormulasLibrary = observer(() => {
         const noClassicData = store.formula.formulas
         setData(classic ? classicData : noClassicData)
     }, [classic])
+
+    useEffect(() => {
+        const delayDebounceFn = setTimeout(() => {
+            setSearch2(search)
+            // Send Axios request here
+        }, 300)
+
+        return () => clearTimeout(delayDebounceFn)
+    }, [search])
 
     useEffect(() => {
         const getAllFormulas = async () => {
@@ -65,8 +84,9 @@ const FormulasLibrary = observer(() => {
                     </div>
                     <div className={s.header_bottom}>
                         <div className={s.input_box}>
-                            <Input.Search onSearch={() => {
-                            }} placeholder="Find formula"/>
+                            <Input.Search value={search} onChange={(e) => {
+                                setSearch(e.target.value)
+                            }} onSearch={setSearch} placeholder="Find formula"/>
                         </div>
                         <div className={s.switch_box}>
                             <Switch value={classic} onChange={setClassic}/>
@@ -75,7 +95,7 @@ const FormulasLibrary = observer(() => {
                     </div>
                 </div>
 
-                <FormulaLeft setRemoveModal={setRemoveModal} formulas={data} choseTypeModal={choseTypeModal}
+                <FormulaLeft setRemoveModal={setRemoveModal} formulas={dataFiltered} choseTypeModal={choseTypeModal}
                              setSelectedFormula={setSelectedFormula}
                              selectedFormula={selectedFormula}/>
             </div>

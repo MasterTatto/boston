@@ -249,7 +249,7 @@
     color: #272933;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 1000px) {
     .info_box {
         display: none;
     }

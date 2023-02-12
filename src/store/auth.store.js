@@ -21,6 +21,7 @@ export class AuthStore {
             localStorage.setItem('name_user', res.data.user.name)
             localStorage.setItem('token', res.data.accessToken)
             localStorage.setItem('refreshToken', res.data.refreshToken)
+            localStorage.setItem('rememberMe', 'true')
             navigate('/patients')
             this.setIsAuth(true)
             this.setButtonLoading(false)

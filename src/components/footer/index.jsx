@@ -16,8 +16,8 @@ const Footer = () => {
                 </div>
                 <div className={s.footer_right}>
                     <div className={s.footer_right_left}>
-                        <p>AcuBoston Herb Pharmacy serving USA</p>
-                        {/*<p> the East Coast, South East & Mid-West Regions</p>*/}
+                        <p>AcuBoston Herb </p>
+                        <p> Pharmacy serving USA</p>
                     </div>
                     <div className={s.footer_right_right}>
                         <div className={s.icons}>

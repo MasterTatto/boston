@@ -11,9 +11,9 @@ const MediaAuth = () => {
                 <img className={s.img2} src={img2} alt="img2"/>
                 <div className={s.media_text}>
                     <h3>Your own herbal pharmacy</h3>
-                    <p>AHP can serve as your own herbal pharmacy where you can design custom herbal formulas according
-                        to FDA GMP requirements without the burden of paperwork and inventory control so you can focus
-                        on your patients.</p>
+                    <p>We can serve as your own herbal pharmacy where you can design custom herbal formulas according to
+                        FDA GMP requirements without the burden of paperwork
+                        and proper inventory control so you can focus on your patients.</p>
                 </div>
             </div>
             <div className={s.media_bottom}>

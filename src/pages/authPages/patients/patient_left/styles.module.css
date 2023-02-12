@@ -195,10 +195,33 @@
 }
 
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 1000px) {
     .content_accordion {
         padding-right: 0;
 
+    }
+
+    .dots span {
+        margin: 0;
+        padding: 0;
+        height: 30px;
+        font-size: 25px;
+        font-weight: 600;
+        margin-top: 0;
+        line-height: 0;
+        margin-bottom: -10px;
+        margin-top: -4px;
+        padding: 0;
+    }
+
+    .dots {
+        width: 40px;
+        display: flex;
+        align-items: center;
+
+        justify-content: space-between;
+        height: 40px;
+        padding: 10px 0;
     }
 
     .content_accordion {

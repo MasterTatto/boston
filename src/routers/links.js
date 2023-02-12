@@ -8,14 +8,16 @@ import AddedPrescriptionPatient from "../pages/authPages/prescriptionCreate";
 import PatientRight from "../pages/authPages/patients/patient_right";
 import Registration from "../pages/unAuthPages/registration";
 import PaymentHistory from "../pages/authPages/paymentHistory";
+import MobilePatients from "../pages/authPages/patients/mobile";
 
 export const unAuthRoutes = [
     {path: '/login', element: <Login/>},
     {path: '/registration', element: <Registration/>},
 ]
 
-export const authRoutes = [
-    {path: '/patients', element: <Patients/>},
+
+export const authRoutes = (width) => [
+    {path: '/patients', element: width > 1000 ? <Patients/> : <MobilePatients/>},
     {path: '/formulas-library', element: <FormulasLibrary/>},
     {path: '/herbs-list', element: <Herbs/>},
     {path: '/payment-history', element: <PaymentHistory/>},

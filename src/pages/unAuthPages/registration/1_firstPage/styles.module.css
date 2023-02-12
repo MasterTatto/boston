@@ -76,7 +76,7 @@
     color: green;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 1000px) {
     .first_page{
         max-width: 100%;
     }

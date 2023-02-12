@@ -123,7 +123,7 @@ const FormulaLeft = observer(({formulas, selectedFormula, setSelectedFormula, ch
                     await getCurrentFormula(el.formula_id)
                 }}>
                     <Collapse
-                        collapsible={size.width > 500 && "disabled"}
+                        collapsible={size.width > 1000 && "disabled"}
                         expandIconPosition={'end'}>
                         <Collapse.Panel header={
                             <div>

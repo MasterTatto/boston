@@ -62,10 +62,29 @@
     fill: rgba(103, 172, 70, 0.7);
 }
 
-@media screen and (max-width: 500px) {
+.mobile_v {
+    display: none;
+}
+
+.desc_v {
+    display: flex;
+    align-items: center;
+}
+
+@media screen and (max-width: 1000px) {
     .header {
         padding: 10px;
         align-items: flex-start;
+    }
+
+    .desc_v {
+        display: none;
+    }
+
+    .mobile_v {
+        display: flex;
+        align-items: flex-end;
+        flex-direction: column-reverse;
     }
 
     .action {
@@ -91,6 +110,6 @@
 
     .logo {
         width: auto;
-        height: 50px;
+        height: 65px;
     }
 }

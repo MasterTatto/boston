@@ -6,18 +6,19 @@ import {observer} from "mobx-react-lite";
 import {calculateMF, calculateTotalPrice} from "../../../../../utils/coastPrescription";
 import {useNavigate} from "react-router-dom";
 
-const PatientLeft = observer(({setSearch, search, setHiddenCopy, hiddenCopy, allPrescriptions}) => {
+const PatientLeft = observer(({setHiddenCopy, hiddenCopy, allPrescriptions}) => {
     const navigate = useNavigate()
 
     const getCurrentPrescription = async (id) => {
-        navigate('/patients/create-prescription', {state: {id: id}})
+
+        navigate('/patients/create-prescription', {state: {id: id, navigateBack: '/patients'}})
     }
 
     const items = (id) => [
         {
-            label: <div onClick={(e) => {
+            label: <div onClick={async (e) => {
                 setHiddenCopy(true)
-                getCurrentPrescription(id)
+                await getCurrentPrescription(id)
                 e.preventDefault()
                 e.stopPropagation()
             }} className={s.drop_item}>
@@ -51,12 +52,7 @@ const PatientLeft = observer(({setSearch, search, setHiddenCopy, hiddenCopy, all
     return (
         <div className={s.content_accordion}>
             {allPrescriptions.length !== 0 ? <>
-                {allPrescriptions.filter(item => {
-                    if (!search) return true
-                    if (item.formula_name.toLowerCase().includes(search.toLowerCase())) {
-                        return true
-                    }
-                })?.map((el, i) => {
+                {allPrescriptions.map((el, i) => {
                     const MF = calculateMF(el.take_times_per_day, el.take_grams, el.take_days, el.formula_weight)
                     return <div key={el.prescription_id}>
                         <div className={s.collaps_item}>

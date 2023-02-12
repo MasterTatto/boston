@@ -13,10 +13,10 @@ const ActionAuth = observer(() => {
     const navigate = useNavigate()
 
     const [values, setValues] = useState({
-        // email: 'bpssoft@yahoo.com',
-        email: '',
-        // password: 'beeguy'
-        password: ''
+        email: 'bpssoft@yahoo.com',
+        // email: '',
+        password: 'beeguy'
+        // password: ''
     })
 
     return (
@@ -25,7 +25,7 @@ const ActionAuth = observer(() => {
             <img src={bg_mobile} className={s.bg_mobile} alt="background"/>
             <div className={s.action_left}>
                 <div className={s.action_left_top}>
-                    <h2>AcuBoston Herbal Pharmacy (AHP)</h2>
+                    <h2>AcuBoston Herbal Pharmacy</h2>
                     <p>is a Compounding Custom Herbal Prescriptions Pharmacy conforming to FDA GMP requirements.</p>
                 </div>
                 <div className={s.action_left_bottom}>
@@ -42,7 +42,7 @@ const ActionAuth = observer(() => {
                     })}
                 </div>
             </div>
-            <div className={s.action_right}>
+            <div className={s.action_right} id={'auth'}>
                 <div className={s.action_box}>
                     <p className={s.sign}>TCM Practitioners & Students,
                         join us</p>

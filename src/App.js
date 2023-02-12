@@ -10,12 +10,18 @@ import Routers from "./routers/routers";
 import {useLocation, useNavigate, useRoutes} from "react-router-dom";
 import {useEffect} from "react";
 import {unAuthRoutes} from "./routers/links";
+import {useWindowSize} from "./utils/useWindowSize";
 
 const App = observer(() => {
     const store = useStore()
     const navigate = useNavigate()
     const {pathname} = useLocation()
     const unAuthPage = useRoutes(unAuthRoutes)
+    const {width} = useWindowSize()
+
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [pathname])
 
     useEffect(() => {
         if (!store.auth.isAuth) {
@@ -31,7 +37,7 @@ const App = observer(() => {
 
     return (
         <div className="App">
-            <SideBar/>
+            {width > 1000 ? <SideBar/> : null}
 
             <div className={'content'}>
                 <Header/>

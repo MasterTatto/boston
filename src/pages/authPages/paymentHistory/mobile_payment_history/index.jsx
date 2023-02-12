@@ -1,24 +1,27 @@
 import React, {useEffect, useRef, useState} from 'react';
 import s from './styles.module.css'
-import {DatePicker, Input} from "antd";
+import {DatePicker, Input, Switch} from "antd";
 import {useStore} from "../../../../useStore";
 import {ReactComponent as Arrow} from '../../../../assets/arrow_select.svg'
 import {ReactComponent as Edit} from "../../../../assets/edit_text.svg";
 import classNames from "classnames";
 import {observer} from "mobx-react-lite";
 import Item from "./item/item";
+import moment from "moment/moment";
+import Loader from "../../../../components/Loader";
 
 const MobilePaymentHistory = observer(() => {
     const store = useStore()
     const inputRef = useRef(null)
 
     const [patients, setPatients] = useState([])
-    const [selectedID,setSelectedID] = useState()
+    const [selectedID, setSelectedID] = useState()
     const [openBalanceInfo, setOpenBalanceInfo] = useState(false)
     const [history, setHistory] = useState()
     const [from, setFrom] = useState(null)
     const [to, setTo] = useState(null)
     const [isDisabled, setIsDisabled] = useState(true)
+    const [classic, setClassic] = useState(false)
     const [values, setValues] = useState({
         payout_person: '',
         payout_address: '',
@@ -36,7 +39,7 @@ const MobilePaymentHistory = observer(() => {
 
     const chooseDay = async (from, to) => {
         console.log('start')
-        await store.history.getAllHistory(from, to)
+        await store.history.getAllHistory(from, to, classic)
         setHistory(store.history.allReport)
         console.log(history)
     }
@@ -59,10 +62,26 @@ const MobilePaymentHistory = observer(() => {
     }, [])
 
     useEffect(() => {
-        // if (from && to) {
-        chooseDay(from, to)
-        // }
-    }, [from, to])
+        const getAllHistory = async () => {
+            const date = new Date()
+            const start = moment(date).add(-6, 'month');
+
+            const date1 = new Date()
+            const date2 = new Date(start.format())
+
+            const toDate = `${date1.getFullYear()}-${date1.getMonth() + 1 < 10 ? `0${date1.getMonth() + 1}` : date1.getMonth() + 1}-${date1.getDate() < 10 ? `0${date1.getDate()}` : date1.getDate()}`
+            const fromDate = `${date2.getFullYear()}-${date2.getMonth() + 1 < 10 ? `0${date2.getMonth() + 1}` : date2.getMonth() + 1}-${date2.getDate() < 10 ? `0${date2.getDate()}` : date2.getDate()}`
+            console.log(toDate)
+            setTo(toDate)
+            setFrom(fromDate)
+
+            await store.history.getAllHistory(fromDate, toDate, classic)
+
+            setHistory(store.history.allReport)
+        }
+
+        getAllHistory()
+    }, [])
     return (
         <div className={s.mobile}>
             <div className={s.header}>
@@ -78,7 +97,7 @@ const MobilePaymentHistory = observer(() => {
                     <div className={s.balance_box}>
                         <p className={s.balance_title}>Your balance:</p>
                         <p className={s.balance_count}>
-                            $2458.47</p>
+                            {`$${history?.current_balance || 0}`}</p>
                         <p className={s.balance_description}>
                             Account Balances in excess of $30 are paid monthly by check
                         </p>
@@ -119,25 +138,43 @@ const MobilePaymentHistory = observer(() => {
 
                 <div className={s.date}>
                     <DatePicker
-                        placeholder={'From'}
-                        onChange={(e) => {
+                        placeholder={from}
+                        onChange={async (e) => {
                             const date = new Date(e)
+                            await chooseDay(`${date.getFullYear()}-${date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1}-${date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()}`, to)
                             setFrom(`${date.getFullYear()}-${date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1}-${date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()}`)
                         }}
                     />
                     <p className={s.arrow}/>
                     <DatePicker
-                        placeholder={'To'}
-                        onChange={(e) => {
+                        placeholder={to}
+                        onChange={async (e) => {
                             const date = new Date(e)
+                            await chooseDay(from, `${date.getFullYear()}-${date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1}-${date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()}`)
                             setTo(`${date.getFullYear()}-${date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1}-${date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()}`)
                         }}/>
                 </div>
+
+                <div className={s.switch_box}>
+                    <div className={s.switch}>
+                        <Switch
+                            value={classic}
+                            onChange={async (e) => {
+                                setClassic(e)
+                                await store.history.getAllHistory(from, to, e)
+                                setHistory(store.history.allReport)
+                            }}
+                        />
+                        <span className={s.switch_box_title}>Payouts only</span>
+                    </div>
+                </div>
             </div>
 
-            <div className={s.items_box}>
-                {history?.rows?.map((el, i) => <Item patients={patients} getCurrentPrescription={getCurrentPrescription} selectedID={selectedID} setSelectedID={setSelectedID} key={i} index={i} {...el}/>)}
-            </div>
+            {store.history.isLoading ? <Loader/> : <div className={s.items_box}>
+                {history?.rows?.map((el, i) => <Item patients={patients} getCurrentPrescription={getCurrentPrescription}
+                                                     selectedID={selectedID} setSelectedID={setSelectedID} key={i}
+                                                     index={i} {...el}/>)}
+            </div>}
         </div>
     );
 });

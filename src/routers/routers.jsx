@@ -3,8 +3,11 @@ import {useLocation, useNavigate, useRoutes} from "react-router-dom";
 
 import {useStore} from "../useStore";
 import {authRoutes} from "./links";
+import {useWindowSize} from "../utils/useWindowSize";
 
 const Routers = () => {
+    const {width} = useWindowSize()
+
     const {pathname} = useLocation()
     const navigate = useNavigate()
     const store = useStore()
@@ -15,7 +18,7 @@ const Routers = () => {
         }
     }, [pathname])
 
-    const authPage = useRoutes(authRoutes)
+    const authPage = useRoutes(authRoutes(width))
 
     return (
         <>

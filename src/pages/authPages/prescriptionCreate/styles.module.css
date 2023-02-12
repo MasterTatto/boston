@@ -283,7 +283,7 @@
     margin-left: 3px;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 1000px) {
     .main {
         padding: 0 10px;
         overflow-y: unset;

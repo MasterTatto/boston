@@ -1,9 +1,14 @@
 .header_title {
-    font-family: 'Montserrat Alternates', sans-serif;
+    font-family: 'Montserrat Alternates';
     font-style: normal;
     font-weight: 500;
     font-size: 18px;
     line-height: 22px;
+    /* identical to box height */
+
+
+    /* Black */
+
     color: #272933;
 }
 
@@ -57,7 +62,17 @@
     display: none;
 }
 
-@media screen and (max-width: 500px) {
+.change_patient {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    cursor: pointer;
+    color: #67AC46;
+}
+
+@media screen and (max-width: 1000px) {
     .mobile_patient {
         display: flex;
     }
@@ -126,7 +141,27 @@
         text-decoration-line: underline;
         color: #8C8C8C;
         cursor: pointer;
-        margin-right: 40px;
+        margin-top: 5px;
+    }
+
+    .serach_patient {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .patient_title {
+        font-family: 'Montserrat Alternates';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 20px;
+        color: #272933;
+    }
+
+    .heder_action_info {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
     }
 
     .action_box {
@@ -228,6 +263,7 @@
         width: fit-content;
         position: relative;
         height: 20px;
+
     }
 
     .dots span {

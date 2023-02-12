@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import s from './styles.module.css'
 import {Collapse, Dropdown} from "antd";
 import {ReactComponent as Copy} from "../../../../assets/copy.svg";
@@ -18,18 +18,36 @@ const PatientLeft = observer(({
                                   currentID
                               }) => {
     const navigate = useNavigate()
-
     const store = useStore()
 
+    const [search2, setSearch2] = useState('')
+
     const getCurrentPrescription = async (id) => {
-        navigate('/patients/create-prescription', {state: {id: id}})
+
+        navigate('/patients/create-prescription', {state: {id: id, navigateBack: '/patients'}})
     }
 
+    useEffect(() => {
+        const delayDebounceFn = setTimeout(() => {
+            setSearch2(search)
+            // Send Axios request here
+        }, 300)
+
+        return () => clearTimeout(delayDebounceFn)
+    }, [search])
+
+
+    const data = [...allPrescriptions.filter(item => {
+        if (!search2) return true
+        if (item?.formula_name?.toLowerCase()?.includes(search2.toLowerCase())) {
+            return true
+        }
+    })];
     const items = (id) => [
         {
-            label: <div onClick={(e) => {
+            label: <div onClick={async (e) => {
                 setHiddenCopy(true)
-                getCurrentPrescription(id)
+                await getCurrentPrescription(id)
                 e.preventDefault()
                 e.stopPropagation()
             }} className={s.drop_item}>
@@ -62,13 +80,8 @@ const PatientLeft = observer(({
 
     return (
         <div className={s.content_accordion}>
-            {allPrescriptions.length !== 0 ? <>
-                {allPrescriptions.filter(item => {
-                    if (!search) return true
-                    if (item.formula_name.toLowerCase().includes(search.toLowerCase())) {
-                        return true
-                    }
-                })?.map((el, i) => {
+            {data.length !== 0 ? <>
+                {data?.map((el, i) => {
                     const MF = calculateMF(el.take_times_per_day, el.take_grams, el.take_days, el.formula_weight)
 
                     return <div key={el.prescription_id} className={s.collaps} style={{

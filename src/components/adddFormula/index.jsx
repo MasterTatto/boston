@@ -63,7 +63,7 @@ const AddedFormula = observer(({openModal, setOpenModal, type, setData}) => {
         }
         getAllHerbs()
     }, [])
-
+    console.log(herb?.herb_name)
     return (
         <Modal
             title=""
@@ -90,7 +90,7 @@ const AddedFormula = observer(({openModal, setOpenModal, type, setData}) => {
                 }
                 }
                         loading={store.formula.buttonLoading}
-                        className={classNames(s.btn, s.add)}>Add</Button>
+                        className={classNames(s.btn, s.add)}>{type === 'copy' ? 'Save' : 'Add'}</Button>
             </div>}
             open={openModal}
             onCancel={() => setOpenModal(null, false)}
@@ -173,14 +173,14 @@ const AddedFormula = observer(({openModal, setOpenModal, type, setData}) => {
                         </div>
                     </div>
                     <div className={s.added_herb}>
-                        <AddedTextPlus title={'Add herb'}
-                                       onClick={() => {
-                                           if (chooseHerbs?.find(f => f.herb_code === herb.herb_code) || !herb.herb_code) {
-                                               return
-                                           }
-                                           setChooseHerbs([{...herb, parts: part}, ...chooseHerbs])
-                                           setPart(1)
-                                       }}/>
+                        {herb?.herb_name ? <AddedTextPlus title={'Add herb'}
+                                                           onClick={() => {
+                                                               if (chooseHerbs?.find(f => f.herb_code === herb.herb_code) || !herb.herb_code) {
+                                                                   return
+                                                               }
+                                                               setChooseHerbs([{...herb, parts: part}, ...chooseHerbs])
+                                                               setPart(1)
+                                                           }}/> : null}
                     </div>
 
                     <div className={s.table}>

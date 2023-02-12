@@ -50,8 +50,43 @@ const MobilePatients = observer(() => {
     const [hiddenCopy, setHiddenCopy] = useState(false)
     const [allPrescriptions, setAllPrescriptions] = useState([])
     const [search, setSearch] = useState('')
+    const [search2, setSearch2] = useState('')
     const [patients, setPatients] = useState([])
     const [selectedPatient, setSelectedPatient] = useState()
+    const [searchPatient, setSearchPatient] = useState('')
+    const [searchPatient2, setSearchPatient2] = useState('')
+    console.log(selectedPatient)
+    const dataFiltered = [...patients.filter(item => {
+        if (!searchPatient2) return true
+        if (item?.patient_name?.toLowerCase()?.includes(searchPatient2.toLowerCase())) {
+            return true
+        }
+    })];
+
+    const dataFilteredPrescriptin = [...allPrescriptions.filter(item => {
+        if (!search2) return true
+        if (item?.formula_name?.toLowerCase()?.includes(search2.toLowerCase())) {
+            return true
+        }
+    })];
+
+    useEffect(() => {
+        const delayDebounceFn = setTimeout(() => {
+            setSearchPatient2(searchPatient)
+            // Send Axios request here
+        }, 300)
+
+        return () => clearTimeout(delayDebounceFn)
+    }, [searchPatient])
+
+    useEffect(() => {
+        const delayDebounceFn = setTimeout(() => {
+            setSearch2(search)
+            // Send Axios request here
+        }, 300)
+
+        return () => clearTimeout(delayDebounceFn)
+    }, [search])
 
     const removePatient = async () => {
         await store.patients.deletePatients(store.patients.patient.patient_id, setOpenRemoveModal)
@@ -89,7 +124,13 @@ const MobilePatients = observer(() => {
     }, [hiddenCopy])
 
     useEffect(() => {
+        const id_patient = localStorage.getItem('patient_id')
+
         const getAllPrescriptions = async () => {
+            await store.patients.getAllPatients()
+            setPatients(store.patients.allPatients)
+            await store.patients.getPatients(id_patient ? id_patient : (store.patients.allPatients[0] ? store.patients.allPatients[0]?.patient_id : null))
+            setSelectedPatient((store.patients.allPatients.length > 0 && id_patient) ? id_patient : (store.patients.allPatients[0] ? store.patients.allPatients[0]?.patient_id : null))
             await store.patients.getPrescription(store.patients.patient.patient_id)
             setAllPrescriptions(store.patients.allPrescription)
         }
@@ -111,8 +152,22 @@ const MobilePatients = observer(() => {
     // }, [])
 
     useEffect(() => {
+        const id_patient = localStorage.getItem('patient_id')
         setPatients(store.patients.allPatients)
+        // setSelectedPatient(id_patient ? id_patient : (store.patients.allPatients[0] ? store.patients.allPatients[0]?.patient_id : null))
     }, [store.patients.isLoading])
+
+    // useEffect(() => {
+    //     const id_patient = localStorage.getItem('patient_id')
+    //     const test = async () => {
+    //         await store.patients.getPatients(id_patient ? id_patient : (store.patients.allPatients[0] ? store.patients.allPatients[0]?.patient_id : null))
+    //         await store.patients.getPrescription(id_patient ? id_patient : (store.patients.allPatients[0] ? store.patients.allPatients[0]?.patient_id : null))
+    //         setPatients(store.patients.allPatients)
+    //         setSelectedPatient((store.patients.allPatients.length > 0 && id_patient) ? id_patient : (store.patients.allPatients[0] ? store.patients.allPatients[0]?.patient_id : null))
+    //     }
+    //     test()
+    // }, [])
+
     return (
         <div className={s.mobile_patient}>
             {openAddedModal !== null && <AddedPatientsModal handleOk={handleOk} openAddedModal={openAddedModal}
@@ -129,32 +184,43 @@ const MobilePatients = observer(() => {
 
                     <div className={s.header}>
                         <div className={s.patients}>
-                            <div className={s.header_top}>
-                                <p className={s.header_title}>Patients</p>
-                                <AddedTextPlus title={'Add patient'}
-                                               onClick={() => setOpenAddedModal('add')}/>
-                            </div>
-                            <div className={classNames(s.header_bottom, s.header_bottom_2)}>
-                                <div className={s.patients_serach}>
-                                    <p className={s.patient_name}>{store.patients.patient.patient_name}</p>
-                                    <div className={s.action_box}>
-                                        <p className={s.show_more} onClick={() => setOpenInfo(true)}>Show Info</p>
-                                        <Arrow onClick={() => setShowFullPatient(!showFullPatient)}/>
-                                    </div>
+                            {!showFullPatient && <div>
+                                <div className={s.header_top}>
+                                    <p className={s.header_title}>{store.patients.patient.patient_name}</p>
+                                    <p className={s.change_patient}
+                                       onClick={() => setShowFullPatient(!showFullPatient)}>Change
+                                        Patient</p>
+                                    {/*<AddedTextPlus title={'Add patient'}*/}
+                                    {/*               onClick={() => setOpenAddedModal('add')}/>*/}
                                 </div>
-                            </div>
+                                <p className={s.show_more} onClick={() => setOpenInfo(true)}>Show Info</p>
+                            </div>}
+                            {showFullPatient && <div className={classNames(s.header_bottom, s.header_bottom_2)}>
+                                <div className={s.heder_action_info}>
+                                    <p className={s.patient_title}>Patients</p>
+                                    <AddedTextPlus title={'Add patient'}
+                                                   onClick={() => setOpenAddedModal('add')}/>
+                                </div>
+
+                                <div className={s.serach_patient}>
+                                    <Input.Search placeholder="Find patient" value={searchPatient} onChange={(e) => {
+                                        setSearchPatient(e.target.value)
+                                    }} onSearch={setSearchPatient}/>
+                                </div>
+                            </div>}
 
                             {showFullPatient && <div>
                                 {patients.length !== 0 ? <div className={s.patient_items}>
-                                    {patients.map((el) => <div key={el.patient_id} onClick={async () => {
+                                    {dataFiltered.map((el) => <div key={el.patient_id} onClick={async () => {
                                         setSelectedPatient(el.patient_id)
+                                        localStorage.setItem('patient_id', el.patient_id)
                                         if (el.patient_id !== selectedPatient) {
                                             setShowFullPatient(false)
                                             await store.patients.getPatients(el.patient_id)
                                         }
 
                                     }}
-                                                               className={classNames(s.item, store.patients.patient.patient_id === el.patient_id && s.selected)}>
+                                                                   className={classNames(s.item, store.patients.patient.patient_id === el.patient_id && s.selected)}>
                                         <div className={s.info_box_item}>
                                             <p className={s.item_name}>{el.patient_name}</p>
                                             <p className={s.item_email}>{el.email}</p>
@@ -193,12 +259,14 @@ const MobilePatients = observer(() => {
                                            })}/>
                         </div>
                         <div className={s.header_bottom}>
-                            <Input.Search onSearch={setSearch} placeholder="Find Prescription"/>
+                            <Input.Search value={search} onChange={(e) => {
+                                setSearch(e.target.value)
+                            }} onSearch={setSearch} placeholder="Find Prescription"/>
                         </div>
                     </div>
 
-                    <PatientLeft setSearch={setSearch} search={search} setHiddenCopy={setHiddenCopy}
-                                 allPrescriptions={allPrescriptions}
+                    <PatientLeft setHiddenCopy={setHiddenCopy}
+                                 allPrescriptions={dataFilteredPrescriptin}
                                  hiddenCopy={hiddenCopy}/>
                 </div>
 

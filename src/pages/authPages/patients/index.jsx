@@ -104,7 +104,10 @@ const Patients = observer(() => {
             setPrescriptionID(null)
             await store.patients.getPrescription(store.patients.patient.patient_id)
             await getCurrentPrescription(store.patients.allPrescription[0]?.prescription_id)
-            await store.formula.getCurrentFormula(store.patients.allPrescription[0]?.formula_id)
+            if (allPrescriptions.length !== 0) {
+                await store.formula.getCurrentFormula(store.patients.allPrescription[0]?.formula_id)
+            }
+
             setCurrentID(store.patients.allPrescription[0]?.prescription_id)
             setAllPrescriptions(store.patients.allPrescription)
         }
@@ -117,7 +120,7 @@ const Patients = observer(() => {
 
     return (
         <>
-            <MobilePatients/>
+            {/*<MobilePatients/>*/}
             <div className={s.desktop_patient}>
                 {openAddedModal !== null && <AddedPatientsModal handleOk={handleOk} openAddedModal={openAddedModal}
                                                                 setOpenAddedModal={setOpenAddedModal}/>}
@@ -197,7 +200,9 @@ const Patients = observer(() => {
                                                })}/>
                             </div>
                             <div className={s.header_bottom}>
-                                <Input.Search onSearch={setSearch} placeholder="Find Prescription"/>
+                                <Input.Search onChange={(e) => {
+                                    setSearch(e.target.value)
+                                }} onSearch={setSearch} value={search} placeholder="Find Prescription"/>
                             </div>
                         </div>
 
