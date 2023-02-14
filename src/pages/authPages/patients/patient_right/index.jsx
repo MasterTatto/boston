@@ -10,7 +10,7 @@ import {getFormatedDate} from "../../../../utils/getFormatDate";
 
 const PatientRight = observer(({prescription, patients}) => {
     const store = useStore()
-
+    console.log(prescription)
     const patient = patients?.find(f => f.patient_id === prescription?.patient_id)
 
     const [openAddedModal, setOpenAddedModal] = useState(null)
