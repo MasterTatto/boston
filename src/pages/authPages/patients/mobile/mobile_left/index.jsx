@@ -7,11 +7,12 @@ import {calculateMF, calculateTotalPrice} from "../../../../../utils/coastPrescr
 import {useNavigate} from "react-router-dom";
 import {ReactComponent as Arrow} from '../../../../../assets/arrow.svg'
 import classNames from "classnames";
+import CollapseItem from "./collapse_item";
 
-const PatientLeft = observer(({setHiddenCopy, hiddenCopy, allPrescriptions}) => {
+const PatientLeft = observer(({selectedPatient, setHiddenCopy, hiddenCopy, allPrescriptions}) => {
     const navigate = useNavigate()
 
-    const [openMenu, setOpenMenu] = useState(false)
+    const [checkerCloseShowMore,setCheckerCloseShowMore] = useState(false)
 
     const getCurrentPrescription = async (id) => {
 
@@ -58,70 +59,96 @@ const PatientLeft = observer(({setHiddenCopy, hiddenCopy, allPrescriptions}) => 
             {allPrescriptions.length !== 0 ? <>
                 {allPrescriptions.map((el, i) => {
                     const MF = calculateMF(el.take_times_per_day, el.take_grams, el.take_days, el.formula_weight)
-
+                    console.log(el)
                     return <div key={el.prescription_id}>
                         <div className={s.collaps_item}>
                             <Collapse expandIconPosition={'end'}>
                                 <Collapse.Panel header={
-                                    <div onClick={() => setOpenMenu(false)}>
+                                    <div onClick={() => setCheckerCloseShowMore(!checkerCloseShowMore)}>
                                         <p className={s.collapse_name}>{el.formula_name}</p>
                                         <p className={s.collapse_date}>{el.date}</p>
                                     </div>
                                 } key="1"
                                                 extra={genExtra(el.prescription_id)}>
-                                    <p className={s.collapse_description}>{el.notes}</p>
+                                    {/*<p className={s.collapse_description}>{el.notes}</p>*/}
+                                    {/*<p className={s.collapse_description}>{el.notes}</p>*/}
 
-                                    <div className={s.collapse_item}>
-                                        <p className={s.collapse_title}>Duration:</p>
-                                        <p className={s.collapse_answer}>{`${el.take_days} days, ${el.take_times_per_day} times a day`}</p>
-                                    </div>
-
-                                    <div className={s.collapse_item}>
-                                        <p className={s.collapse_title}>Dosage:</p>
-                                        <p className={s.collapse_answer}>{`${el.take_grams} gr.each (${el.total_grams} gr. in total)`}</p>
+                                    <div className={s.collapse_item} style={{
+                                        marginTop:0
+                                    }}>
+                                        <p className={s.collapse_title}>Status:</p>
+                                        <p className={s.collapse_answer}>{el.status}</p>
                                     </div>
 
                                     <div className={s.collapse_item}>
                                         <p className={s.collapse_title}>Total price:</p>
-                                        {/*<p className={s.collapse_answer}>{`$${calculateTotalPrice(MF, el.formula_weight, el.formula_cost, el.markup, el.fulfillment_fee)}`}</p>*/}
-                                        <p className={s.collapse_answer}>{el?.prescription_price}</p>
+                                        <p className={s.collapse_answer}>{`$${el.prescription_price}`}</p>
+                                    </div>
+
+                                    <br/>
+                                    <div style={{
+                                        height: '1px',
+                                        backgroundColor: 'rgba(39,41,51,0.2)',
+                                        width: '100%'
+                                    }}/>
+                                    <br/>
+
+                                    <div className={s.collapse_item} style={{
+                                        marginTop:0
+                                    }}>
+                                        <p className={s.collapse_title}>Take days:</p>
+                                        <p className={s.collapse_answer}>{el.take_days}</p>
                                     </div>
 
                                     <div className={s.collapse_item}>
-                                        <p className={s.collapse_title}>Payment:</p>
-                                        <p className={s.collapse_answer}>{el.payment_method}</p>
+                                        <p className={s.collapse_title}>Take times per day:</p>
+                                        <p className={s.collapse_answer}>{el.take_times_per_day}</p>
                                     </div>
 
                                     <div className={s.collapse_item}>
-                                        <p className={s.collapse_title}>Delivery:</p>
-                                        <p className={s.collapse_answer}>{el.delivery_method}</p>
+                                        <p className={s.collapse_title}>Take grams:</p>
+                                        <p className={s.collapse_answer}>{`${el.take_grams} g`}</p>
                                     </div>
 
-                                    <div>
-                                        <p className={classNames(s.click, openMenu && s.rotate)}
-                                           onClick={() => setOpenMenu(!openMenu)}>
-                                            <Arrow/>
-                                            More details
+                                    <div className={s.collapse_item}>
+                                        <p className={s.collapse_title}>Total grams:</p>
+                                        <p className={s.collapse_answer}>{`${el.total_grams} g`}</p>
+                                    </div>
+
+                                    <div className={classNames(s.collapse_item, s.collapse_item_notes)}>
+                                        <p className={s.collapse_title}>Note:</p>
+                                        <p className={classNames(s.collapse_answer, s.collapse_answer_notes)}>
+                                            {el.notes}
+
                                         </p>
-                                        <div style={{
-                                            height: openMenu ? 'fit-content' : 0,
-                                            overflow: 'hidden'
-                                        }}>
-                                            <ul>
-                                                <li>1</li>
-                                                <li>1</li>
-                                                <li>1</li>
-                                                <li>1</li>
-                                                <li>1</li>
-                                                <li>1</li>
-                                                <li>1</li>
-                                                <li>1</li>
-                                                <li>1</li>
-                                                <li>1</li>
-                                            </ul>
-                                        </div>
                                     </div>
 
+                                    {/*<div className={s.collapse_item}>*/}
+                                    {/*    <p className={s.collapse_title}>Duration:</p>*/}
+                                    {/*    <p className={s.collapse_answer}>{`${el.take_days} days, ${el.take_times_per_day} times a day`}</p>*/}
+                                    {/*</div>*/}
+
+                                    {/*<div className={s.collapse_item}>*/}
+                                    {/*    <p className={s.collapse_title}>Dosage:</p>*/}
+                                    {/*    <p className={s.collapse_answer}>{`${el.take_grams} gr.each (${el.total_grams} gr. in total)`}</p>*/}
+                                    {/*</div>*/}
+
+                                    {/*<div className={s.collapse_item}>*/}
+                                    {/*    <p className={s.collapse_title}>Total price:</p>*/}
+                                    {/*    /!*<p className={s.collapse_answer}>{`$${calculateTotalPrice(MF, el.formula_weight, el.formula_cost, el.markup, el.fulfillment_fee)}`}</p>*!/*/}
+                                    {/*    <p className={s.collapse_answer}>{el?.prescription_price}</p>*/}
+                                    {/*</div>*/}
+
+                                    {/*<div className={s.collapse_item}>*/}
+                                    {/*    <p className={s.collapse_title}>Payment:</p>*/}
+                                    {/*    <p className={s.collapse_answer}>{el.payment_method}</p>*/}
+                                    {/*</div>*/}
+
+                                    {/*<div className={s.collapse_item}>*/}
+                                    {/*    <p className={s.collapse_title}>Delivery:</p>*/}
+                                    {/*    <p className={s.collapse_answer}>{el.delivery_method}</p>*/}
+                                    {/*</div>*/}
+                                    <CollapseItem checkerCloseShowMore={checkerCloseShowMore} el={el} selectedPatient={selectedPatient}/>
                                     <div className={s.collapse_formula}>
                                         <p className={s.collapse_formula_title}>Composition of the formula</p>
 

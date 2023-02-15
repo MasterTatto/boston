@@ -265,7 +265,7 @@ const MobilePatients = observer(() => {
                         </div>
                     </div>
 
-                    <PatientLeft setHiddenCopy={setHiddenCopy}
+                    <PatientLeft selectedPatient={selectedPatient} setHiddenCopy={setHiddenCopy}
                                  allPrescriptions={dataFilteredPrescriptin}
                                  hiddenCopy={hiddenCopy}/>
                 </div>
