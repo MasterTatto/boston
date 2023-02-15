@@ -104,6 +104,20 @@
     color: #272933;
 }
 
+.collapse_title_status {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+    /* identical to box height */
+
+
+    /* Black */
+
+    color: #272933;
+}
+
 .collapse_answer {
     font-family: 'Montserrat', sans-serif;
     font-style: normal;
@@ -113,6 +127,20 @@
     max-width: 200px;
     width: 100%;
     color: #272933;
+}
+
+.collapse_answer_status {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+    /* identical to box height */
+
+
+    /* Green */
+
+    color: #67AC46;
 }
 
 .collapse_answer_notes {

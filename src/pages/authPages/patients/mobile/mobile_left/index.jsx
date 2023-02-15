@@ -76,8 +76,8 @@ const PatientLeft = observer(({selectedPatient, setHiddenCopy, hiddenCopy, allPr
                                     <div className={s.collapse_item} style={{
                                         marginTop:0
                                     }}>
-                                        <p className={s.collapse_title}>Status:</p>
-                                        <p className={s.collapse_answer}>{el.status}</p>
+                                        <p className={classNames(s.collapse_title,s.collapse_title_status)}>Status:</p>
+                                        <p className={classNames(s.collapse_answer,s.collapse_answer_status)}>{el.status}</p>
                                     </div>
 
                                     <div className={s.collapse_item}>
