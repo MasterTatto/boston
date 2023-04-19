@@ -5,7 +5,7 @@ import {Dropdown, Input} from "antd";
 import {observer} from "mobx-react-lite";
 import {useStore} from "../../../../useStore";
 import Loader from "../../../../components/Loader";
-import {NavLink, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import classNames from "classnames";
 import {ReactComponent as Arrow} from '../../../../assets/arrow.svg'
 import AddedPatientsModal from "../../../../components/sideBar/addedPatientModal";
@@ -55,7 +55,7 @@ const MobilePatients = observer(() => {
     const [selectedPatient, setSelectedPatient] = useState()
     const [searchPatient, setSearchPatient] = useState('')
     const [searchPatient2, setSearchPatient2] = useState('')
-    console.log(selectedPatient)
+
     const dataFiltered = [...patients.filter(item => {
         if (!searchPatient2) return true
         if (item?.patient_name?.toLowerCase()?.includes(searchPatient2.toLowerCase())) {
@@ -100,11 +100,16 @@ const MobilePatients = observer(() => {
     const handleOk = async (values) => {
         if (openAddedModal === 'add') {
             const add = await store.patients.addedPatients(values, setOpenAddedModal)
+            setShowFullPatient(false)
+            localStorage.setItem('patient_id', add.data.patient_id)
+            await store.patients.getPatients(add.data.patient_id)
+            setSelectedPatient(add.data.patient_id)
 
             if (!add.response) {
                 await store.patients.getAllPatients()
                 setPatients(store.patients.allPatients)
             }
+            // setShowFullPatient(false)
         }
 
         if (openAddedModal === 'edit') {
@@ -235,7 +240,10 @@ const MobilePatients = observer(() => {
                                                 trigger={['click']}
                                                 placement="bottomRight"
                                             >
-                                                <div className={s.dots} onClick={(e) => e.preventDefault()}>
+                                                <div className={s.dots} onClick={(e) => {
+                                                    e.stopPropagation()
+                                                    e.preventDefault()
+                                                }}>
                                                     <span>.</span>
                                                     <span>.</span>
                                                     <span>.</span>

@@ -6,24 +6,39 @@ import {observer} from "mobx-react-lite";
 import {useStore} from "../../../../useStore";
 import ModalAlreadyEmail from "../modalAlreadyEmail";
 
-const FirstPage = observer(({salutations, suffixes, changeValues, values}) => {
+const FirstPage = observer(({
+                                salutations,
+                                suffixes,
+                                changeValues,
+                                setValidImportantValue,
+                                validImportantValue,
+                                values
+                            }) => {
     const store = useStore()
 
     const [validateEmail, setValidateEmail] = useState({
         status: '',
         text: ''
     })
+
     const [openModal, setOpenModal] = useState(false)
 
     const checkEmail = async () => {
-        const res = await store.auth.checkEmail(values.email)
-        if (res.response) {
-            setValidateEmail({status: 'error', text: 'This email is already'})
-            setOpenModal(true)
+        if (values.email === '' || values.email === null) {
+            setValidImportantValue({...validImportantValue, email: 'error'})
         } else {
-            setValidateEmail({status: 'succes', text: 'Email available'})
+            const res = await store.auth.checkEmail(values.email)
+            setValidImportantValue({...validImportantValue, email: null})
+            if (res.response) {
+                setValidateEmail({status: 'error', text: 'This email is already'})
+                setOpenModal(true)
+            } else {
+                setValidateEmail({status: 'succes', text: 'Email available'})
+            }
         }
+
     }
+
     return (
         <div className={s.first_page}>
             {openModal && <ModalAlreadyEmail setOpenModal={setOpenModal} openModal={openModal} email={values.email}/>}
@@ -36,10 +51,35 @@ const FirstPage = observer(({salutations, suffixes, changeValues, values}) => {
                 </div>
 
                 <div className={s.box}>
-                    <label className={s.label}>E-mail</label>
-                    <Input onChange={(e) => changeValues('email', e.target.value)}
-                           value={values.email}/>
-                    {validateEmail !== null &&
+                    <label className={s.label} style={{
+                        color: validImportantValue.email !== null && '#ff4d4f'
+                    }}>E-mail *</label>
+                    <Input
+                        // autoComplete="new-password"
+                        status={validImportantValue.email === null ? null : 'error'}
+                        required
+                        onBlur={() => {
+                            if (values.email === '' || values.email === null) {
+                                setValidImportantValue({...validImportantValue, email: 'error'})
+                            } else {
+                                setValidImportantValue({...validImportantValue, email: null})
+                            }
+                        }}
+                        onChange={(e) => {
+                            setValidateEmail({
+                                status: '',
+                                text: ''
+                            })
+                            if (e.target.value === '') {
+                                setValidImportantValue({...validImportantValue, email: 'error'})
+                            } else {
+                                setValidImportantValue({...validImportantValue, email: null})
+                            }
+                            changeValues('email', e.target.value)
+                        }}
+                        value={values.email || null}/>
+                    {validImportantValue.email !== null && <span className={s.error_message}>Required</span>}
+                    {(validateEmail !== null && values.email !== '') &&
                         <span
                             className={classNames(s.label, validateEmail.status === 'error' ? s.error : s.succes)}>{validateEmail.text}</span>}
                     <div className={classNames(s.label, s.check)} onClick={checkEmail}>
@@ -54,8 +94,8 @@ const FirstPage = observer(({salutations, suffixes, changeValues, values}) => {
                 <div className={s.box}>
                     <label className={s.label}>Salutation</label>
                     <Select
-                        value={values.salutation}
-                        placeholder={''}
+                        value={values.salutation || null}
+                        placeholder="Select"
                         style={{width: '100%'}}
                         onChange={(e) => {
                             changeValues('salutation', e)
@@ -68,8 +108,29 @@ const FirstPage = observer(({salutations, suffixes, changeValues, values}) => {
                 </div>
 
                 <div className={s.box}>
-                    <label className={s.label}>First Name</label>
-                    <Input onChange={(e) => changeValues('first_name', e.target.value)} value={values.first_name}/>
+                    <label style={{
+                        color: validImportantValue.name !== null && '#ff4d4f'
+                    }} className={s.label}>First Name *</label>
+                    <Input
+                        // autoComplete="new-password"
+                        onBlur={() => {
+                            if (values.first_name === '' || values.first_name === null) {
+                                setValidImportantValue({...validImportantValue, name: 'error'})
+                            } else {
+                                setValidImportantValue({...validImportantValue, name: null})
+                            }
+                        }} status={validImportantValue.name === null ? null : 'error'}
+                        onChange={(e) => {
+                            if (e.target.value === '') {
+                                setValidImportantValue({...validImportantValue, name: 'error'})
+                            } else {
+                                setValidImportantValue({...validImportantValue, name: null})
+                            }
+                            changeValues('first_name', e.target.value)
+                        }}
+                        value={values.first_name}/>
+                    {validImportantValue.name !== null &&
+                        <span className={classNames(s.error_message, s.error_message_name)}>Required</span>}
                 </div>
 
                 <div className={s.box}>
@@ -85,12 +146,12 @@ const FirstPage = observer(({salutations, suffixes, changeValues, values}) => {
                 <div className={s.box}>
                     <label className={s.label}>Suffix</label>
                     <Select
-                        placeholder={''}
+                        placeholder="Select"
                         style={{width: '100%'}}
                         onChange={(e) => {
                             changeValues('suffix', e)
                         }}
-                        value={values.suffix}
+                        value={values.suffix || null}
                         options={suffixes.map((el) => ({
                             value: el,
                             label: el,
@@ -98,12 +159,12 @@ const FirstPage = observer(({salutations, suffixes, changeValues, values}) => {
                     />
                 </div>
 
-                <div className={classNames(s.text_area)}>
-                    <label className={s.label}>Specialties</label>
-                    <Input.TextArea placeholder={'Specialties'}
-                                    onChange={(e) => changeValues('specialities', e.target.value)}
-                                    value={values.specialities}/>
-                </div>
+                {/*<div className={classNames(s.text_area)}>*/}
+                {/*    <label className={s.label}>Specialties</label>*/}
+                {/*    <Input.TextArea placeholder={'Specialties'}*/}
+                {/*                    onChange={(e) => changeValues('specialities', e.target.value)}*/}
+                {/*                    value={values.specialities}/>*/}
+                {/*</div>*/}
             </div>
         </div>
     );

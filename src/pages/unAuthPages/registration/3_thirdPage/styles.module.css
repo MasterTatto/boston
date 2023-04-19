@@ -22,6 +22,38 @@
     margin-left: 10px;
 }
 
+.uploaded_files_box {
+    margin-top: 20px;
+}
+
+.uploaded_file_item {
+    border: 1px solid #D4D4D6;
+    padding: 4px 10px;
+    width: 100%;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: .3s all;
+    background-color: #fff;
+    font-size: 14px;
+    margin-top: 10px;
+    height: 34px;
+}
+
+.uploaded_file_item svg {
+    transition: .3s all;
+}
+
+.uploaded_file_item svg:hover {
+    fill: red;
+}
+
+.uploaded_file_item:hover {
+    background-color: rgba(201, 198, 198, 0.2);
+}
+
 .upload {
     width: 100%;
     margin-top: 10px;
@@ -53,8 +85,8 @@
     font-size: 12px;
     line-height: 15px;
     color: #272933;
-    max-width: 218px;
-    width: 100%;
+    /*max-width: 218px;*/
+    width: 95%;
     margin-left: 10px;
     margin-top: 5px;
 }
@@ -103,7 +135,7 @@
 }
 
 @media screen and (max-width: 1000px) {
-    .third_page{
+    .third_page {
         max-width: 100%;
         margin-top: 25px;
     }

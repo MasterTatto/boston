@@ -2,12 +2,17 @@ export const calculateMF = (take_times_per_day, take_grams, take_days, formula_w
     return Math.ceil((+take_times_per_day * +take_grams * +take_days) / +formula_weight)
 }
 
-export const calculateTotalPrice = (MF, formula_weight, formula_cost, markup, fullfillment_fee) => {
-    return !isNaN((MF * +formula_weight * +formula_cost * +markup) + +fullfillment_fee) ? ((MF * +formula_weight * +formula_cost * +markup) + +fullfillment_fee).toFixed(2) : '-'
+////////
+export const multiplication_factor = (total_grams, formula_weight) => {
+
+    return Math.ceil(total_grams / formula_weight)
 }
 
-export const calculateHerbCoast = (MF, formula_cost) => {
-    return !isNaN(MF * +formula_cost) ?
-        (MF * +formula_cost).toFixed(2) :
-        '-'
+export const herbs_cost = (formula_cost = 0, multiplication_factor = 0) => {
+
+    return ((isNaN(formula_cost) ? 0 : formula_cost) * (isNaN(multiplication_factor) ? 0 : multiplication_factor)).toFixed(2)
+}
+
+export const total_price = (herbs_cost = 0, markup = 0, fulfillment_fee = 0, delivery_cost = 0) => {
+    return (((isNaN(herbs_cost) ? 0 : herbs_cost) * markup) + fulfillment_fee + delivery_cost).toFixed(2)
 }

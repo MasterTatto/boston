@@ -89,7 +89,7 @@ const FormulasLibrary = observer(() => {
                             }} onSearch={setSearch} placeholder="Find formula"/>
                         </div>
                         <div className={s.switch_box}>
-                            <Switch value={classic} onChange={setClassic}/>
+                            <Switch checked={classic} onChange={setClassic}/>
                             <span className={s.switch_box_title}>Classic formulas</span>
                         </div>
                     </div>

@@ -3,16 +3,15 @@ import s from '../../patient_left/styles.module.css'
 import {Collapse, Dropdown} from "antd";
 import {ReactComponent as Copy} from "../../../../../assets/copy.svg";
 import {observer} from "mobx-react-lite";
-import {calculateMF, calculateTotalPrice} from "../../../../../utils/coastPrescription";
+import {calculateMF} from "../../../../../utils/coastPrescription";
 import {useNavigate} from "react-router-dom";
-import {ReactComponent as Arrow} from '../../../../../assets/arrow.svg'
 import classNames from "classnames";
 import CollapseItem from "./collapse_item";
 
 const PatientLeft = observer(({selectedPatient, setHiddenCopy, hiddenCopy, allPrescriptions}) => {
     const navigate = useNavigate()
 
-    const [checkerCloseShowMore,setCheckerCloseShowMore] = useState(false)
+    const [checkerCloseShowMore, setCheckerCloseShowMore] = useState(false)
 
     const getCurrentPrescription = async (id) => {
 
@@ -59,7 +58,7 @@ const PatientLeft = observer(({selectedPatient, setHiddenCopy, hiddenCopy, allPr
             {allPrescriptions.length !== 0 ? <>
                 {allPrescriptions.map((el, i) => {
                     const MF = calculateMF(el.take_times_per_day, el.take_grams, el.take_days, el.formula_weight)
-                    console.log(el)
+
                     return <div key={el.prescription_id}>
                         <div className={s.collaps_item}>
                             <Collapse expandIconPosition={'end'}>
@@ -74,10 +73,16 @@ const PatientLeft = observer(({selectedPatient, setHiddenCopy, hiddenCopy, allPr
                                     {/*<p className={s.collapse_description}>{el.notes}</p>*/}
 
                                     <div className={s.collapse_item} style={{
-                                        marginTop:0
+                                        marginTop: 0
                                     }}>
-                                        <p className={classNames(s.collapse_title,s.collapse_title_status)}>Status:</p>
-                                        <p className={classNames(s.collapse_answer,s.collapse_answer_status)}>{el.status}</p>
+                                        <p className={classNames(s.collapse_title, s.collapse_title_status)}>Status:</p>
+                                        <p className={classNames(s.collapse_answer, s.collapse_answer_status)}>{el.status}</p>
+                                    </div>
+
+                                    <div className={s.collapse_item}>
+                                        <p className={s.collapse_title}>Expert practitioner fee:</p>
+                                        <p className={s.collapse_answer}>{`$${(+el?.prescription_price - +el?.herbs_cost - +el?.fulfillment_fee - +el?.delivery_cost).toFixed(2)
+                                        }`}</p>
                                     </div>
 
                                     <div className={s.collapse_item}>
@@ -94,7 +99,7 @@ const PatientLeft = observer(({selectedPatient, setHiddenCopy, hiddenCopy, allPr
                                     <br/>
 
                                     <div className={s.collapse_item} style={{
-                                        marginTop:0
+                                        marginTop: 0
                                     }}>
                                         <p className={s.collapse_title}>Take days:</p>
                                         <p className={s.collapse_answer}>{el.take_days}</p>
@@ -148,7 +153,8 @@ const PatientLeft = observer(({selectedPatient, setHiddenCopy, hiddenCopy, allPr
                                     {/*    <p className={s.collapse_title}>Delivery:</p>*/}
                                     {/*    <p className={s.collapse_answer}>{el.delivery_method}</p>*/}
                                     {/*</div>*/}
-                                    <CollapseItem checkerCloseShowMore={checkerCloseShowMore} el={el} selectedPatient={selectedPatient}/>
+                                    <CollapseItem checkerCloseShowMore={checkerCloseShowMore} el={el}
+                                                  selectedPatient={selectedPatient}/>
                                     <div className={s.collapse_formula}>
                                         <p className={s.collapse_formula_title}>Composition of the formula</p>
 

@@ -35,6 +35,10 @@
     margin-top: 40px;
 }
 
+.logo_added_box {
+    margin-top: 40px;
+}
+
 .detalis_title {
     font-family: 'Montserrat Alternates', sans-serif;
     font-style: normal;
@@ -107,4 +111,51 @@
 
 .edit_dave {
     margin-left: 8px;
+}
+
+.added svg path {
+    fill: #67AC46;
+}
+
+.logo_box img {
+    width: 100%;
+    height: auto;
+    border: .1px solid;
+    margin-top: 20px;
+}
+
+.btns_box {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+.added_btn, .remove_btn {
+    width: 100%;
+}
+
+.remove_btn {
+    margin-top: 10px;
+    background-color: #fa2727;
+    color: #fff;
+    border: none;
+    transition: .3s all;
+}
+
+.remove_btn:hover{
+    color: #fff !important;
+    background-color: rgba(250, 39, 39, 0.6);
+}
+
+.added_btn{
+    background-color: #67AC46;
+    color: #fff;
+    border: none;
+}
+
+.added_btn:hover{
+    color: #fff !important;
+    background-color: rgba(103, 172, 70, 0.6);
 }

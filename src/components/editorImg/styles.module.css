@@ -1,0 +1,128 @@
+.btn_box {
+    justify-content: space-between;
+    width: 100%;
+    display: flex;
+    margin-top: 25px;
+}
+
+.btn {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    color: #8C8C8C;
+    border: 1.5px solid #8C8C8C;
+    border-radius: 8px;
+    height: 44px;
+    max-width: 130px;
+    width: 100%;
+}
+
+.add {
+    color: #FFFFFF;
+    background: #67AC46;
+}
+
+.clear {
+    height: 30px;
+    color: #FFFFFF;
+    background: #E76B50;
+    border: 0px;
+    transition: .3s all;
+    margin-bottom: 10px;
+}
+
+.clear:hover {
+    color: #fff !important;
+    background: rgba(255, 35, 35, 0.56);
+}
+
+.add:hover {
+    color: #fff !important;
+    border: none !important;
+    background: rgba(103, 172, 70, 0.75);
+}
+
+.upload_img {
+    flex-direction: column;
+    height: 60vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /*border: 1px solid red;*/
+    cursor: pointer;
+    position: relative;
+    z-index: 2;
+}
+
+.canvas, .initial {
+    /*border: 1px solid red;*/
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.canvas {
+    margin-top: 20px;
+}
+
+.canvas h3, .initial h3 {
+    margin-bottom: 5px;
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    color: #272933;
+}
+
+.upload_img h3 {
+    color: lightgrey;
+    font-size: 42px;
+}
+
+.upload_img svg {
+    height: 30vh;
+    width: 40vw;
+    fill: lightgrey;
+}
+
+.upload_input {
+    border: 1px solid red;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 0;
+    position: absolute;
+}
+
+.cancel2 {
+    background-color: #fa2727;
+    color: #fff;
+    border: none;
+    transition: .3s all;
+}
+
+.cancel2:hover {
+    color: #fff !important;
+    background-color: rgba(250, 39, 39, 0.6);
+}
+
+@media screen and (max-width: 767px) {
+    .upload_img h3 {
+        color: lightgrey;
+        font-size: 32px;
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 520px) {
+    .upload_img h3 {
+        color: lightgrey;
+        font-size: 22px;
+        text-align: center;
+    }
+}
+

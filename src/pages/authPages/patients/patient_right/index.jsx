@@ -1,16 +1,15 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import s from './styles.module.css'
 import {ReactComponent as Edit} from "../../../../assets/edit_text.svg";
 import {useStore} from "../../../../useStore";
 import AddedPatientsModal from "../../../../components/sideBar/addedPatientModal";
 import {observer} from "mobx-react-lite";
 import classNames from "classnames";
-import {ReactComponent as Arrow} from "../../../../assets/hidden_arrow.svg";
 import {getFormatedDate} from "../../../../utils/getFormatDate";
 
-const PatientRight = observer(({prescription, patients}) => {
+const PatientRight = observer(({needPrescription, prescription, patients}) => {
     const store = useStore()
-    console.log(prescription)
+
     const patient = patients?.find(f => f.patient_id === prescription?.patient_id)
 
     const [openAddedModal, setOpenAddedModal] = useState(null)
@@ -25,8 +24,8 @@ const PatientRight = observer(({prescription, patients}) => {
         }
     };
 
-    console.log(patients, 'patients')
-    console.log(prescription, 'prescription')
+    const yourMoney = (+prescription?.prescription_price - +prescription?.herbs_cost - +prescription?.fulfillment_fee - +prescription?.delivery_cost).toFixed(2)
+
     return (
         <div className={s.info_box}>
             {openAddedModal !== null && <AddedPatientsModal handleOk={handleOk} openAddedModal={openAddedModal}
@@ -99,6 +98,7 @@ const PatientRight = observer(({prescription, patients}) => {
                             <p className={s.quest}>Herbs cost:</p>
                             <p className={s.quest}>Fulfillment fee:</p>
                             <p className={s.quest}>Markup:</p>
+                            <p className={s.quest}>Expert practitioner fee:</p>
                             <p className={s.quest}>Total price:</p>
                         </div>
                         <div className={s.hidden_left_item_right}>
@@ -107,6 +107,7 @@ const PatientRight = observer(({prescription, patients}) => {
                             <p className={s.answer}>{`$${prescription?.herbs_cost}`}</p>
                             <p className={s.answer}>{`$${prescription?.fulfillment_fee}`}</p>
                             <p className={s.answer}>{`x${prescription?.markup}`}</p>
+                            <p className={s.answer}>{`$${yourMoney}`}</p>
                             <p className={s.answer}>{`$${prescription?.prescription_price}`}</p>
                         </div>
                     </div>
@@ -138,8 +139,9 @@ const PatientRight = observer(({prescription, patients}) => {
                     </div>
 
                 </div>
-
-                {store.formula.currentFormula?.components?.length !== 0 && <div className={s.component_box}>
+            </>}
+            {prescription !== undefined && <>
+                {store.formula.currentFormula?.components && <div className={s.component_box}>
                     <h3>Composition of the formula</h3>
 
                     <div className={s.component_items}>
@@ -150,8 +152,21 @@ const PatientRight = observer(({prescription, patients}) => {
                         </div>)}
                     </div>
                 </div>}
-            </>
-            }
+            </>}
+
+            {needPrescription === true && <>
+                {store.formula.currentFormula?.components && <div className={s.component_box}>
+                    <h3>Composition of the formula</h3>
+
+                    <div className={s.component_items}>
+                        {store.formula.currentFormula?.components?.map((el, i) => <div className={s.component_item}
+                                                                                       key={i}>
+                            <p className={s.herb_part}>{`x${el.parts}`}</p>
+                            <p className={s.herb_name}>{el.herb_name}</p>
+                        </div>)}
+                    </div>
+                </div>}</>}
+
         </div>
     );
 });

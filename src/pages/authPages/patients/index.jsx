@@ -7,7 +7,7 @@ import {useStore} from "../../../useStore";
 import Loader from "../../../components/Loader";
 import PatientRight from "./patient_right";
 import PatientLeft from "./patient_left";
-import {NavLink, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import classNames from "classnames";
 import {ReactComponent as Arrow} from '../../../assets/arrow.svg'
 import AddedPatientsModal from "../../../components/sideBar/addedPatientModal";
@@ -15,7 +15,6 @@ import InfoPatient from "../../../components/infoPatient";
 import {ReactComponent as Edit} from "../../../assets/edit.svg";
 import {ReactComponent as Remove} from "../../../assets/remove.svg";
 import RemovePatientModal from "../../../components/sideBar/removePatientModal";
-import MobilePatients from "./mobile";
 
 const Patients = observer(() => {
     const store = useStore()
@@ -102,16 +101,27 @@ const Patients = observer(() => {
         const getAllPrescriptions = async () => {
             setShowFullPatient(false)
             setPrescriptionID(null)
+
             await store.patients.getPrescription(store.patients.patient.patient_id)
-            await getCurrentPrescription(store.patients.allPrescription[0]?.prescription_id)
-            if (allPrescriptions.length !== 0) {
-                await store.formula.getCurrentFormula(store.patients.allPrescription[0]?.formula_id)
+            // await store.patients.getPrescription(store.patients.allPatients[0]?.patient_id || null)
+            setAllPrescriptions(store.patients.allPrescription)
+            if (store.patients.allPrescription.length !== 0) {
+                setCurrentID(store.patients.allPrescription[0]?.prescription_id)
+                await getCurrentPrescription(store.patients.allPrescription[0]?.prescription_id)
+                await store.formula.getCurrentFormula(store.patients.allPrescription[0]?.formula_id || null)
             }
 
-            setCurrentID(store.patients.allPrescription[0]?.prescription_id)
-            setAllPrescriptions(store.patients.allPrescription)
+
+            // if (allPrescriptions.length !== 0) {
+            //     await store.formula.getCurrentFormula(store.patients.allPrescription[0]?.formula_id)
+            // }
+
+
         }
-        getAllPrescriptions()
+        if (store.patients.patient.patient_id) {
+            getAllPrescriptions()
+        }
+
     }, [store.patients.patient.patient_id])
 
     useEffect(() => {
@@ -205,6 +215,7 @@ const Patients = observer(() => {
                                 }} onSearch={setSearch} value={search} placeholder="Find Prescription"/>
                             </div>
                         </div>
+
 
                         <PatientLeft setCurrentID={setCurrentID} currentID={currentID}
                                      getCurrentPrescriptionHandler={getCurrentPrescription} setSearch={setSearch}

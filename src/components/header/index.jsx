@@ -6,8 +6,6 @@ import {useStore} from "../../useStore";
 import logo from "../../assets/logo_mobile.png";
 import {Dropdown, Select} from "antd";
 import {ReactComponent as Arrow} from '../../assets/arrow_select.svg'
-import {ReactComponent as Edit} from "../../assets/edit.svg";
-import {ReactComponent as Remove} from "../../assets/remove.svg";
 
 const Header = () => {
     const store = useStore()
@@ -19,13 +17,14 @@ const Header = () => {
     const [currentLocation, setCurrentLocation] = useState('')
     const [openMenu, setOpenMenu] = useState(false)
 
-    console.log(currentLocation)
+
     const links = [
         {title: 'Patients', link: 'patients'},
         // {title: 'Patients', isHidden: true, link: 'patients/create-prescription'},
         {title: 'Formulas library', link: 'formulas-library'},
         {title: 'Herbs list', link: 'herbs-list'},
         {title: 'Account Statement', link: 'payment-history'},
+        {title: 'Help', link: 'help'},
     ]
 
     const items = (id) => [...links.map((el) => ({

@@ -55,7 +55,7 @@ const LeftSide = ({history, chooseDay, setHistory, from, setFrom, to, setTo}) =>
             </div>
             <div className={s.switch_box}>
                 <div className={s.switch}>
-                    <Switch value={classic} onChange={setClassic}/>
+                    <Switch checked={classic} onChange={setClassic}/>
                     <span className={s.switch_box_title}>Payouts only</span>
                 </div>
             </div>
@@ -70,7 +70,7 @@ const LeftSide = ({history, chooseDay, setHistory, from, setFrom, to, setTo}) =>
                         justifyContent: classic && 'flex-end',
                         display: classic && 'flex'
                     }}>Amount</p>
-                    {!classic && <p className={s.amount_table}>Current balance</p>}
+                    {!classic && <p className={s.amount_table}>Balance</p>}
                 </div>
 
                 <div className={s.table_items}>
@@ -78,7 +78,7 @@ const LeftSide = ({history, chooseDay, setHistory, from, setFrom, to, setTo}) =>
                         const currentItem = store.history.prescription?.find(f => f.prescription_id === el.prescription_id)
 
                         return (
-                            <div className={classNames(s.item, el.isOpen && s.active)} onClick={async () => {
+                            <div key={i} className={classNames(s.item, el.isOpen && s.active)} onClick={async () => {
                                 if (!el?.prescription_id) return
                                 await getCurrentPrescription(el.prescription_id)
                                 setHistory({

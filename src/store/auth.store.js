@@ -17,7 +17,8 @@ export class AuthStore {
         this.setButtonLoading(true)
         try {
             const res = await AuthService.login(email, password)
-            localStorage.setItem('fulfillment_fee', res.data.user.fulfillment_fee ? res.data.user.fulfillment_fee : 1)
+
+            localStorage.setItem('fulfillment_fee', res.data.user.fulfillment_fee ? res.data.user.fulfillment_fee : 0)
             localStorage.setItem('name_user', res.data.user.name)
             localStorage.setItem('token', res.data.accessToken)
             localStorage.setItem('refreshToken', res.data.refreshToken)
@@ -29,7 +30,7 @@ export class AuthStore {
             console.log(e)
             this.setIsAuth(false)
             this.setButtonLoading(false)
-            toast.error(e.response.data, {
+            toast.error(e.response.data?.errors ? e.response.data?.errors[0].message : e.response.data, {
                 position: "bottom-left",
                 autoClose: 5000,
                 hideProgressBar: false,
@@ -79,6 +80,13 @@ export class AuthStore {
         try {
             const res = await AuthService.registration(payload)
             setOpenModal(true)
+            window.localStorage.setItem('registration_values', JSON.stringify(payload))
+            // for (let i = 0; i < payload.photo.length; i++) {
+            //     window.localStorage.setItem(`photo${i}`, JSON.stringify(payload.photo[i]))
+            //     debugger
+            // }
+            window.localStorage.setItem('wait_registration', 'yes')
+            window.localStorage.setItem('wait_registration_date', new Date())
         } catch (e) {
             console.log(e)
             if (e.response.data.errors) {

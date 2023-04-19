@@ -40,7 +40,8 @@ const Item = observer(({
                            await getCurrentPrescription(prescription_id)
                            setSelectedID(prescription_id)
                            setOpenInfo(!openInfo)
-                       }}>{type}</p>
+                       }}
+                    >{type}</p>
                 </div>
             </div>
             <div className={s.bottom}>
@@ -53,7 +54,7 @@ const Item = observer(({
                     <p className={classNames(s.answer, s.answer_type_2)}>{amount}</p>
                 </div>
                 <div className={s.bottom_t}>
-                    <p className={s.qest}>Current balance</p>
+                    <p className={s.qest}>Balance</p>
                     <p className={classNames(s.answer, s.answer_type_2)}>{balance}</p>
                 </div>
             </div>

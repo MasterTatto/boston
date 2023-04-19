@@ -1,5 +1,5 @@
 import './App.css';
-// import 'antd/dist/reset.css';
+import dayjs from 'dayjs'
 import 'ag-grid-community/styles/ag-grid.css'; // Core grid CSS, always needed
 import 'ag-grid-community/styles/ag-theme-alpine.css'; // Optional theme CSS
 import {useStore} from "./useStore";
@@ -9,15 +9,29 @@ import Header from "./components/header";
 import Routers from "./routers/routers";
 import {useLocation, useNavigate, useRoutes} from "react-router-dom";
 import {useEffect} from "react";
-import {unAuthRoutes} from "./routers/links";
+import {authRoutes, unAuthRoutes} from "./routers/links";
 import {useWindowSize} from "./utils/useWindowSize";
+import advancedFormat from 'dayjs/plugin/advancedFormat'
+import customParseFormat from 'dayjs/plugin/customParseFormat'
+import localeData from 'dayjs/plugin/localeData'
+import weekday from 'dayjs/plugin/weekday'
+import weekOfYear from 'dayjs/plugin/weekOfYear'
+import weekYear from 'dayjs/plugin/weekYear'
+
+dayjs.extend(customParseFormat)
+dayjs.extend(advancedFormat)
+dayjs.extend(weekday)
+dayjs.extend(localeData)
+dayjs.extend(weekOfYear)
+dayjs.extend(weekYear)
 
 const App = observer(() => {
     const store = useStore()
     const navigate = useNavigate()
     const {pathname} = useLocation()
-    const unAuthPage = useRoutes(unAuthRoutes)
     const {width} = useWindowSize()
+    const unAuthPage = useRoutes(!store.auth.isAuth ? unAuthRoutes : authRoutes(width))
+
 
     useEffect(() => {
         window.scrollTo(0, 0)

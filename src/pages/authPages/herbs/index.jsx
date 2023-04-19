@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect, useRef, useState} from 'react';
 import s from './styles.module.css'
-import {Input, Table} from "antd";
+import {Input} from "antd";
 import {useStore} from "../../../useStore";
 import {observer} from "mobx-react-lite";
 import Loader from "../../../components/Loader";
@@ -9,12 +9,13 @@ import 'ag-grid-community/styles/ag-grid.css'; // Core grid CSS, always needed
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 import RowText from "../../../common/rowText"; // Optional theme CSS
 import {isMobile} from 'react-device-detect';
+import Allergens from "../../../common/fieldsTable/allergens";
 
 const Herbs = observer(() => {
     const store = useStore()
 
     const gridRef = useRef();
-    console.log(isMobile)
+
     const [allHerbs, setAllHerbs] = useState([])
     const [search, setSearch] = useState('')
     const [search2, setSearch2] = useState('')
@@ -73,7 +74,7 @@ const Herbs = observer(() => {
                         rowData={data}
                         ref={gridRef}
                         rowSelection={'multiple'}
-                        pagination={true}
+                        // pagination={true}
                         enableBrowserTooltips={true}
                         tooltipShowDelay={0}
                         tooltipHideDelay={2000}
@@ -91,6 +92,7 @@ const Herbs = observer(() => {
                         }}
                         frameworkComponents={{
                             rowText: RowText,
+                            allergens: Allergens,
                         }}
                     >
 
@@ -122,7 +124,7 @@ const Herbs = observer(() => {
                         />
 
                         <AgGridColumn
-                            headerName={isMobile ? "Gram $ cost" : "Common Name"}
+                            headerName={isMobile ? "$ per 1g" : "Common Name"}
                             field={isMobile ? "gram_cost" : "common_name"}
                             editable={false}
                             sortable={false}
@@ -139,14 +141,14 @@ const Herbs = observer(() => {
                             editable={false}
                             sortable={false}
                             filter={false}
-                            cellRenderer="rowText"
+                            // cellRenderer="rowText"
                             tooltipField='latin_name'
                             // flex={1.4}
                             minWidth={isMobile && 120}
                         />
 
                         <AgGridColumn
-                            headerName={!isMobile ? "Gram $ cost" : "Common Name"}
+                            headerName={!isMobile ? "$ per 1g" : "Common Name"}
                             field={!isMobile ? "gram_cost" : "common_name"}
                             editable={false}
                             sortable={false}
@@ -163,7 +165,7 @@ const Herbs = observer(() => {
                             editable={false}
                             sortable={false}
                             filter={false}
-                            cellRenderer="rowText"
+                            cellRenderer="allergens"
                             tooltipField='allergens'
                             flex={0.6}
                             minWidth={isMobile && 120}
@@ -171,14 +173,14 @@ const Herbs = observer(() => {
 
                     </AgGridReact>
 
-                    <div className={s.choose_pagination}>
-                        <select onChange={onPageSizeChanged} id="page-size">
-                            <option value="25" selected>25</option>
-                            <option value="50">50</option>
-                            <option value="75">75</option>
-                            <option value="100">100</option>
-                        </select>
-                    </div>
+                    {/*<div className={s.choose_pagination}>*/}
+                    {/*    <select onChange={onPageSizeChanged} id="page-size">*/}
+                    {/*        <option value="25" selected>25</option>*/}
+                    {/*        <option value="50">50</option>*/}
+                    {/*        <option value="75">75</option>*/}
+                    {/*        <option value="100">100</option>*/}
+                    {/*    </select>*/}
+                    {/*</div>*/}
                 </div>}
         </div>
     );

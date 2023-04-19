@@ -9,6 +9,7 @@ import PatientRight from "../pages/authPages/patients/patient_right";
 import Registration from "../pages/unAuthPages/registration";
 import PaymentHistory from "../pages/authPages/paymentHistory";
 import MobilePatients from "../pages/authPages/patients/mobile";
+import Help from "../pages/authPages/help";
 
 export const unAuthRoutes = [
     {path: '/login', element: <Login/>},
@@ -20,17 +21,19 @@ export const authRoutes = (width) => [
     {path: '/patients', element: width > 1000 ? <Patients/> : <MobilePatients/>},
     {path: '/formulas-library', element: <FormulasLibrary/>},
     {path: '/herbs-list', element: <Herbs/>},
+    {path: '/help', element: <Help/>},
+    {path: '*', element: <h1>404</h1>},
     {path: '/payment-history', element: <PaymentHistory/>},
     {
         path: '/formulas-library/create-prescription', element: <div className={s.create_prescription_patient}>
             <AddedPrescriptionPatient/>
-            <PatientRight/>
+            <PatientRight needPrescription={true}/>
         </div>
     },
     {
         path: '/patients/create-prescription', element: <div className={s.create_prescription_patient}>
             <AddedPrescriptionPatient/>
-            <PatientRight/>
+            <PatientRight needPrescription={true}/>
         </div>
     },
 ]

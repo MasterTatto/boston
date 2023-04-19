@@ -84,6 +84,11 @@
 
 }
 
+.remove_item svg {
+    /*height: 30px;*/
+    width: 30px;
+}
+
 .input_box input {
     margin-top: 3px;
     border: 1px solid #D4D4D6;
@@ -201,6 +206,29 @@
     align-items: flex-end;
     width: 100%;
     justify-content: flex-end;
+}
+
+.icons_action_pats_plus svg, .icons_action_pats_minus svg {
+    margin-left: 0 !important;
+    fill: #A9A9A9;
+}
+
+.icons_action_pats_plus {
+    margin-right: 10px;
+    user-select: none;
+}
+
+.icons_action_pats_minus {
+    margin-left: 10px;
+    user-select: none;
+}
+
+.parts_title {
+    margin-right: 65px;
+}
+
+.parts_answer {
+    margin-right: 20px;
 }
 
 .items_box {

@@ -1,0 +1,58 @@
+.title {
+    font-family: 'Montserrat Alternates', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    color: #272933;
+}
+
+.switch_box_title {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #272933;
+    margin-top: 20px;
+}
+
+.therd_block {
+    font-weight: 500;
+    margin-top: 20px;
+}
+
+.subtitle {
+    font-family: 'Barlow', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    color: #000000;
+    margin-left: 10px;
+
+}
+
+.wrapper {
+    margin-top: 40px;
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 10px;
+}
+
+.item .svg svg {
+    width: 60px;
+    height: 60px;
+    padding-right: 10px;
+}
+
+@media screen and (max-width: 1000px) {
+    .help {
+        padding: 0 10px;
+        padding-bottom: 50px;
+    }
+}

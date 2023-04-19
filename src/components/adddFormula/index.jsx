@@ -8,8 +8,9 @@ import {ReactComponent as Plus} from "../../assets/plus.svg";
 import {ReactComponent as Minus} from "../../assets/minus.svg";
 import {ReactComponent as Delete} from "../../assets/trash.svg";
 import AddedTextPlus from "../../common/addedTextPlus";
+import {MinusOutlined, PlusOutlined} from "@ant-design/icons";
 
-const AddedFormula = observer(({openModal, setOpenModal, type, setData}) => {
+const AddedFormula = observer(({setAddedFormulaID, openModal, setOpenModal, type, setData}) => {
     const store = useStore()
 
     const [allHerbs, setAllHerbs] = useState([])
@@ -30,7 +31,7 @@ const AddedFormula = observer(({openModal, setOpenModal, type, setData}) => {
         await store.formula.addedFormula({
             ...values,
             components: chooseHerbs.map(el => ({herb_code: el.herb_code, parts: +el.parts}))
-        }, setOpenModal)
+        }, setOpenModal, setAddedFormulaID)
         await store.formula.getAllFormulas()
         setData(store.formula.formulas)
     }
@@ -63,7 +64,7 @@ const AddedFormula = observer(({openModal, setOpenModal, type, setData}) => {
         }
         getAllHerbs()
     }, [])
-    console.log(herb?.herb_name)
+
     return (
         <Modal
             title=""
@@ -174,31 +175,54 @@ const AddedFormula = observer(({openModal, setOpenModal, type, setData}) => {
                     </div>
                     <div className={s.added_herb}>
                         {herb?.herb_name ? <AddedTextPlus title={'Add herb'}
-                                                           onClick={() => {
-                                                               if (chooseHerbs?.find(f => f.herb_code === herb.herb_code) || !herb.herb_code) {
-                                                                   return
-                                                               }
-                                                               setChooseHerbs([{...herb, parts: part}, ...chooseHerbs])
-                                                               setPart(1)
-                                                           }}/> : null}
+                                                          onClick={() => {
+                                                              if (chooseHerbs?.find(f => f.herb_code === herb.herb_code) || !herb.herb_code) {
+                                                                  return
+                                                              }
+                                                              setChooseHerbs([{...herb, parts: part}, ...chooseHerbs])
+                                                              setPart(1)
+                                                          }}/> : null}
                     </div>
 
                     <div className={s.table}>
                         <div className={s.table_header}>
                             <p className={s.code}>Code</p>
                             <p className={s.name}>Name</p>
-                            <p className={s.parts}>Parts</p>
+                            <p className={classNames(s.parts, s.parts_title)}>Parts</p>
                         </div>
 
                         <div className={s.items_box}>
 
                             {chooseHerbs?.map((el, i) => {
+                                console.log(el)
                                 return <div className={s.item} key={`${el.herb_code} ${i}`}>
                                     <p className={s.code}>{el.herb_code}</p>
                                     <p className={s.name}>{el.herb_name}</p>
-                                    <p className={s.parts}>{el.parts} <Delete
-                                        onClick={() => setChooseHerbs(chooseHerbs.filter(f => f.herb_code !== el.herb_code))}/>
+                                    <p className={classNames(s.parts, s.parts_answer)}>
+                                        <div className={s.icons_action_pats_plus}
+                                             onClick={() => setChooseHerbs(chooseHerbs.map((item) => item.herb_code === el.herb_code ? ({
+                                                 ...item,
+                                                 parts: +(+item.parts + 0.1).toFixed(1)
+                                             }) : item))}>
+                                            <PlusOutlined/>
+                                        </div>
+                                        {el.parts}
+                                        <div className={s.icons_action_pats_minus} onClick={() => {
+                                            if (el.parts === 0) return
+                                            setChooseHerbs(chooseHerbs.map((item) => item.herb_code === el.herb_code ? ({
+                                                ...item,
+                                                parts: +(+item.parts - 0.1).toFixed(1)
+                                            }) : item))
+                                        }}>
+                                            <MinusOutlined/>
+                                        </div>
                                     </p>
+
+                                    <div className={s.remove_item}>
+                                        <Delete
+                                            onClick={() => setChooseHerbs(chooseHerbs.filter(f => f.herb_code !== el.herb_code))}/>
+                                    </div>
+
                                 </div>
                             })}
                         </div>

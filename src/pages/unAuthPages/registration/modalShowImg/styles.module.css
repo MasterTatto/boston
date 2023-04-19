@@ -1,0 +1,46 @@
+.add {
+    color: #FFFFFF;
+    background: #E76B50;
+    border: none !important;
+}
+
+.box_img img{
+    height: 100%;
+    max-width: 500px;
+    width: 100%;
+}
+
+.add:hover {
+    color: #fff !important;
+    border: none !important;
+    background: rgba(231, 107, 80, 0.73);
+}
+
+.btn_box {
+    justify-content: space-between;
+    width: 100%;
+    display: flex;
+    margin-top: 25px;
+}
+
+.title {
+    font-family: 'Montserrat Alternates', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    color: #272933;
+    margin-bottom: 15px;
+}
+
+.description {
+    font-family: 'Montserrat',sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #272933;
+    margin-top: 9px;
+}
+
+

@@ -47,12 +47,13 @@ export class FormulaStore {
         }
     }
 
-    async addedFormula(payload, setOpenModal) {
+    async addedFormula(payload, setOpenModal, setAddedFormulaID) {
         this.setButtonLoading(true)
         try {
             const res = await FormulaService.addedFormula(payload)
             this.setButtonLoading(false)
             setOpenModal(null, false)
+            setAddedFormulaID !== undefined && setAddedFormulaID(res?.data?.formula_id)
         } catch (e) {
             console.log(e)
             this.setButtonLoading(false)

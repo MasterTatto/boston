@@ -250,6 +250,18 @@ input[type=number] {
     display: none !important;
 }
 
+.ant-input-number-input {
+    cursor: initial !important;
+}
+
+.ant-input-number {
+    cursor: pointer !important;
+}
+
+.ant-skeleton {
+    width: 100% !important;
+}
+
 @media screen and (max-width: 1000px) {
     .content {
         padding: 0;

@@ -19,7 +19,7 @@ const ModalFinishRegistration = ({openModal, setOpenModal, email}) => {
                 footer={<div className={s.btn_box}>
 
                     <Button onClick={handleOk}
-                            className={classNames(s.btn, s.add)}>Okay</Button>
+                            className={classNames(s.btn, s.add)}>OK</Button>
                 </div>}
                 open={openModal}
                 onCancel={handleOk}
@@ -28,7 +28,14 @@ const ModalFinishRegistration = ({openModal, setOpenModal, email}) => {
                     <p className={s.title}>{email}</p>
 
                     <p className={s.description}>
-                        We check your data, the password will be sent to e-mail for several days
+                        Thank you for filling out your application.
+                    </p>
+                    <p className={s.description}>
+                        A representative of AcuBoston Pharmacy will get back to you within 1-2 days.
+                    </p>
+                    <p className={s.description}>
+                        If your application is accepted, we will send you username and password to access and use
+                        AcuBoston Pharmacy.
                     </p>
                 </div>
             </Modal>

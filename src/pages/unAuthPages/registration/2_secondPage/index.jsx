@@ -1,8 +1,11 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import s from './styles.module.css'
-import {DatePicker, Input, Select} from "antd";
+import {DatePicker, Form, Input, Select} from "antd";
 import {observer} from "mobx-react-lite";
 
+import dayjs from 'dayjs'
+
+const dateFormat = 'YYYY/MM/DD';
 const STATES = [
     'Alabama',
     'Alaska',
@@ -72,8 +75,15 @@ const SecondPage = observer(({
                                  stateAssociations,
                                  nationalAssociations,
                                  practices,
-                                 credentials
+                                 credentials,
+                                 defaultDateValue
                              }) => {
+
+    const convertDate = values.expiration_date !== '' ? new Date(values.expiration_date.split('.').join('/')) : new Date()
+    const convertedDateToString = (date) => `${date.getFullYear()}/${(date.getMonth() + 1) >= 10 ? date.getMonth() + 1 : `0${date.getMonth() + 1}`}/${(date.getDate() >= 10) ? date.getDate() : `0${date.getDate()}`}`
+
+    const datePicker = dayjs(convertedDateToString(convertDate), dateFormat)
+
     return (
         <div className={s.second_page}>
             <h3 className={s.title}>Practice Info</h3>
@@ -85,30 +95,14 @@ const SecondPage = observer(({
             </div>
 
             <div className={s.box}>
-                <label className={s.label}>Practice Type</label>
-                <Select
-                    placeholder={''}
-                    style={{width: '100%'}}
-                    onChange={(e) => {
-                        changeValues('practice_type', e)
-                    }}
-                    value={values.practice_type}
-                    options={practices.map((el) => ({
-                        value: el,
-                        label: el,
-                    }))}
-                />
-            </div>
-
-            <div className={s.box}>
                 <label className={s.label}>Credential</label>
                 <Select
-                    placeholder={''}
+                    placeholder="Select"
                     style={{width: '100%'}}
                     onChange={(e) => {
                         changeValues('practice_credential', e)
                     }}
-                    value={values.practice_credential}
+                    value={values.practice_credential || null}
                     options={credentials.map((el) => ({
                         value: el,
                         label: el,
@@ -124,12 +118,12 @@ const SecondPage = observer(({
             <div className={s.box}>
                 <label className={s.label}>State</label>
                 <Select
-                    placeholder={''}
+                    placeholder="Select"
                     style={{width: '100%'}}
                     onChange={(e) => {
                         changeValues('practice_state', e)
                     }}
-                    value={values.practice_state}
+                    value={values.practice_state || null}
                     options={STATES.map((el) => ({
                         value: el,
                         label: el,
@@ -139,23 +133,36 @@ const SecondPage = observer(({
 
             <div className={s.box}>
                 <label className={s.label}>Expiration Date</label>
+                {values.expiration_date === '' ?
+                    <DatePicker
+                        // allowClear={false}
+                        onChange={(e) => {
+                            const date = new Date(e)
+                            changeValues('expiration_date', `${date.getFullYear()}.${date.getMonth() + 1}.${date.getDate()}`)
+                        }}/>
 
-                <DatePicker
-                    onChange={(e) => {
-                        const date = new Date(e)
-                        changeValues('expiration_date', `${date.getFullYear()}.${date.getMonth() + 1}.${date.getDate()}`)
-                    }}/>
+                    :
+                    <DatePicker
+                        // allowClear={false}
+                        onChange={(e) => {
+
+                            const date = new Date(e)
+                            changeValues('expiration_date', `${date.getFullYear()}.${date.getMonth() + 1}.${date.getDate()}`)
+                        }}
+                        defaultValue={datePicker}
+                        format={dateFormat}/>
+                }
             </div>
 
             <div className={s.box}>
                 <label className={s.label}>School</label>
                 <Select
-                    placeholder={''}
+                    placeholder="Select"
                     style={{width: '100%'}}
                     onChange={(e) => {
                         changeValues('school', e)
                     }}
-                    value={values.school}
+                    value={values.school || null}
                     options={schools.map((el) => ({
                         value: el,
                         label: el,
@@ -166,12 +173,12 @@ const SecondPage = observer(({
             <div className={s.box}>
                 <label className={s.label}>State Association</label>
                 <Select
-                    placeholder={''}
+                    placeholder="Select"
                     style={{width: '100%'}}
                     onChange={(e) => {
                         changeValues('state_association', e)
                     }}
-                    value={values.state_association}
+                    value={values.state_association || null}
                     options={stateAssociations.map((el) => ({
                         value: el,
                         label: el,
@@ -182,12 +189,12 @@ const SecondPage = observer(({
             <div className={s.box}>
                 <label className={s.label}>National Association</label>
                 <Select
-                    placeholder={''}
+                    placeholder="Select"
                     style={{width: '100%'}}
                     onChange={(e) => {
                         changeValues('national_association', e)
                     }}
-                    value={values.national_association}
+                    value={values.national_association || null}
                     options={nationalAssociations.map((el) => ({
                         value: el,
                         label: el,

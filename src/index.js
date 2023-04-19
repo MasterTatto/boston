@@ -6,6 +6,8 @@ import {BrowserRouter} from "react-router-dom";
 import store from "./store/store";
 import {ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import 'react-image-crop/dist/ReactCrop.css'
+import {CookiesProvider} from "react-cookie";
 
 export const Context = createContext(null);
 
@@ -28,7 +30,9 @@ root.render(
                 store: store,
             }}
         >
-            <App/>
+            <CookiesProvider>
+                <App/>
+            </CookiesProvider>
         </Context.Provider>
     </BrowserRouter>
 );

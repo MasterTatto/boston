@@ -2,7 +2,10 @@ import React, {useEffect, useState} from 'react';
 import {observer} from "mobx-react-lite";
 import {useStore} from "../../../useStore";
 import {useLocation, useNavigate} from "react-router-dom";
-import {calculateHerbCoast, calculateMF, calculateTotalPrice} from "../../../utils/coastPrescription";
+import {
+    herbs_cost,
+    multiplication_factor, total_price
+} from "../../../utils/coastPrescription";
 import {toast} from "react-toastify";
 import s from "./styles.module.css";
 import {Button, Input, InputNumber, Select} from "antd";
@@ -31,10 +34,14 @@ const AddedPrescriptionPatient = observer(() => {
             payment_method: '',
             delivery_method: '',
             notes: '',
-            markup: 1,
+            markup: 3,
             total_grams: 0,
             patient_id: store.patients.patient.patient_id,
         })
+
+        const setAddedFormulaID = (id) => {
+            setValues({...values, formula_id: id})
+        }
 
         const [errors, setErrors] = useState({
             formula_id: '',
@@ -47,10 +54,15 @@ const AddedPrescriptionPatient = observer(() => {
             total_grams: '',
         })
 
-        const MF = calculateMF(values.take_times_per_day, values.take_grams, values.take_days, store.patients.formula?.formula_weight)
-        const totalPrice = calculateTotalPrice(MF, store.patients.formula?.formula_weight, store.patients.formula?.formula_cost, values.markup, localStorage.getItem('fulfillment_fee') || 1)
-        const herbsCoast = calculateHerbCoast(MF, store.patients.formula?.formula_cost)
-        console.log(localStorage.getItem('fulfillment_fee'))
+        // const MF = calculateMF(values.take_times_per_day, values.take_grams, values.take_days, store.patients.formula?.formula_weight)
+        // // const totalPrice = calculateTotalPrice(MF, store.patients.formula?.formula_weight, store.patients.formula?.formula_cost, values.markup, localStorage.getItem('fulfillment_fee') || 1)
+        // const herbsCoast = calculateHerbCoast(MF, store.patients.formula?.formula_cost)
+
+
+        const multiplicationFactor = multiplication_factor(values.total_grams, store.patients.formula?.formula_weight)
+        const herbsCost = herbs_cost(allFormula.find((f) => f.formula_id === values.formula_id)?.formula_cost, multiplicationFactor)
+        const totalPrice = total_price(herbsCost, values.markup, +localStorage.getItem('fulfillment_fee'), values.delivery_method === 'USPS' ? 9 : 0)
+
         const choseTypeModal = (type, open) => {
             setOpenModal(open)
         }
@@ -69,7 +81,6 @@ const AddedPrescriptionPatient = observer(() => {
                     payment_method: values.payment_method !== '' ? '' : 'error',
                     delivery_method: values.delivery_method !== '' ? '' : 'error',
                 })
-                console.log(values)
                 return
             }
             await store.patients.addedPrescriptionToPatient({
@@ -79,6 +90,8 @@ const AddedPrescriptionPatient = observer(() => {
 
             }, () => navigate(state.navigateBack))
         }
+
+        const yourMoney = (+totalPrice - +herbsCost - +localStorage.getItem('fulfillment_fee') - +(values.delivery_method === 'USPS' ? 9 : 0)).toFixed(2)
 
         useEffect(() => {
             if (counter !== 0) {
@@ -96,7 +109,7 @@ const AddedPrescriptionPatient = observer(() => {
 
         useEffect(() => {
             const getCurrentFormula = async () => {
-                console.log(values.formula_id)
+
                 if (values.formula_id === '') {
                     store.formula.setCurrentFormula({})
                 } else {
@@ -135,7 +148,7 @@ const AddedPrescriptionPatient = observer(() => {
                 total_grams: +(values.take_days * (values.take_times_per_day * values.take_grams)).toFixed(1),
             })
         }, [values.take_days, values.take_times_per_day, values.take_grams])
-        console.log(store.auth.user)
+
         useEffect(() => {
             if (state?.id) {
                 const getCurrentPrescription = async () => {
@@ -168,7 +181,7 @@ const AddedPrescriptionPatient = observer(() => {
                 const formulaAllergens = store.patients.formula?.allergens.split(', ')
                 for (let i = 0; i < formulaPatient.length; i++) {
                     if (formulaAllergens.includes(formulaPatient[i])) {
-                        console.log(formulaPatient[i])
+
                         toast.error(`Patient is allergic to ${formulaPatient[i]} `, {
                             position: "bottom-right",
                             autoClose: 5000,
@@ -187,7 +200,8 @@ const AddedPrescriptionPatient = observer(() => {
         return (
             <div className={s.main}>
                 {openModal &&
-                    <AddedFormula setData={setAllFormula} setOpenModal={choseTypeModal} openModal={openModal}/>}
+                    <AddedFormula setAddedFormulaID={setAddedFormulaID} setData={setAllFormula}
+                                  setOpenModal={choseTypeModal} openModal={openModal}/>}
                 {store.patients.prescriptionLoading ? <p>Loading...</p> : <div className={s.action_box}>
                     <p className={s.title}>Prescriptions creating</p>
 
@@ -208,6 +222,7 @@ const AddedPrescriptionPatient = observer(() => {
                             onChange={async (e) => {
                                 // getCurrentFormula(e)
                                 await getCurrentFormula(e)
+
                                 setValues({...values, formula_id: e})
                             }}
                             options={allFormula.map((el) => ({
@@ -333,11 +348,16 @@ const AddedPrescriptionPatient = observer(() => {
                         <p className={s.total_gramms_answer}>{values.total_grams}</p>
                     </div>
 
+                    <div className={s.total_gramms}>
+                        <p className={s.total_gramm_title}>Expert practitioner fee:</p>
+                        <p className={s.total_gramms_answer}>{yourMoney}</p>
+                    </div>
+
                     <div className={s.markup}>
                         <div className={classNames(s.input_box_number)}>
                             <label className={s.label}>Markup</label>
                             <div className={s.input_number}>
-                                <InputNumber pattern="\d*" min="1" step={1} value={`x${values.markup}`}
+                                <InputNumber disabled pattern="\d*" min="1" step={1} value={`x${values.markup}`}
                                              onChange={(e) => setValues({...values, markup: e})}
 
                                              addonAfter={<div className={classNames(s.controls, s.after)}
@@ -364,12 +384,12 @@ const AddedPrescriptionPatient = observer(() => {
                         <>
                             <div className={s.markup_item}>
                                 <p className={s.markup_item_title}>Herbs cost:</p>
-                                <p className={s.markup_item_answer}>{herbsCoast}</p>
+                                <p className={s.markup_item_answer}>{herbsCost}</p>
                             </div>
 
                             <div className={s.markup_item}>
                                 <p className={s.markup_item_title}>Fulfillment fee:</p>
-                                <p className={s.markup_item_answer}>{localStorage.getItem('fulfillment_fee') || 1}</p>
+                                <p className={s.markup_item_answer}>{localStorage.getItem('fulfillment_fee')}</p>
                             </div>
 
                             <div className={s.markup_item}>

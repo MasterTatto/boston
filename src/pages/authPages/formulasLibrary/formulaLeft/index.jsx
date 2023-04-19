@@ -1,16 +1,14 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import s from './styles.module.css'
 import {useStore} from "../../../../useStore";
 import {observer} from "mobx-react-lite";
 import {ReactComponent as Edit} from "../../../../assets/edit.svg";
 import {ReactComponent as Copy} from "../../../../assets/copy.svg";
 import {ReactComponent as Plus} from "../../../../assets/plus_formula.svg";
-import {ReactComponent as Arrow} from "../../../../assets/arrow_select.svg";
 import classNames from "classnames";
 import {ReactComponent as Remove} from "../../../../assets/remove.svg";
 import {Collapse, Dropdown} from "antd";
 import {useNavigate} from "react-router-dom";
-import FormulaRight from "../formulaRight";
 import {useWindowSize} from "../../../../utils/useWindowSize";
 
 const FormulaLeft = observer(({formulas, selectedFormula, setSelectedFormula, choseTypeModal, setRemoveModal}) => {

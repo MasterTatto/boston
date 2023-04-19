@@ -225,6 +225,7 @@
     font-size: 14px;
     line-height: 17px;
     color: #67AC46;
+    margin-left: 10px;
 }
 
 .status_answer:first-letter {
@@ -238,6 +239,7 @@
     font-size: 14px;
     line-height: 17px;
     color: #272933;
+
 }
 
 .answer {
@@ -247,6 +249,7 @@
     font-size: 14px;
     line-height: 17px;
     color: #272933;
+    margin-left: 10px;
 }
 
 @media screen and (max-width: 1000px) {

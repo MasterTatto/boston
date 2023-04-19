@@ -175,10 +175,11 @@ export class PatientsStore {
 
     async addedPatients(payload, setOpenAddedModal) {
         this.setButtonLoading(true)
-
+        this.setPageLoading(true)
         try {
             const res = await PatientsService.addedPatients(payload)
             this.setButtonLoading(false)
+            this.setPageLoading(false)
             toast.success('Patient added', {
                 position: "bottom-left",
                 autoClose: 5000,
@@ -203,6 +204,7 @@ export class PatientsStore {
             });
             setOpenAddedModal('add')
             this.setButtonLoading(false)
+            this.setPageLoading(false)
             return e
         }
     }

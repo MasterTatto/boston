@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 import s from './styles.module.css'
-import {DatePicker, Input, Switch} from "antd";
+import {Button, DatePicker, Input, Skeleton, Switch} from "antd";
 import {useStore} from "../../../../useStore";
 import {ReactComponent as Arrow} from '../../../../assets/arrow_select.svg'
 import {ReactComponent as Edit} from "../../../../assets/edit_text.svg";
@@ -8,11 +8,21 @@ import classNames from "classnames";
 import {observer} from "mobx-react-lite";
 import Item from "./item/item";
 import moment from "moment/moment";
-import Loader from "../../../../components/Loader";
+import axios from "axios";
+import {toast} from "react-toastify";
+import RemoveLogo from "../removeLogo";
+import ImgEditor from "../../../../components/editorImg";
+import axiosConfig from "../../../../api";
 
 const MobilePaymentHistory = observer(() => {
     const store = useStore()
     const inputRef = useRef(null)
+
+    const [showAddedLogo, setShowAddedLogo] = useState(false)
+    const [firstLoadingLogo, setFirstLoadingLogo] = useState(false)
+    const [logo, setLogo] = useState(null)
+    const [loadingButton, setLoadingButton] = useState(false)
+    const [removeLogo, setRemoveLogo] = useState(false)
 
     const [patients, setPatients] = useState([])
     const [selectedID, setSelectedID] = useState()
@@ -27,6 +37,173 @@ const MobilePaymentHistory = observer(() => {
         payout_address: '',
     })
 
+    const getLogo = async () => {
+        const token = localStorage.getItem('token')
+        setFirstLoadingLogo(true)
+        try {
+            const response = await fetch('https://stage.acuboston.com/api/v1/office/logo', {
+                method: 'GET',
+                responseType: 'blob',
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                }
+            });
+
+            const blob = await response.blob()
+
+            function blobToBase64(blob) {
+                return new Promise((resolve, _) => {
+                    const reader = new FileReader();
+                    reader.onloadend = () => resolve(reader.result);
+                    reader.readAsDataURL(blob);
+                });
+            }
+
+            blobToBase64(blob).then((res) => {
+                    setLogo(res === 'data:' ? null : res)
+                }
+            )
+
+            setFirstLoadingLogo(false)
+        } catch (e) {
+            setFirstLoadingLogo(false)
+            console.log(e)
+        }
+    }
+    const downloadLogo = async (url) => {
+        const token = localStorage.getItem('token')
+        setLoadingButton(true)
+        try {
+            const formData = new FormData()
+
+            formData.append('logo ', url)
+
+            const res = await axios({
+                url: `https://stage.acuboston.com/api/v1/office/logo`,
+                method: 'POST',
+                data: formData,
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+
+            const response = await fetch('https://stage.acuboston.com/api/v1/office/logo', {
+                method: 'GET',
+                responseType: 'blob',
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                }
+            });
+
+            const blob = await response.blob()
+
+            function blobToBase64(blob) {
+                return new Promise((resolve, _) => {
+                    const reader = new FileReader();
+                    reader.onloadend = () => resolve(reader.result);
+                    reader.readAsDataURL(blob);
+                });
+            }
+
+            blobToBase64(blob).then((res) => {
+                    setLogo(res === 'data:' ? null : res)
+                }
+            )
+            // setLogo(res2.data)
+            setShowAddedLogo(false)
+            setLoadingButton(false)
+            toast.success('Your logo uploading', {
+                position: "bottom-left",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: true,
+                progress: undefined,
+            });
+        } catch (e) {
+            console.log(e)
+            setLoadingButton(false)
+            toast.error('Something went wrong', {
+                position: "bottom-left",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: true,
+                progress: undefined,
+            });
+            setShowAddedLogo(true)
+        }
+    }
+
+    const removeLogoHandler = async () => {
+        const token = localStorage.getItem('token')
+
+        try {
+            const res = await axios.delete('https://stage.acuboston.com/api/v1/office/logo', {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                }
+            })
+            setLogo(null)
+            setRemoveLogo(false)
+            toast.success('Your logo removed', {
+                position: "bottom-left",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: true,
+                progress: undefined,
+            });
+
+        } catch (e) {
+            const originalRequest = e.config;
+
+            if (e.response.status === 401) {
+                const token = localStorage.getItem('refreshToken')
+
+                const res = await axios.post('https://stage.acuboston.com/api/v1/auth/refresh', {
+                    refreshToken: token
+                })
+
+                localStorage.setItem('token', res.data.accessToken)
+                localStorage.setItem('refreshToken', res.data.refreshToken)
+
+                setLogo(null)
+                setRemoveLogo(false)
+                toast.success('Your logo removed', {
+                    position: "bottom-left",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: false,
+                    draggable: true,
+                    progress: undefined,
+                });
+
+                return axiosConfig().request({
+                    ...originalRequest, headers: {
+                        ...originalRequest.headers,
+                        Authorization: `Bearer ${res.data.accessToken}`
+                    }
+                });
+
+            } else {
+                toast.error('Something went wrong', {
+                    position: "bottom-left",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: false,
+                    draggable: true,
+                    progress: undefined,
+                });
+            }
+        }
+    }
+
     const updatePayoutInfo = async () => {
         await store.history.updatePayoutInfo(values)
         await store.history.getPayoutInfo()
@@ -38,15 +215,19 @@ const MobilePaymentHistory = observer(() => {
     }
 
     const chooseDay = async (from, to) => {
-        console.log('start')
+
         await store.history.getAllHistory(from, to, classic)
         setHistory(store.history.allReport)
-        console.log(history)
+
     }
 
     const getCurrentPrescription = async (id) => {
         await store.history.getCurrentPrescription(id)
     }
+
+    useEffect(() => {
+        getLogo()
+    }, [])
 
     useEffect(() => {
         const getPayoutInfo = async () => {
@@ -71,7 +252,7 @@ const MobilePaymentHistory = observer(() => {
 
             const toDate = `${date1.getFullYear()}-${date1.getMonth() + 1 < 10 ? `0${date1.getMonth() + 1}` : date1.getMonth() + 1}-${date1.getDate() < 10 ? `0${date1.getDate()}` : date1.getDate()}`
             const fromDate = `${date2.getFullYear()}-${date2.getMonth() + 1 < 10 ? `0${date2.getMonth() + 1}` : date2.getMonth() + 1}-${date2.getDate() < 10 ? `0${date2.getDate()}` : date2.getDate()}`
-            console.log(toDate)
+
             setTo(toDate)
             setFrom(fromDate)
 
@@ -82,8 +263,16 @@ const MobilePaymentHistory = observer(() => {
 
         getAllHistory()
     }, [])
+
+
+
     return (
         <div className={s.mobile}>
+            {removeLogo &&
+                <RemoveLogo onClick={removeLogoHandler} open={removeLogo} onClose={() => setRemoveLogo(false)}/>}
+            {showAddedLogo &&
+                <ImgEditor loading={loadingButton} onClick={(url) => downloadLogo(url)} open={showAddedLogo}
+                           onClose={() => setShowAddedLogo(false)}/>}
             <div className={s.header}>
                 <div className={s.top_header}>
                     <p className={s.title}>Account Statement</p>
@@ -92,7 +281,7 @@ const MobilePaymentHistory = observer(() => {
                 </div>
 
                 <div className={s.info} style={{
-                    height: openBalanceInfo && '350px'
+                    height: (openBalanceInfo && logo) && '630px' || openBalanceInfo && '430px'
                 }}>
                     <div className={s.balance_box}>
                         <p className={s.balance_title}>Your balance:</p>
@@ -133,6 +322,30 @@ const MobilePaymentHistory = observer(() => {
                                 Save
                             </p>}
                         </div>
+
+                        <div className={s.logo_added_box}>
+                            <h3 className={s.detalis_title}>Your company logo</h3>
+
+                            {firstLoadingLogo && <Skeleton.Avatar width={'100%'} style={{
+                                width: '100%',
+                                height: '100px',
+                                marginTop: '20px'
+                            }} active={true} shape={'square'}/>}
+                            {!firstLoadingLogo && <>
+                                {logo && <div className={s.logo_box}>
+                                    <img src={logo} alt=""/>
+                                </div>}
+
+                                <div className={s.btns_box}>
+                                    <Button className={s.added_btn}
+                                            onClick={() => setShowAddedLogo(true)}>{logo ? 'Change logo' : 'Added logo'}</Button>
+                                    {logo &&
+                                        <Button className={s.remove_btn} onClick={() => setRemoveLogo(true)}>Remove
+                                            logo</Button>}
+                                </div>
+                            </>}
+                        </div>
+
                     </div>
                 </div>
 
@@ -158,7 +371,7 @@ const MobilePaymentHistory = observer(() => {
                 <div className={s.switch_box}>
                     <div className={s.switch}>
                         <Switch
-                            value={classic}
+                            checked={classic}
                             onChange={async (e) => {
                                 setClassic(e)
                                 await store.history.getAllHistory(from, to, e)
@@ -170,11 +383,13 @@ const MobilePaymentHistory = observer(() => {
                 </div>
             </div>
 
-            {store.history.isLoading ? <Loader/> : <div className={s.items_box}>
+            {/*{store.history.isLoading ? <Loader/> : */}
+            <div className={s.items_box}>
                 {history?.rows?.map((el, i) => <Item patients={patients} getCurrentPrescription={getCurrentPrescription}
                                                      selectedID={selectedID} setSelectedID={setSelectedID} key={i}
                                                      index={i} {...el}/>)}
-            </div>}
+            </div>
+            {/*// }*/}
         </div>
     );
 });

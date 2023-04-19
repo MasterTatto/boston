@@ -57,7 +57,7 @@ export class ReportStore {
                 this.setCurrentPrescription([...this.prescription, res.data])
             }
 
-            console.log(this.prescription)
+
             this.setIsLoading(false)
         } catch (e) {
             console.log(e)

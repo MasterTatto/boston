@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import s from './styles.module.css'
-import {Collapse, Dropdown} from "antd";
+import {Dropdown} from "antd";
 import {ReactComponent as Copy} from "../../../../assets/copy.svg";
 import {observer} from "mobx-react-lite";
-import {calculateMF, calculateTotalPrice} from "../../../../utils/coastPrescription";
+import {calculateMF} from "../../../../utils/coastPrescription";
 import {useNavigate} from "react-router-dom";
 import {useStore} from "../../../../useStore";
 

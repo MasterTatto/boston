@@ -155,6 +155,7 @@ const AddedPatientsModal = observer(({openAddedModal, setOpenAddedModal, handleO
                                            value={othersValue}/>
 
                                     <Button className={s.accept_other} onClick={() => {
+                                        if (othersValue === '') return
                                         setValues({...values, allergens: [...values.allergens, othersValue]})
                                         setOtherValue('')
                                     }

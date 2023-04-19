@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import s from './styles.module.css'
 import logo from '../../assets/logo.png'
-import {Dropdown, Input, Space} from "antd";
+import {Dropdown, Input} from "antd";
 import {useStore} from "../../useStore";
 import {observer} from "mobx-react-lite";
 import {ReactComponent as Edit} from "../../assets/edit.svg";
@@ -69,7 +69,8 @@ const SideBar = observer(() => {
     const handleOk = async (values) => {
         if (openAddedModal === 'add') {
             const add = await store.patients.addedPatients(values, setOpenAddedModal)
-
+            await store.patients.getPatients(add.data.patient_id)
+            setSelectedPatient(add.data.patient_id)
             if (!add.response) {
                 await store.patients.getAllPatients()
                 setPatients(store.patients.allPatients)
@@ -100,10 +101,11 @@ const SideBar = observer(() => {
     useEffect(() => {
         const getAllPatients = async () => {
             await store.patients.getAllPatients()
+
             setSelectedPatient(store.patients.allPatients.length > 0 ? store.patients.allPatients[0]?.patient_id : null)
             if (store.patients.allPatients.length > 0) {
                 await store.patients.getPatients(store.patients.allPatients[0]?.patient_id)
-                await store.patients.getPrescription(store.patients.allPatients[0]?.patient_id)
+                // await store.patients.getPrescription(store.patients.allPatients[0]?.patient_id)
             }
         }
 
@@ -113,6 +115,7 @@ const SideBar = observer(() => {
 
     useEffect(() => {
         setPatients(store.patients.allPatients)
+
     }, [store.patients.isLoading])
 
 
