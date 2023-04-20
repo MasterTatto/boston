@@ -6,7 +6,8 @@ const HeaderReg = () => {
     return (
         <div className={s.header_reg}>
             <img className={s.logo} src={logo} alt="logo"/>
-            <p className={s.title}>AcuBoston.com Pharmacy sells only to practitioners and <br/> students of Traditional
+            <p className={s.title}>AcuBoston Herbal Pharmacy sells only to practitioners and students of
+                Traditional
                 Chinese Medicine (TCM)</p>
         </div>
     );

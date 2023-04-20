@@ -10,6 +10,8 @@ import ModalFinishRegistration from "./modalFinishRegistration";
 import {toast} from "react-toastify";
 import dayjs from "dayjs";
 import ModalWaitRegistartion from "./modalWaitRegistartion";
+import UseLocalStorage from "../../../utils/useLocalStorage";
+import Footer from "./footer";
 
 const dateFormat = 'YYYY/MM/DD';
 
@@ -35,7 +37,7 @@ const Registration = observer(() => {
 
     const [loader, setLoader] = useState(false)
 
-    const [values, setValues] = useState({
+    const [values, setValues] = UseLocalStorage('registration_values', {
         //first page
         email: '',
         phone: '',
@@ -85,6 +87,40 @@ const Registration = observer(() => {
     }
 
     useEffect(() => {
+        const wait_registration_date = localStorage.getItem('wait_registration_date')
+
+        if (wait_registration_date) {
+            return
+        } else {
+            setValues({
+                //first page
+                email: '',
+                phone: '',
+                salutation: '',
+                first_name: '',
+                last_name: '',
+                middle_name: '',
+                suffix: '',
+                specialities: '',
+                //second page
+                practice_clinic: '',
+                practice_type: '',
+                practice_credential: '',
+                license_number: '',
+                practice_state: '',
+                expiration_date: '',
+                school: '',
+                state_association: '',
+                national_association: '',
+                //third page
+                photo: [],
+            })
+            window.localStorage.setItem('wait_registration', 'no')
+            window.localStorage.setItem('wait_registration_date', new Date())
+        }
+    }, [])
+
+    useEffect(() => {
         const registration_values = JSON.parse(localStorage.getItem('registration_values'))
         const wait_registration = localStorage.getItem('wait_registration')
         const wait_registration_date = new Date(localStorage.getItem('wait_registration_date'))
@@ -92,38 +128,63 @@ const Registration = observer(() => {
         const dateNow = new Date()
 
         const limit = 72 * 60
-        // const limit = 3
+        // const limit = 2
         const timeOutside = ((dateNow - wait_registration_date) / 1000) / 60
 
-        if (limit > timeOutside) {
+        if ((limit > timeOutside) && wait_registration === 'yes') {
             setLoader(true)
             setValues({
                 //first page
-                email: registration_values.email,
-                phone: registration_values.phone,
-                salutation: registration_values.salutation,
-                first_name: registration_values.first_name,
-                last_name: registration_values.last_name,
-                middle_name: registration_values.middle_name,
-                suffix: registration_values.suffix,
-                specialities: registration_values.specialities,
+                email: registration_values?.email,
+                phone: registration_values?.phone,
+                salutation: registration_values?.salutation,
+                first_name: registration_values?.first_name,
+                last_name: registration_values?.last_name,
+                middle_name: registration_values?.middle_name,
+                suffix: registration_values?.suffix,
+                specialities: registration_values?.specialities,
                 //second page
-                practice_clinic: registration_values.practice_clinic,
-                practice_type: registration_values.practice_type,
-                practice_credential: registration_values.practice_credential,
-                license_number: registration_values.license_number,
-                practice_state: registration_values.practice_state,
-                expiration_date: registration_values.expiration_date,
-                school: registration_values.school,
-                state_association: registration_values.state_association,
-                national_association: registration_values.national_association,
+                practice_clinic: registration_values?.practice_clinic,
+                practice_type: registration_values?.practice_type,
+                practice_credential: registration_values?.practice_credential,
+                license_number: registration_values?.license_number,
+                practice_state: registration_values?.practice_state,
+                expiration_date: registration_values?.expiration_date,
+                school: registration_values?.school,
+                state_association: registration_values?.state_association,
+                national_association: registration_values?.national_association,
                 //third page
-                photo: registration_values.photo,
+                photo: registration_values?.photo,
             })
             setOpenModalWait(true)
 
 
             setTimeout(() => setLoader(false), 0)
+        } else if ((limit > timeOutside) && wait_registration === 'no') {
+            setValues({
+                //first page
+                email: registration_values?.email,
+                phone: registration_values?.phone,
+                salutation: registration_values?.salutation,
+                first_name: registration_values?.first_name,
+                last_name: registration_values?.last_name,
+                middle_name: registration_values?.middle_name,
+                suffix: registration_values?.suffix,
+                specialities: registration_values?.specialities,
+                //second page
+                practice_clinic: registration_values?.practice_clinic,
+                practice_type: registration_values?.practice_type,
+                practice_credential: registration_values?.practice_credential,
+                license_number: registration_values?.license_number,
+                practice_state: registration_values?.practice_state,
+                expiration_date: registration_values?.expiration_date,
+                school: registration_values?.school,
+                state_association: registration_values?.state_association,
+                national_association: registration_values?.national_association,
+                //third page
+                photo: registration_values?.photo,
+            })
+
         } else {
             window.localStorage.removeItem('registration_values')
             window.localStorage.removeItem('wait_registration')
@@ -197,6 +258,7 @@ const Registration = observer(() => {
                     />}
                 </div>
             </div>
+            <Footer/>
         </div>
     );
 });

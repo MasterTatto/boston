@@ -13,11 +13,17 @@ import {toast} from "react-toastify";
 import RemoveLogo from "../removeLogo";
 import ImgEditor from "../../../../components/editorImg";
 import axiosConfig from "../../../../api";
+import {useWindowSize} from "../../../../utils/useWindowSize";
 
 const MobilePaymentHistory = observer(() => {
     const store = useStore()
-    const inputRef = useRef(null)
 
+    const {width} = useWindowSize()
+
+    const inputRef = useRef(null)
+    const imgRef = useRef(null)
+
+    const [heightImg, setHeightImg] = useState(0)
     const [showAddedLogo, setShowAddedLogo] = useState(false)
     const [firstLoadingLogo, setFirstLoadingLogo] = useState(false)
     const [logo, setLogo] = useState(null)
@@ -224,7 +230,7 @@ const MobilePaymentHistory = observer(() => {
     const getCurrentPrescription = async (id) => {
         await store.history.getCurrentPrescription(id)
     }
-
+    console.log(imgRef?.current?.offsetHeight)
     useEffect(() => {
         getLogo()
     }, [])
@@ -264,7 +270,10 @@ const MobilePaymentHistory = observer(() => {
         getAllHistory()
     }, [])
 
-
+    useEffect(() => {
+        // console.log(imgRef?.current?.offsetHeight)
+        // setHeightImg(0)
+    }, [width])
 
     return (
         <div className={s.mobile}>
@@ -281,7 +290,7 @@ const MobilePaymentHistory = observer(() => {
                 </div>
 
                 <div className={s.info} style={{
-                    height: (openBalanceInfo && logo) && '630px' || openBalanceInfo && '430px'
+                    height: (openBalanceInfo && logo) && `${imgRef?.current?.offsetHeight + 500}px` || openBalanceInfo && '430px'
                 }}>
                     <div className={s.balance_box}>
                         <p className={s.balance_title}>Your balance:</p>
@@ -333,7 +342,7 @@ const MobilePaymentHistory = observer(() => {
                             }} active={true} shape={'square'}/>}
                             {!firstLoadingLogo && <>
                                 {logo && <div className={s.logo_box}>
-                                    <img src={logo} alt=""/>
+                                    <img src={logo} ref={imgRef} alt=""/>
                                 </div>}
 
                                 <div className={s.btns_box}>

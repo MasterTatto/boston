@@ -75,7 +75,6 @@ const ThirdPage = ({registration, changeValues, values}) => {
             if (info.file.status !== 'uploading') {
 
                 getBase64(info.file, (url) => {
-                    console.log(info.file)
                     if (values.photo.length >= 5 && info.file.status !== 'removed') {
                         toast.error('Max limit upload file = 5.', {
                             position: "bottom-left",
@@ -103,7 +102,6 @@ const ThirdPage = ({registration, changeValues, values}) => {
                             });
                             return
                         }
-                        console.log('semi')
                         toast.error('You have already downloaded this file.', {
                             position: "bottom-left",
                             autoClose: 5000,
@@ -142,7 +140,7 @@ const ThirdPage = ({registration, changeValues, values}) => {
                         // }])
                         if (info.file.status === 'removed') return
                         changeValues('photo', [...values.photo, url])
-                        console.log('not semi')
+
                     }
                 })
                 // for (let i = 0; i < info.fileList.length; i++) {
@@ -168,8 +166,7 @@ const ThirdPage = ({registration, changeValues, values}) => {
 
         },
     };
-    console.log(values)
-    console.log(fileList)
+
     return (
         <div className={s.third_page}>
             {currentImg !== null &&
@@ -206,13 +203,13 @@ const ThirdPage = ({registration, changeValues, values}) => {
             {/*    </Upload>*/}
             {/*</div>*/}
 
-            {wait_registration === 'yes' && <div className={s.uploaded_files_box}>
+            {((wait_registration === 'yes') || (wait_registration === 'no')) && <div className={s.uploaded_files_box}>
                 <h3 className={s.title}>Uploaded files</h3>
                 <div className={s.uploaded_files}>
                     {values.photo?.map((el, i) => {
                         // if (registration_values.photo.some(e => e !== el)) return
                         return <div key={`${el}${i}`} style={{
-                            display: !registration_values.photo.some(e => e !== el) && 'none'
+                            // display: registration_values.photo.some(e => e !== el) && 'none'
                         }} onClick={() => setCurrentImg(el)}
                                     className={s.uploaded_file_item}>
                             <span>{`File ${i + 1}`}</span>
@@ -230,8 +227,6 @@ const ThirdPage = ({registration, changeValues, values}) => {
                                 for (let i = 0; i < fileList.length; i++) {
                                     getBase64(fileList[i], (url) => {
                                         if (url !== el) return
-                                        console.log(fileList)
-                                        console.log(i)
                                         setFileList(fileList.filter((f, indx) => indx !== i))
                                     })
                                 }

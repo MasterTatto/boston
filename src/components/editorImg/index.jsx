@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import s from './styles.module.css'
 import ReactCrop, {centerCrop, makeAspectCrop} from "react-image-crop";
 import {useDebounceEffect} from "../../utils/useDebounceEffect";
@@ -7,6 +7,7 @@ import {Button, Modal} from "antd";
 import classNames from "classnames";
 import {UploadOutlined} from "@ant-design/icons";
 import {useWindowSize} from "../../utils/useWindowSize";
+import {imgPreview} from "../../utils/imgPrev";
 
 const ImgEditor = ({open, onClose, onClick, loading}) => {
     const imgRef = useRef(null)
@@ -20,8 +21,6 @@ const ImgEditor = ({open, onClose, onClick, loading}) => {
     const [imgSrc, setImgSrc] = useState('')
     const [crop, setCrop] = useState()
     const [completedCrop, setCompletedCrop] = useState()
-
-    console.log(imgSrc)
 
     function centerAspectCrop(
         mediaWidth,
@@ -46,7 +45,6 @@ const ImgEditor = ({open, onClose, onClick, loading}) => {
     function onImageLoad(e) {
         const {width, height} = e.currentTarget
         setCrop(centerAspectCrop(width, height, 3 / 1))
-
     }
 
     function onDownloadCropClick() {
@@ -62,7 +60,6 @@ const ImgEditor = ({open, onClose, onClick, loading}) => {
                 URL.revokeObjectURL(blobUrlRef.current)
             }
             onClick(blob)
-            console.log(blob)
 
             // console.log(URL.createObjectURL(blob))
             // blobUrlRef.current = URL.createObjectURL(blob)
@@ -95,7 +92,6 @@ const ImgEditor = ({open, onClose, onClick, loading}) => {
             )
             reader.readAsDataURL(files[0])
         }
-        console.log(files);
     }
 
     function onSelectFile(e) {
@@ -129,7 +125,9 @@ const ImgEditor = ({open, onClose, onClick, loading}) => {
         0,
         [completedCrop, crop, scale],
     )
+
     console.log(previewCanvasRef)
+
     return (
         <div>
             {/*<UploadOutlined />*/}
@@ -163,48 +161,49 @@ const ImgEditor = ({open, onClose, onClick, loading}) => {
                 </div>}
 
                 {imgSrc && <Button className={classNames(s.btn, s.clear)} onClick={() => setImgSrc('')}>Clear</Button>}
-
-                {imgSrc !== '' && <div className={s.initial}>
-                    <h3>Initial logo:</h3>
-                    <ReactCrop
-                        aspect={3 / 1}
-                        // locked={true}
-                        crop={crop}
-                        scale={scale}
-                        onChange={(_, percentCrop) => {
-                            setCrop(percentCrop)
-                        }}
-                        onComplete={(c) => setCompletedCrop(c)}
-                    >
-
-                        <img
-                            ref={imgRef}
-                            alt="Crop me"
-                            src={imgSrc}
-
-                            onLoad={onImageLoad}
-                            style={{
-                                transform: `scale(${scale})`,
-                                width: width >= 1000 ? '60vw' : '90vw',
-                                // width: '100%',
-                                height: 'auto',
+                <div className={s.content_image}>
+                    {imgSrc !== '' && <div className={s.initial}>
+                        <h3>Initial logo:</h3>
+                        <ReactCrop
+                            aspect={3 / 1}
+                            // locked={true}
+                            crop={crop}
+                            scale={scale}
+                            onChange={(_, percentCrop) => {
+                                console.log(percentCrop)
+                                setCrop(percentCrop)
                             }}
-                            // onLoad={onImageLoad}
-                        />
-                    </ReactCrop></div>}
+                            onComplete={(c) => {
+                                setCompletedCrop(c)
+                            }}
+                        >
 
-                {(completedCrop && imgSrc) && <div className={s.canvas}>
-                    <h3>Result logo:</h3>
-                    <canvas
-                        ref={previewCanvasRef}
-                        style={{
-                            border: '1px solid black',
-                            objectFit: 'contain',
-                            width: completedCrop.width,
-                            height: completedCrop.height,
-                        }}
-                    />
-                </div>}
+                            <img
+                                ref={imgRef}
+                                alt="Crop me"
+                                src={imgSrc}
+                                id={'img_initial'}
+                                onLoad={onImageLoad}
+                                style={{
+                                    transform: `scale(${scale})`,
+                                    // width: '50vw',
+                                    // // width: '100%',
+                                    // height: 'auto',
+                                }}
+                                // onLoad={onImageLoad}
+                            />
+                        </ReactCrop></div>}
+
+                    {(imgSrc) && <div className={s.canvas}>
+                        <h3>Result logo:</h3>
+                        <canvas
+                            ref={previewCanvasRef}
+                            style={{
+                                border: '1px solid black',
+                            }}
+                        />
+                    </div>}
+                </div>
                 {/*{completedCrop && <button onClick={onDownloadCropClick}>Download</button>}*/}
                 <a
                     ref={hiddenAnchorRef}

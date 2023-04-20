@@ -223,10 +223,9 @@ const RightSide = ({balance}) => {
             })
         }
         getPayoutInfo()
-        console.log(logo)
+
     }, [])
 
-    console.log(logo)
     return (
         <div className={s.right_side}>
             {removeLogo &&

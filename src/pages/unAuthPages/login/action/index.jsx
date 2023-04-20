@@ -50,7 +50,7 @@ const ActionAuth = observer(() => {
                     <h2>AcuBoston Herbal Pharmacy</h2>
                     {/*<p className={s.mobile_p}>is a Compounding Custom Herbal Prescriptions Pharmacy conforming to FDA*/}
                     {/*    GMP requirements.</p>*/}
-                    <p className={s.web_p}>Custom Herbal Prescription Pharmacy for TCM Practitioners and Students.</p>
+                    <p className={s.web_p}>Custom Herbal Prescription Pharmacy for TCM Practitioners and Students</p>
                 </div>
                 <div className={s.action_left_bottom}>
                     {items.map((el, i) => {

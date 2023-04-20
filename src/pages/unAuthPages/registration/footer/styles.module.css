@@ -1,0 +1,27 @@
+.footer {
+    max-width: 925px;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.footer h3 {
+    font-family: 'Montserrat Alternates', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 22px;
+    color: #272933;
+    margin-bottom: 20px;
+}
+
+.ul li {
+    list-style: none;
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    color: #272933;
+    text-align: left;
+    margin-top: 10px;
+}

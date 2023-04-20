@@ -29,13 +29,13 @@ const HeaderAuth = () => {
 
                             <div className={s.helper_text} onClick={(e) => e.stopPropagation()}>
                                 <Tooltip title={<>
-                                    1. Create custom FDA GMP-complaint formulas from highest quality individual herbs
+                                    1. Create custom FDA GMP-compliant formulas from highest quality individual herbs
                                     <br/>
                                     2. Use your own clinic logo on every prescription
                                     <br/>
                                     3. Allow AcuBoston pharmacists to review your formula for quality control
                                     <br/>
-                                    4. Let AcuBoston pharmacy mail your custom formulas to your patients
+                                    4. Let AcuBoston Herbal Pharmacy mail your custom formulas to your patients
                                 </>}>
                                     <QuestionCircleOutlined/>
                                 </Tooltip>
@@ -56,13 +56,13 @@ const HeaderAuth = () => {
 
                     <div className={s.helper_text}>
                         <Tooltip title={<>
-                            1. Create custom FDA GMP-complaint formulas from highest quality individual herbs
+                            1. Create custom FDA GMP-compliant formulas from highest quality individual herbs
                             <br/>
                             2. Use your own clinic logo on every prescription
                             <br/>
                             3. Allow AcuBoston pharmacists to review your formula for quality control
                             <br/>
-                            4. Let AcuBoston pharmacy mail your custom formulas to your patients
+                            4. Let AcuBoston Herbal Pharmacy mail your custom formulas to your patients
                         </>}>
                             <QuestionCircleOutlined/>
                         </Tooltip>
