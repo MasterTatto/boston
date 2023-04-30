@@ -1,5 +1,5 @@
 import React from 'react';
-import s from "../../../../components/editorImg/styles.module.css";
+import s from "../../../../../components/editorImg/styles.module.css";
 import {Button, Modal} from "antd";
 import classNames from "classnames";
 

@@ -1,5 +1,5 @@
 .left_side {
-    max-width: 690px;
+    max-width: 80%;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -24,6 +24,8 @@
 .date {
     display: flex;
     align-items: center;
+    width: 100%;
+    justify-content: flex-end;
 }
 
 .arrow {
@@ -52,32 +54,67 @@
     line-height: 15px;
     text-align: left;
     color: #272933;
-    padding-right: 25px;
+    padding-right: 15px;
 }
 
-.number_table {
-    min-width: 56px;
-    max-width: 56px;
+.header_table div p {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    /* identical to box height */
+
+    text-align: right;
+
+    /* Black */
+
+    color: #272933;
 }
 
-.empty {
-    min-width: 56px;
-    max-width: 56px;
-    margin-right: 25px;
+.header_table_first, .header_table_second {
+    display: flex;
+    align-items: center;
+
 }
+
+/*.number_table {*/
+/*    min-width: 56px;*/
+/*    max-width: 56px;*/
+/*}*/
+
+/*.empty {*/
+/*    min-width: 56px;*/
+/*    max-width: 56px;*/
+/*    margin-right: 25px;*/
+/*}*/
+
+/*.type_table {*/
+/*    min-width: 260px;*/
+/*    max-width: 260px;*/
+/*}*/
+
+/*.date_table {*/
+/*    min-width: 116px;*/
+/*    max-width: 116px;*/
+/*}*/
+
+/*.amount_table {*/
+/*    width: 100%;*/
+/*}*/
 
 .type_table {
-    min-width: 260px;
-    max-width: 260px;
+    margin-left: 40px;
 }
 
-.date_table {
-    min-width: 116px;
-    max-width: 116px;
+.amount_table_header {
+    /*margin: 0 90px;*/
 }
 
-.amount_table {
-    width: 100%;
+.date_table, .amount_table_header, .amount_table {
+    width: 130px;
+    /*border: 1px solid red;*/
+    text-align: right;
 }
 
 .table_items {
@@ -293,7 +330,7 @@
     align-items: center;
     width: 100%;
     /*justify-content: flex-end;*/
-    margin-top: 10px;
+    /*margin-top: 10px;*/
 }
 
 .switch {

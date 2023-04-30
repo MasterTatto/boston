@@ -1,8 +1,9 @@
 import React from 'react';
 import s from "./styles.module.css";
 import classNames from "classnames";
-import {ReactComponent as Arrow} from "../../../../assets/hidden_arrow.svg";
-import {getFormatedDate} from "../../../../utils/getFormatDate";
+import {ReactComponent as Arrow} from "../../../../../assets/hidden_arrow.svg";
+import {getFormatedDate} from "../../../../../utils/getFormatDate";
+
 
 const Item = ({content, onHidden, patients}) => {
     const patient = patients.find(f => f.patient_id === content?.patient_id)

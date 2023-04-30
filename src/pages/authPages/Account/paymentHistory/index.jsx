@@ -2,9 +2,10 @@ import React, {useEffect, useState} from 'react';
 import s from './styles.module.css'
 import LeftSide from "./left_side";
 import RightSide from "./right_side";
-import {useStore} from "../../../useStore";
+
 import MobilePaymentHistory from "./mobile_payment_history";
 import moment from "moment";
+import {useStore} from "../../../../useStore";
 
 const PaymentHistory = () => {
     const store = useStore()
@@ -47,7 +48,7 @@ const PaymentHistory = () => {
             <div className={s.main}>
                 <LeftSide from={from} setFrom={setFrom} to={to} setTo={setTo} history={history} chooseDay={chooseDay}
                           setHistory={setHistory}/>
-                <RightSide balance={history?.current_balance || 0}/>
+                {/*<RightSide balance={history?.current_balance || 0}/>*/}
             </div>
         </>
 

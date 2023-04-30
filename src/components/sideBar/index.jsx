@@ -120,7 +120,10 @@ const SideBar = observer(() => {
 
 
     return (
-        <div className={s.side_bar}>
+        <div className={s.side_bar} style={{
+            maxWidth: ((location.pathname === '/account') || (location.pathname === '/help')) ? '237px' : '355px',
+            minWidth: ((location.pathname === '/account') || (location.pathname === '/help')) ? '237px' : '355px',
+        }}>
             {openAddedModal !== null && <AddedPatientsModal handleOk={handleOk} openAddedModal={openAddedModal}
                                                             setOpenAddedModal={setOpenAddedModal}/>}
 
@@ -129,7 +132,9 @@ const SideBar = observer(() => {
                                     setOpenRemoveModal={setOpenRemoveModal}/>}
             <img className={s.logo} src={logo} alt="logo"/>
 
-            <div className={s.action_box}>
+            <div className={s.action_box} style={{
+                display: ((location.pathname === '/account') || (location.pathname === '/help')) && 'none'
+            }}>
                 <div className={s.added_patients}>
                     <p className={s.title}>Patients</p>
                     <AddedTextPlus title={'Add patient'} onClick={() => setOpenAddedModal('add')}/>
@@ -141,7 +146,9 @@ const SideBar = observer(() => {
                 </div>
             </div>
 
-            {patients.length !== 0 ? <div className={s.patient_items}>
+            {patients.length !== 0 ? <div className={s.patient_items} style={{
+                display: ((location.pathname === '/account') || (location.pathname === '/help')) && 'none'
+            }}>
                 {patients.filter(item => {
                     if (!search2) return true
                     if (item.patient_name.toLowerCase().includes(search2.toLowerCase())) {

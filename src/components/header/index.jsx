@@ -6,6 +6,7 @@ import {useStore} from "../../useStore";
 import logo from "../../assets/logo_mobile.png";
 import {Dropdown, Select} from "antd";
 import {ReactComponent as Arrow} from '../../assets/arrow_select.svg'
+import avatar from '../../assets/doctor.jpg'
 
 const Header = () => {
     const store = useStore()
@@ -23,18 +24,39 @@ const Header = () => {
         // {title: 'Patients', isHidden: true, link: 'patients/create-prescription'},
         {title: 'Formulas library', link: 'formulas-library'},
         {title: 'Herbs list', link: 'herbs-list'},
-        {title: 'Account Statement', link: 'payment-history'},
+        {title: 'Account', link: 'account'},
+        {title: 'Help', link: 'help'},
+    ]
+
+    const links_desk = [
+        // {title: 'Patients', link: 'patients'},
+        // // {title: 'Patients', isHidden: true, link: 'patients/create-prescription'},
+        // {title: 'Formulas library', link: 'formulas-library'},
+        // {title: 'Herbs list', link: 'herbs-list'},
+        // {title: 'Account Statement', link: 'payment-history'},
+        {title: 'Account', link: 'account'},
         {title: 'Help', link: 'help'},
     ]
 
     const items = (id) => [...links.map((el) => ({
         label: <NavLink
-            //     style={{
-            //     display: el.isHidden && 'none',
-            //     height: el.isHidden && '0',
-            //     overflow: 'hidden',
-            //     border: '1px solid red'
-            // }}
+            className={classNames(currentLocation === `/${el.link}` && s.selected)}
+            to={el.link}
+            key={el.title}>
+            <p>{el.title}</p>
+        </NavLink>,
+        key: el.link,
+    })),
+        {
+            label: <p style={{
+                color: '#000'
+            }
+            } onClick={() => store.auth.logout(navigate)}>Logout</p>,
+            key: '1',
+        }
+    ]
+    const items_desk = (id) => [...links_desk.map((el) => ({
+        label: <NavLink
             className={classNames(currentLocation === `/${el.link}` && s.selected)}
             to={el.link}
             key={el.title}>
@@ -67,11 +89,22 @@ const Header = () => {
                 </div>
 
                 <div className={s.right_header}>
-                    <p>{userName || 'undefined'}</p>
-
-                    <div className={s.logout} onClick={() => store.auth.logout(navigate)}>
-                        Logout
-                    </div>
+                    {/*<p>{userName || 'undefined'}</p>*/}
+                    <div className={s.avatar} style={{
+                        backgroundImage: `url(${avatar})`
+                    }}/>
+                    <Dropdown
+                        menu={{
+                            items: items_desk()
+                        }}
+                        trigger={['click']}
+                        placement="bottomRight"
+                    >
+                        <div className={s.selected_box_desc}>
+                            <p>{userName || 'undefined'}</p>
+                            <Arrow/>
+                        </div>
+                    </Dropdown>
                 </div>
             </div>
 
@@ -79,6 +112,9 @@ const Header = () => {
                 <img className={s.logo} src={logo} alt="logo"/>
                 <div className={s.pages}>
 
+                    <div className={s.avatar} style={{
+                        backgroundImage: `url(${avatar})`
+                    }}/>
                     <Dropdown
                         menu={{
                             items: items()
@@ -86,11 +122,8 @@ const Header = () => {
                         trigger={['click']}
                         placement="bottomRight"
                     >
-                        <div className={s.selected_box}>
-                            <p>{
-                                currentLocation === '/patients/create-prescription' && 'Patients' ||
-                                currentLocation === '/formulas-library/create-prescription' && 'Formulas library' ||
-                                links?.find(f => `/${f.link}` === currentLocation)?.title}</p>
+                        <div className={s.selected_box_desc}>
+                            <p>{userName || 'undefined'}</p>
                             <Arrow/>
                         </div>
                     </Dropdown>

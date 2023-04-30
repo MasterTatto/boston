@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import s from './styles.module.css'
 import classNames from "classnames";
-import {useStore} from "../../../../../useStore";
 import {observer} from "mobx-react-lite";
-import {getFormatedDate} from "../../../../../utils/getFormatDate";
-import {ReactComponent as Arrow} from "../../../../../assets/hidden_arrow.svg";
+import {ReactComponent as Arrow} from "../../../../../../assets/hidden_arrow.svg";
+import {useStore} from "../../../../../../useStore";
+import {getFormatedDate} from "../../../../../../utils/getFormatDate";
 
 const Item = observer(({
                            getCurrentPrescription,

@@ -1,0 +1,46 @@
+.account {
+    /*border: 1px solid red;*/
+    width: 100%;
+    margin-top: -24px;
+    height: 100%;
+}
+
+.navigate {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    position: relative;
+}
+
+.navigate p {
+    margin-right: 40px;
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #272933;
+    cursor: pointer;
+    transition: .3s all;
+}
+
+.active {
+    color: #67AC46 !important;
+}
+
+.line {
+    height: 2px;
+    background-color: #67AC46;
+    bottom: -4px;
+    left: 0;
+    position: absolute;
+    width: 0;
+    transition: .3s all;
+}
+
+@media screen and (max-width: 1000px) {
+    .account {
+        margin-top: 0;
+        padding: 0 10px;
+    }
+}

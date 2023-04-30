@@ -1,0 +1,73 @@
+.logo{
+    /*border: 1px solid;*/
+    width: calc(100% / 3);
+    /*height: 100%;*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo_added_box {
+    /*margin-top: 40px;*/
+    width: 100%;
+}
+.detalis_title {
+    font-family: 'Montserrat Alternates', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #272933;
+}
+
+.logo_box img {
+    width: 100%;
+    height: auto;
+    border: .1px solid;
+    margin-top: 20px;
+}
+
+.btns_box {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+.added_btn, .remove_btn {
+    width: 100%;
+}
+
+.remove_btn {
+    margin-top: 10px;
+    background-color: #fa2727;
+    color: #fff;
+    border: none;
+    transition: .3s all;
+}
+
+.remove_btn:hover{
+    color: #fff !important;
+    background-color: rgba(250, 39, 39, 0.6);
+}
+
+.added_btn{
+    background-color: #67AC46;
+    color: #fff;
+    border: none;
+}
+
+.added_btn:hover{
+    color: #fff !important;
+    background-color: rgba(103, 172, 70, 0.6);
+}
+
+@media screen and (max-width: 1000px) {
+    .logo{
+        width: 100%;
+        margin-top: 30px;
+        padding-bottom: 30px;
+    }
+}
+

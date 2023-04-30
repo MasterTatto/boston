@@ -13,7 +13,7 @@ const Routers = () => {
     const store = useStore()
 
     useEffect(() => {
-        if (!['/patients', '/formulas-library', '/herbs-list', '/help', '/patients/create-prescription', '/formulas-library/create-prescription', '/payment-history'].includes(pathname)) {
+        if (!['/patients', '/account', '/formulas-library', '/herbs-list', '/help', '/patients/create-prescription', '/formulas-library/create-prescription', '/payment-history'].includes(pathname)) {
             navigate('/patients')
         }
     }, [pathname])

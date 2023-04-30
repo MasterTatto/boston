@@ -43,18 +43,18 @@
         transition: .3s all;
     }
 
-    .remove_btn:hover{
+    .remove_btn:hover {
         color: #fff !important;
         background-color: rgba(250, 39, 39, 0.6);
     }
 
-    .added_btn{
+    .added_btn {
         background-color: #67AC46;
         color: #fff;
         border: none;
     }
 
-    .added_btn:hover{
+    .added_btn:hover {
         color: #fff !important;
         background-color: rgba(103, 172, 70, 0.6);
     }
@@ -89,6 +89,7 @@
         display: flex;
         padding: 0 10px;
         flex-direction: column;
+        margin-top: 20px;
     }
 
     .header {

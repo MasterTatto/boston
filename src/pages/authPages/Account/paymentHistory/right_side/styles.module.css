@@ -1,7 +1,11 @@
 .right_side {
-    max-width: 290px;
     width: 100%;
-    margin-left: 40px;
+    /*display: flex;*/
+    /*align-items: center;*/
+    /*flex-direction: column;*/
+    /*justify-content: center;*/
+    /*margin-left: 40px;*/
+    padding: 0 65px;
 }
 
 .text_balance, .balance {
@@ -144,18 +148,25 @@
     transition: .3s all;
 }
 
-.remove_btn:hover{
+.remove_btn:hover {
     color: #fff !important;
     background-color: rgba(250, 39, 39, 0.6);
 }
 
-.added_btn{
+.added_btn {
     background-color: #67AC46;
     color: #fff;
     border: none;
 }
 
-.added_btn:hover{
+.added_btn:hover {
     color: #fff !important;
     background-color: rgba(103, 172, 70, 0.6);
+}
+
+
+@media screen and (max-width: 1000px) {
+    .right_side {
+        padding: 0;
+    }
 }
