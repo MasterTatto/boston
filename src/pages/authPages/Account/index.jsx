@@ -9,14 +9,13 @@ const navigate_data = [
 ]
 
 const Account = () => {
-    const ref = useRef()
     //can be statement or profile
     const [navigateAccount, setNavigateAccount] = useState('profile')
-    console.log(ref)
+
     return (
         <div className={s.account}>
             <div className={s.navigate}>
-                {navigate_data.map((el) => <p ref={ref} onClick={(e) => {
+                {navigate_data.map((el) => <p onClick={(e) => {
                     console.log(e)
                     setNavigateAccount(el.link)
                 }}

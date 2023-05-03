@@ -51,11 +51,11 @@ const Item = observer(({
                 </div>
                 <div className={s.bottom_s}>
                     <p className={s.qest}>Amount</p>
-                    <p className={classNames(s.answer, s.answer_type_2)}>{amount}</p>
+                    <p className={classNames(s.answer, s.answer_type_2)}>{`$${amount}`}</p>
                 </div>
                 <div className={s.bottom_t}>
                     <p className={s.qest}>Balance</p>
-                    <p className={classNames(s.answer, s.answer_type_2)}>{balance}</p>
+                    <p className={classNames(s.answer, s.answer_type_2)}>{`$${balance}`}</p>
                 </div>
             </div>
 
@@ -66,13 +66,13 @@ const Item = observer(({
                     <div className={s.hidden_left_item_left}>
                         <p className={s.status}>Status:</p>
                         <p className={s.quest}>Prescription ID:</p>
-                        <p className={s.quest}>Patient ID:</p>
+                        {/*<p className={s.quest}>Patient ID:</p>*/}
                         <p className={s.quest}>Patient name:</p>
                     </div>
                     <div className={s.hidden_left_item_right}>
                         <p className={s.status_answer}>{currentItem?.status}</p>
                         <p className={s.answer2}>{currentItem?.prescription_id || 'None'}</p>
-                        <p className={s.answer2}>{currentItem?.patient_id || 'None'}</p>
+                        {/*<p className={s.answer2}>{currentItem?.patient_id || 'None'}</p>*/}
                         <p className={s.answer2}>{patient?.patient_name ? patient.patient_name : 'None'}</p>
                     </div>
                 </div>

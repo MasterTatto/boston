@@ -9,6 +9,9 @@
     flex-direction: column;
     padding-bottom: 20px;
     transition: .3s all;
+    /*position: fixed;*/
+    /*top: 0;*/
+    /*left: 0;*/
 }
 
 .logo {

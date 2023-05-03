@@ -18,13 +18,13 @@ const Item = ({content, onHidden, patients}) => {
                     <div className={s.hidden_left_item_left}>
                         <p className={s.status}>Status:</p>
                         <p className={s.quest}>Prescription ID:</p>
-                        <p className={s.quest}>Patient ID:</p>
+                        {/*<p className={s.quest}>Patient ID:</p>*/}
                         <p className={s.quest}>Patient name:</p>
                     </div>
                     <div className={s.hidden_left_item_right}>
                         <p className={s.status_answer}>{content?.status}</p>
                         <p className={s.answer}>{content?.prescription_id || 'None'}</p>
-                        <p className={s.answer}>{content?.patient_id || 'None'}</p>
+                        {/*<p className={s.answer}>{content?.patient_id || 'None'}</p>*/}
                         <p className={s.answer}>{patient?.patient_name ? patient.patient_name : 'None'}</p>
                     </div>
                 </div>

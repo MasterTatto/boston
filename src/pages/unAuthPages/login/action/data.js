@@ -25,8 +25,29 @@ export const items = [
     {
         svg: <Auth4/>,
         title: 'You set your own prescription $prices for your patients',
-        subtitle: 'Set your own prescription $prices for your patients. Add your own Practitioner Expert Fee surcharge to the wholesale price for your TCM formula. AcuBoston only charges a small flat fulfillment fee of $3.95 per bottle in addition to listed wholesale cost of ingredients and shipping.\n' +
-            'Your Practitioner Expert Fee can be set via a drop-down ‘Markup’ field. Markup  set at default “x3” means that the patient pays triple charges compared to the wholesale cost of the custom formula. Your accumulated Practitioner Expert Fees will be listed in your secure online account and will be paid to you by AcuBoston Herbal Pharmacy.',
+        subtitle: <>
+            Set your own prescription $prices for your patients. Add your own Practitioner Expert Fee
+            surcharge to the wholesale price for your TCM formula.
+            <br/>
+            <div style={{
+                marginBottom: '10px'
+            }}/>
+            AcuBoston only charges a small flat fulfillment fee
+            of $3.95 per bottle in addition to listed wholesale cost of ingredients and shipping. Your Practitioner
+            Expert Fee can be set via a drop-down ‘Markup’ field.
+            <br/>
+            <div style={{
+                marginBottom: '10px'
+            }}/>
+            Markup set at default “x3” means that the patient pays
+            triple charges compared to the wholesale cost of the custom formula.
+            <br/>
+            <div style={{
+                marginBottom: '10px'
+            }}/>
+            Your accumulated Practitioner Expert
+            Fees will be listed in your secure online account and will be paid to you by AcuBoston Herbal Pharmacy.
+        </>,
         id: 4
     },
 ]

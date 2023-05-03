@@ -6,7 +6,7 @@ import {useStore} from "../../useStore";
 import logo from "../../assets/logo_mobile.png";
 import {Dropdown, Select} from "antd";
 import {ReactComponent as Arrow} from '../../assets/arrow_select.svg'
-import avatar from '../../assets/doctor.jpg'
+import avatar from '../../assets/user.jpeg'
 
 const Header = () => {
     const store = useStore()
@@ -26,6 +26,13 @@ const Header = () => {
         {title: 'Herbs list', link: 'herbs-list'},
         {title: 'Account', link: 'account'},
         {title: 'Help', link: 'help'},
+    ]
+
+    const header_links = [
+        {title: 'Patients', link: 'patients'},
+        // {title: 'Patients', isHidden: true, link: 'patients/create-prescription'},
+        {title: 'Formulas library', link: 'formulas-library'},
+        {title: 'Herbs list', link: 'herbs-list'},
     ]
 
     const links_desk = [
@@ -81,7 +88,7 @@ const Header = () => {
         <>
             <div className={s.header}>
                 <div className={classNames(s.navigate)}>
-                    {links.map((el) => <NavLink className={classNames(currentLocation === `/${el.link}` && s.selected)}
+                    {header_links.map((el) => <NavLink className={classNames(currentLocation === `/${el.link}` && s.selected)}
                                                 to={el.link}
                                                 key={el.title}><p>
                         {el.title}

@@ -7,7 +7,7 @@ import Logo from "./logo";
 const Profile = () => {
     return (
         <div className={s.profile}>
-            <Avatar/>
+            {/*<Avatar/>*/}
             <Balance/>
             <Logo/>
         </div>

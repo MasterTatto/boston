@@ -5,7 +5,7 @@
     /*flex-direction: column;*/
     /*justify-content: center;*/
     /*margin-left: 40px;*/
-    padding: 0 65px;
+    padding: 0 65px 0 0;
 }
 
 .text_balance, .balance {

@@ -52,6 +52,7 @@
     position: relative;
     height: 28px;
     user-select: none;
+    margin-right: 20px;
 }
 
 .dots span {
@@ -200,5 +201,30 @@
         fill: #272933;
         height: 15px;
         width: 15px;
+    }
+
+    .dots {
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+        padding: 0;
+        cursor: pointer;
+        width: fit-content;
+        position: relative;
+        height: 50px;
+        /*border: .1px solid;*/
+        padding: 0px 20px;
+        padding-top: 10px;
+
+
+    }
+
+    .dots span {
+        margin: 0;
+        padding: 0;
+        height: 3px;
+        font-size: 29px;
+        font-weight: 600;
+        margin-top: -10px;
     }
 }

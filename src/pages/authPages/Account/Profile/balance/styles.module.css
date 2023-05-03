@@ -1,7 +1,7 @@
 .balance {
     /*border: 1px solid;*/
     width: calc(100% / 3);
-    border-left: 1px solid rgba(39, 41, 51, 0.2);
+    /*border-left: 1px solid rgba(39, 41, 51, 0.2);*/
     border-right: 1px solid rgba(39, 41, 51, 0.2);
     margin: 0 65px 0 0;
     height: 100%;
