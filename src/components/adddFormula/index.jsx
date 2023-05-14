@@ -10,7 +10,7 @@ import {ReactComponent as Delete} from "../../assets/trash.svg";
 import AddedTextPlus from "../../common/addedTextPlus";
 import {MinusOutlined, PlusOutlined} from "@ant-design/icons";
 
-const AddedFormula = observer(({setAddedFormulaID, openModal, setOpenModal, type, setData}) => {
+const AddedFormula = observer(({setAddedFormulaID, classic, openModal, setOpenModal, type, setData}) => {
     const store = useStore()
 
     const [allHerbs, setAllHerbs] = useState([])
@@ -33,7 +33,8 @@ const AddedFormula = observer(({setAddedFormulaID, openModal, setOpenModal, type
             components: chooseHerbs.map(el => ({herb_code: el.herb_code, parts: +el.parts}))
         }, setOpenModal, setAddedFormulaID)
         await store.formula.getAllFormulas()
-        setData(store.formula.formulas)
+        const filteredDataByClassic = classic ? store.formula.formulas.filter((f) => f.is_classic) : store.formula.formulas.filter((f) => !f.is_classic)
+        setData(filteredDataByClassic)
     }
 
     const updateFormula = async () => {
@@ -42,7 +43,8 @@ const AddedFormula = observer(({setAddedFormulaID, openModal, setOpenModal, type
             notes: values.notes,
         }, store.formula.currentFormula.formula_id, setOpenModal)
         await store.formula.getAllFormulas()
-        setData(store.formula.formulas)
+        const filteredDataByClassic = classic ? store.formula.formulas.filter((f) => f.is_classic) : store.formula.formulas.filter((f) => !f.is_classic)
+        setData(filteredDataByClassic)
     }
 
 
@@ -174,7 +176,8 @@ const AddedFormula = observer(({setAddedFormulaID, openModal, setOpenModal, type
                         </div>
                     </div>
                     <div className={s.added_herb}>
-                        {herb?.herb_name ? <AddedTextPlus title={'Add herb'}
+                        {herb?.herb_name ? <AddedTextPlus title={'Create herb'}
+                                                          showPlus={false}
                                                           onClick={() => {
                                                               if (chooseHerbs?.find(f => f.herb_code === herb.herb_code) || !herb.herb_code) {
                                                                   return

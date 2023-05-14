@@ -112,7 +112,8 @@ const Herbs = observer(() => {
                             headerName={"Name"}
                             field="herb_name"
                             editable={false}
-                            sortable={false}
+                            unSortIcon={true}
+                            sortable={true}
                             filter={false}
                             cellRenderer="rowText"
                             cellRendererParams={{
@@ -127,7 +128,8 @@ const Herbs = observer(() => {
                             headerName={isMobile ? "$ per 1g" : "Common Name"}
                             field={isMobile ? "gram_cost" : "common_name"}
                             editable={false}
-                            sortable={false}
+                            sortable={!isMobile}
+                            unSortIcon={!isMobile}
                             filter={false}
                             cellRenderer="rowText"
                             tooltipField='common_name'
@@ -151,7 +153,8 @@ const Herbs = observer(() => {
                             headerName={!isMobile ? "$ per 1g" : "Common Name"}
                             field={!isMobile ? "gram_cost" : "common_name"}
                             editable={false}
-                            sortable={false}
+                            sortable={isMobile}
+                            unSortIcon={isMobile}
                             filter={false}
                             cellRenderer="rowText"
                             tooltipField='gram_cost'

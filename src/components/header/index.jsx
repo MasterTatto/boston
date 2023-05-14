@@ -5,7 +5,8 @@ import classNames from "classnames";
 import {useStore} from "../../useStore";
 import logo from "../../assets/logo_mobile.png";
 import {Dropdown, Select} from "antd";
-import {ReactComponent as Arrow} from '../../assets/arrow_select.svg'
+// import {ReactComponent as Arrow} from '../../assets/arrow_select.svg'
+import {ReactComponent as Burger} from '../../assets/burger.svg'
 import avatar from '../../assets/user.jpeg'
 
 const Header = () => {
@@ -21,7 +22,6 @@ const Header = () => {
 
     const links = [
         {title: 'Patients', link: 'patients'},
-        // {title: 'Patients', isHidden: true, link: 'patients/create-prescription'},
         {title: 'Formulas library', link: 'formulas-library'},
         {title: 'Herbs list', link: 'herbs-list'},
         {title: 'Account', link: 'account'},
@@ -30,17 +30,11 @@ const Header = () => {
 
     const header_links = [
         {title: 'Patients', link: 'patients'},
-        // {title: 'Patients', isHidden: true, link: 'patients/create-prescription'},
         {title: 'Formulas library', link: 'formulas-library'},
         {title: 'Herbs list', link: 'herbs-list'},
     ]
 
     const links_desk = [
-        // {title: 'Patients', link: 'patients'},
-        // // {title: 'Patients', isHidden: true, link: 'patients/create-prescription'},
-        // {title: 'Formulas library', link: 'formulas-library'},
-        // {title: 'Herbs list', link: 'herbs-list'},
-        // {title: 'Account Statement', link: 'payment-history'},
         {title: 'Account', link: 'account'},
         {title: 'Help', link: 'help'},
     ]
@@ -109,7 +103,7 @@ const Header = () => {
                     >
                         <div className={s.selected_box_desc}>
                             <p>{userName || 'undefined'}</p>
-                            <Arrow/>
+                            <Burger/>
                         </div>
                     </Dropdown>
                 </div>
@@ -131,7 +125,7 @@ const Header = () => {
                     >
                         <div className={s.selected_box_desc}>
                             <p>{userName || 'undefined'}</p>
-                            <Arrow/>
+                            <Burger/>
                         </div>
                     </Dropdown>
                 </div>

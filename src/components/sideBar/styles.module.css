@@ -53,6 +53,15 @@
     color: #272933;
 }
 
+.no_patients {
+    margin-top: 35px;
+    font-size: 24px !important;
+}
+
+.no_patients p, .no_patients span {
+    font-size: 24px !important;
+}
+
 .search_pacient {
     margin-top: 15px;
 }

@@ -101,7 +101,11 @@ const FormulaLeft = observer(({formulas, selectedFormula, setSelectedFormula, ch
                 trigger={['click']}
                 placement="bottomRight"
             >
-                <div className={s.dots} onClick={(e) => e.preventDefault()}>
+                <div className={s.dots} onClick={(e) => {
+                    console.log('click')
+                    e.stopPropagation()
+                    e.preventDefault()
+                }}>
                     <span>.</span>
                     <span>.</span>
                     <span>.</span>

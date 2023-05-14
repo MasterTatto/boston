@@ -37,14 +37,16 @@ const FormulasLibrary = observer(() => {
     const removeFormula = async () => {
         await store.formula.removeFormula(store.formula.currentFormula.formula_id)
         await store.formula.getAllFormulas()
-        setData(store.formula.formulas)
+        const filteredDataByClassic = classic ? store.formula.formulas.filter((f) => f.is_classic) : store.formula.formulas.filter((f) => !f.is_classic)
+        setData(filteredDataByClassic)
         setRemoveModal(false)
     }
 
+    console.log(data)
+
     useEffect(() => {
-        const classicData = data.filter((f) => f.is_classic)
-        const noClassicData = store.formula.formulas
-        setData(classic ? classicData : noClassicData)
+        const filteredDataByClassic = classic ? store.formula.formulas.filter((f) => f.is_classic) : store.formula.formulas.filter((f) => !f.is_classic)
+        setData(filteredDataByClassic)
     }, [classic])
 
     useEffect(() => {
@@ -59,7 +61,8 @@ const FormulasLibrary = observer(() => {
     useEffect(() => {
         const getAllFormulas = async () => {
             await store.formula.getAllFormulas()
-            setData(store.formula.formulas)
+            const filteredDataByClassic = classic ? store.formula.formulas.filter((f) => f.is_classic) : store.formula.formulas.filter((f) => !f.is_classic)
+            setData(filteredDataByClassic)
 
             if (store.formula.formulas.length !== 0) {
                 setSelectedFormula(store.formula.formulas[0].formula_id)
@@ -72,7 +75,8 @@ const FormulasLibrary = observer(() => {
     return (
         <div className={s.formula}>
             {openModal &&
-                <AddedFormula type={typeModal} setData={setData} setOpenModal={choseTypeModal} openModal={openModal}/>}
+                <AddedFormula classic={classic} type={typeModal} setData={setData} setOpenModal={choseTypeModal}
+                              openModal={openModal}/>}
             {removeModal &&
                 <RemoveFormula removeFormula={removeFormula} setOpenModal={setRemoveModal} openModal={removeModal}/>}
             <div className={s.content_box}>
@@ -90,7 +94,8 @@ const FormulasLibrary = observer(() => {
                         </div>
                         <div className={s.switch_box}>
                             <Switch checked={classic} onChange={setClassic}/>
-                            <span className={s.switch_box_title}>Classic formulas</span>
+                            <span
+                                className={s.switch_box_title}>{classic ? 'Created formulas' : 'Classic formulas'}</span>
                         </div>
                     </div>
                 </div>

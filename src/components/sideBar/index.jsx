@@ -186,7 +186,12 @@ const SideBar = observer(() => {
                     </div>
 
                 </NavLink>)}
-            </div> : <h2 className={s.empty}>No patients</h2>}
+            </div> : <div>
+                <h2 className={s.empty}>No patients</h2>
+                <div className={s.no_patients}>
+                    <AddedTextPlus title={'Add patient'} onClick={() => setOpenAddedModal('add')}/>
+                </div>
+            </div>}
         </div>
     );
 });
