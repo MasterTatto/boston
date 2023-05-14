@@ -66,6 +66,7 @@
     color: #000000;
 }
 
+
 @media screen and (max-width: 1000px) {
     .media_auth {
         padding: 0 10px;
@@ -97,16 +98,18 @@
 
     .img2 {
         order: 3;
-        max-width: 100%;
+        min-width: 100%;
         margin-left: 0;
-        height: 456px;
+        height: auto;
+        margin: 0 auto;
         margin-top: 10px;
     }
 
     .img1 {
         order: 2;
-        max-width: 100%;
-        height: 266px;
+        min-width: 100%;
+        height: auto;
+        margin: 0 auto;
         margin-top: 20px;
     }
 
@@ -124,5 +127,31 @@
     .iframe {
         max-width: 100%;
         height: 200px;
+    }
+}
+
+@media screen and (min-width: 540px) and (max-width: 1000px) {
+    /*.iframe {*/
+    /*    min-width: 100%;*/
+    /*    height: 500px;*/
+    /*}*/
+
+    .img2 {
+        order: 3;
+        min-width: auto;
+        width: 100%;
+        margin-left: 0;
+        height: auto;
+        margin: 0 auto;
+        margin-top: 10px;
+    }
+
+    .img1 {
+        order: 2;
+        min-width: auto;
+        width: 100%;
+        height: auto;
+        margin: 0 auto;
+        margin-top: 20px;
     }
 }

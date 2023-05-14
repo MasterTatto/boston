@@ -16,12 +16,13 @@ const MediaAuth = () => {
                         and proper inventory control so you can focus on your patients.</p>
                 </div>
             </div>
+
             <div className={s.media_bottom}>
                 <h2>How to start?</h2>
                 <iframe className={s.iframe} src="https://www.youtube.com/embed/fKopy74weus"
                         title="YouTube video player" frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen></iframe>
+                        allow=" autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                ></iframe>
             </div>
         </div>
     );

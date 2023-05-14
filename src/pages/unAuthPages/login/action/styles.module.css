@@ -73,14 +73,17 @@
 
 .last_item .subtitle {
     width: 180%;
+    -webkit-text-size-adjust: none;
 }
 
 .subtitle_mobile {
     display: none;
+    -webkit-text-size-adjust: none;
 }
 
 .text {
     margin-left: 15px;
+    -webkit-text-size-adjust: none;
 }
 
 .title {
@@ -90,6 +93,7 @@
     font-size: 18px;
     line-height: 22px;
     color: #000000;
+    -webkit-text-size-adjust: none;
 }
 
 .subtitle {
@@ -100,6 +104,7 @@
     line-height: 19px;
     margin-top: 5px;
     color: #000000;
+    -webkit-text-size-adjust: none;
 }
 
 .action_box {
@@ -220,6 +225,7 @@
 
 .title_mobile {
     display: none;
+    -webkit-text-size-adjust: none;
 }
 
 .remember_me {

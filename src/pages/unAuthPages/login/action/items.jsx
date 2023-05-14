@@ -15,18 +15,22 @@ const Items = ({el, i}) => {
             <div className={s.text}>
                 <p className={s.title}>
                     {el.title}
-
                 </p>
+
                 <p className={s.title_mobile} onClick={() => setShowSubTitle(!showSubTitle)}>
                     {el.title}
-                    <span className={classNames(s.arrow, showSubTitle && s.rotate)} onClick={() => setShowSubTitle(!showSubTitle)}>
+                    <span className={classNames(s.arrow, showSubTitle && s.rotate)}
+                          onClick={() => setShowSubTitle(!showSubTitle)}>
                     <Arrow/>
-            </span>
+                    </span>
                 </p>
+
                 <p className={s.subtitle}>{el.subtitle}</p>
+
                 <p className={s.subtitle_mobile} style={{
                     height: showSubTitle ? 'fit-content' : 0
                 }}>{el.subtitle}</p>
+
             </div>
         </div>
     );
