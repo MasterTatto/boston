@@ -5,6 +5,13 @@
     height: calc(100% - 100px);
 }
 
+.extra {
+    position: absolute;
+    right: 0;
+    top: -2px;
+}
+
+
 .formula_left::-webkit-scrollbar {
     width: 0.4em;
     border-radius: 20px;
@@ -42,26 +49,44 @@
     color: #E76B50;
 }
 
+/*.dots {*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    margin: 0;*/
+/*    padding: 0;*/
+/*    cursor: pointer;*/
+/*    width: fit-content;*/
+/*    position: relative;*/
+/*    height: 28px;*/
+/*    user-select: none;*/
+/*    margin-right: 20px;*/
+/*}*/
+
+/*.dots span {*/
+/*    margin: 0;*/
+/*    padding: 0;*/
+/*    height: 5px;*/
+/*    font-size: 25px;*/
+/*    font-weight: 600;*/
+/*    margin-top: -10px;*/
+/*}*/
+
 .dots {
     display: flex;
     flex-direction: column;
-    margin: 0;
-    padding: 0;
     cursor: pointer;
-    width: fit-content;
-    position: relative;
-    height: 28px;
-    user-select: none;
-    margin-right: 20px;
+    align-items: center;
+    justify-content: space-between;
+    height: 50px;
+    width: 50px;
+    padding: 15px 0;
 }
 
-.dots span {
-    margin: 0;
-    padding: 0;
-    height: 5px;
-    font-size: 25px;
-    font-weight: 600;
-    margin-top: -10px;
+.dots div {
+    border-radius: 100%;
+    height: 3px;
+    width: 3px;
+    background-color: #000;
 }
 
 .formula {
@@ -203,28 +228,25 @@
         width: 15px;
     }
 
-    .dots {
-        display: flex;
-        flex-direction: column;
-        margin: 0;
-        padding: 0;
-        cursor: pointer;
-        width: fit-content;
-        position: relative;
-        height: 50px;
-        /*border: .1px solid;*/
-        padding: 0px 20px;
-        padding-top: 10px;
-
-
-    }
-
-    .dots span {
-        margin: 0;
-        padding: 0;
-        height: 3px;
-        font-size: 29px;
-        font-weight: 600;
-        margin-top: -10px;
-    }
+    /*.dots {*/
+    /*    display: flex;*/
+    /*    flex-direction: column;*/
+    /*    margin: 0;*/
+    /*    padding: 0;*/
+    /*    cursor: pointer;*/
+    /*    width: fit-content;*/
+    /*    position: relative;*/
+    /*    height: 50px;*/
+    /*    !*border: .1px solid;*!*/
+    /*    padding: 0px 20px;*/
+    /*    padding-top: 10px;*/
+    /*}*/
+    /*.dots span {*/
+    /*    margin: 0;*/
+    /*    padding: 0;*/
+    /*    height: 3px;*/
+    /*    font-size: 29px;*/
+    /*    font-weight: 600;*/
+    /*    margin-top: -10px;*/
+    /*}*/
 }

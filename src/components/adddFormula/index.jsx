@@ -148,6 +148,12 @@ const AddedFormula = observer(({setAddedFormulaID, classic, openModal, setOpenMo
                                     value: el.herb_code,
                                     label: el.herb_name,
                                 }))}
+                                showSearch
+                                optionFilterProp="children"
+                                filterOption={(input, option) => (option?.label.toLowerCase() ?? '').includes(input.toLowerCase())}
+                                filterSort={(optionA, optionB) =>
+                                    (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase())
+                                }
                             />
                             {errors.components === 'error' && <span className={s.error_mes}>Required field</span>}
                         </div>

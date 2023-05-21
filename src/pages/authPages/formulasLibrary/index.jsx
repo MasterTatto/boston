@@ -21,7 +21,6 @@ const FormulasLibrary = observer(() => {
     const [search, setSearch] = useState('')
     const [search2, setSearch2] = useState('')
 
-
     const dataFiltered = [...data.filter(item => {
         if (!search2) return true
         if (item?.formula_name?.toLowerCase()?.includes(search2.toLowerCase())) {
@@ -95,7 +94,7 @@ const FormulasLibrary = observer(() => {
                         <div className={s.switch_box}>
                             <Switch checked={classic} onChange={setClassic}/>
                             <span
-                                className={s.switch_box_title}>{classic ? 'Created formulas' : 'Classic formulas'}</span>
+                                className={s.switch_box_title}>Classic formulas</span>
                         </div>
                     </div>
                 </div>

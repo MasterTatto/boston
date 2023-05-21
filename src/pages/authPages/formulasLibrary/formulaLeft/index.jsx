@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import s from './styles.module.css'
 import {useStore} from "../../../../useStore";
 import {observer} from "mobx-react-lite";
@@ -25,7 +25,12 @@ const FormulaLeft = observer(({formulas, selectedFormula, setSelectedFormula, ch
         if (is_classic) {
             return [
                 {
-                    label: <div className={s.drop_item} onClick={() => choseTypeModal('edit', true)}>
+                    label: <div className={s.drop_item} onClick={async (e) => {
+                        // e.stopPropagation()
+                        setSelectedFormula(id)
+                        await getCurrentFormula(id)
+                        choseTypeModal('edit', true)
+                    }}>
                         <Edit/>
                         <p>Edit formula</p>
                     </div>,
@@ -55,7 +60,12 @@ const FormulaLeft = observer(({formulas, selectedFormula, setSelectedFormula, ch
         } else {
             return [
                 {
-                    label: <div className={s.drop_item} onClick={() => choseTypeModal('edit', true)}>
+                    label: <div className={s.drop_item} onClick={async (e) => {
+                        // e.stopPropagation()
+                        setSelectedFormula(id)
+                        await getCurrentFormula(id)
+                        choseTypeModal('edit', true)
+                    }}>
                         <Edit/>
                         <p>Edit formula</p>
                     </div>,
@@ -106,9 +116,9 @@ const FormulaLeft = observer(({formulas, selectedFormula, setSelectedFormula, ch
                     e.stopPropagation()
                     e.preventDefault()
                 }}>
-                    <span>.</span>
-                    <span>.</span>
-                    <span>.</span>
+                    <div/>
+                    <div/>
+                    <div/>
                 </div>
             </Dropdown>
 
@@ -118,21 +128,37 @@ const FormulaLeft = observer(({formulas, selectedFormula, setSelectedFormula, ch
     return (
         <div className={s.formula_left}>
             {formulas.map((el) => {
+                console.log(el)
                 return <div
                     className={classNames(s.formula, selectedFormula === el.formula_id && s.selected)}
-                    key={el.formula_id} onClick={async () => {
+                    key={el.formula_id} onClick={async (e) => {
+                    e.preventDefault()
+                    e.stopPropagation()
                     setSelectedFormula(el.formula_id)
                     await getCurrentFormula(el.formula_id)
                 }}>
                     <Collapse
-                        collapsible={size.width > 1000 && "disabled"}
+                        collapsible={(size.width > 1000 && "disabled")}
                         expandIconPosition={'end'}>
-                        <Collapse.Panel header={
-                            <div>
+
+                        <Collapse.Panel accordion={false} header={
+                            <div style={{
+                                position: 'relative',
+                                height:'50px',
+                                alignItems:'flex-start',
+                                justifyContent:"center",
+                                display:'flex',
+                                flexDirection:'column'
+                            }}>
                                 <p className={s.formula_name}>{el.formula_name}</p>
                                 <p className={s.formula_note}>{el.notes}</p>
+                                <div className={s.extra} onClick={(e) => e.stopPropagation()}>
+                                    {genExtra(el.formula_id, el.is_classic)}
+                                </div>
                             </div>
-                        } key="1" extra={genExtra(el.formula_id, el.is_classic)}>
+                        } key="1"
+                            // extra={genExtra(el.formula_id, el.is_classic)}
+                        >
 
                             <div className={s.test}>
                                 <p className={s.title_components}>Composition of the formula</p>
