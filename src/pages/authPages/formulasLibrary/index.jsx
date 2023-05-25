@@ -20,6 +20,8 @@ const FormulasLibrary = observer(() => {
     const [classic, setClassic] = useState(false)
     const [search, setSearch] = useState('')
     const [search2, setSearch2] = useState('')
+    const [idFormula, setIdFormula] = useState(null)
+    console.log(idFormula)
 
     const dataFiltered = [...data.filter(item => {
         if (!search2) return true
@@ -34,14 +36,12 @@ const FormulasLibrary = observer(() => {
     }
 
     const removeFormula = async () => {
-        await store.formula.removeFormula(store.formula.currentFormula.formula_id)
+        await store.formula.removeFormula(idFormula)
         await store.formula.getAllFormulas()
         const filteredDataByClassic = classic ? store.formula.formulas.filter((f) => f.is_classic) : store.formula.formulas.filter((f) => !f.is_classic)
         setData(filteredDataByClassic)
         setRemoveModal(false)
     }
-
-    console.log(data)
 
     useEffect(() => {
         const filteredDataByClassic = classic ? store.formula.formulas.filter((f) => f.is_classic) : store.formula.formulas.filter((f) => !f.is_classic)
@@ -99,7 +99,8 @@ const FormulasLibrary = observer(() => {
                     </div>
                 </div>
 
-                <FormulaLeft setRemoveModal={setRemoveModal} formulas={dataFiltered} choseTypeModal={choseTypeModal}
+                <FormulaLeft setIdFormula={setIdFormula} setRemoveModal={setRemoveModal} formulas={dataFiltered}
+                             choseTypeModal={choseTypeModal}
                              setSelectedFormula={setSelectedFormula}
                              selectedFormula={selectedFormula}/>
             </div>

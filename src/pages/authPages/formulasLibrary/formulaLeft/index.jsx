@@ -11,7 +11,7 @@ import {Collapse, Dropdown} from "antd";
 import {useNavigate} from "react-router-dom";
 import {useWindowSize} from "../../../../utils/useWindowSize";
 
-const FormulaLeft = observer(({formulas, selectedFormula, setSelectedFormula, choseTypeModal, setRemoveModal}) => {
+const FormulaLeft = observer(({setIdFormula,formulas, selectedFormula, setSelectedFormula, choseTypeModal, setRemoveModal}) => {
     const store = useStore()
     const size = useWindowSize();
     const navigate = useNavigate()
@@ -93,7 +93,10 @@ const FormulaLeft = observer(({formulas, selectedFormula, setSelectedFormula, ch
                 },
                 {
                     label: <div className={classNames(s.drop_item, s.drop_item_remove)}
-                                onClick={() => setRemoveModal(true)}>
+                                onClick={() => {
+                                    setIdFormula(id)
+                                    setRemoveModal(true)
+                                }}>
                         <Remove/>
                         <p>Delete formula</p>
                     </div>,
