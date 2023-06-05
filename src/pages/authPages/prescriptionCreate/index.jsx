@@ -229,6 +229,12 @@ const AddedPrescriptionPatient = observer(() => {
                                 value: el.formula_id,
                                 label: el.formula_name,
                             }))}
+                            showSearch
+                            optionFilterProp="children"
+                            filterOption={(input, option) => (option?.label?.toLowerCase() ?? '')?.includes(input?.toLowerCase())}
+                            filterSort={(optionA, optionB) =>
+                                (optionA?.label ?? '')?.toLowerCase()?.localeCompare((optionB?.label ?? '')?.toLowerCase())
+                            }
                         />
 
                         <p className={s.alergen_formula}>{store.patients.formula?.allergens ? <>This formula have

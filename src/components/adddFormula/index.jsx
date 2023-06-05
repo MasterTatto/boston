@@ -93,7 +93,7 @@ const AddedFormula = observer(({setAddedFormulaID, classic, openModal, setOpenMo
                 }
                 }
                         loading={store.formula.buttonLoading}
-                        className={classNames(s.btn, s.add)}>{type === 'copy' ? 'Save' : 'Add'}</Button>
+                        className={classNames(s.btn, s.add)}>{type === 'copy' ? 'Save' : 'Create formula'}</Button>
             </div>}
             open={openModal}
             onCancel={() => setOpenModal(null, false)}
@@ -150,9 +150,9 @@ const AddedFormula = observer(({setAddedFormulaID, classic, openModal, setOpenMo
                                 }))}
                                 showSearch
                                 optionFilterProp="children"
-                                filterOption={(input, option) => (option?.label.toLowerCase() ?? '').includes(input.toLowerCase())}
+                                filterOption={(input, option) => (option?.label?.toLowerCase() ?? '')?.includes(input?.toLowerCase())}
                                 filterSort={(optionA, optionB) =>
-                                    (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase())
+                                    (optionA?.label ?? '')?.toLowerCase()?.localeCompare((optionB?.label ?? '')?.toLowerCase())
                                 }
                             />
                             {errors.components === 'error' && <span className={s.error_mes}>Required field</span>}
@@ -182,7 +182,7 @@ const AddedFormula = observer(({setAddedFormulaID, classic, openModal, setOpenMo
                         </div>
                     </div>
                     <div className={s.added_herb}>
-                        {herb?.herb_name ? <AddedTextPlus title={'Create herb'}
+                        {herb?.herb_name ? <AddedTextPlus title={'Add herb'}
                                                           showPlus={false}
                                                           onClick={() => {
                                                               if (chooseHerbs?.find(f => f.herb_code === herb.herb_code) || !herb.herb_code) {

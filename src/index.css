@@ -17,3 +17,7 @@ code {
     padding: 0;
     box-sizing: border-box;
 }
+
+.ant-input-number-input, .ant-input-number {
+    color: rgba(0, 0, 0, 0.88) !important;
+}
