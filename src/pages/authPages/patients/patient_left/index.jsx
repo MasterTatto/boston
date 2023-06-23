@@ -52,7 +52,7 @@ const PatientLeft = observer(({
                 e.stopPropagation()
             }} className={s.drop_item}>
                 <Copy/>
-                <p>Copy prescription</p>
+                <p>Renew Prescription</p>
             </div>,
             key: '0',
         },

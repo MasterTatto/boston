@@ -64,10 +64,11 @@ const LeftSide = ({history, chooseDay, setHistory, from, setFrom, to, setTo}) =>
                 <div className={s.header_table}>
                     <div className={s.header_table_first}>
                         <p className={s.number_table}>#</p>
+                        <p className={s.date_table}>Date</p>
                         <p className={s.type_table}>Transaction Type</p>
                     </div>
                     <div className={s.header_table_second}>
-                        <p className={s.date_table}>Date</p>
+
                         <p className={s.amount_table_header} style={{
                             alignItems: classic && 'center',
                             justifyContent: classic && 'flex-end',
@@ -96,13 +97,14 @@ const LeftSide = ({history, chooseDay, setHistory, from, setFrom, to, setTo}) =>
                                 <div className={s.item_first}>
                                     <div className={s.header_table_first}>
                                         <p className={s.number_table}>{i + 1}</p>
+                                        <p className={s.date_table}>{el.date}</p>
                                         <p className={s.type_table} style={{
                                             color: el.isOpen && '#67AC46'
                                         }}>{el.type}</p>
                                     </div>
 
                                     <div className={s.header_table_second}>
-                                        <p className={s.date_table}>{el.date}</p>
+
                                         <p style={{
                                             alignItems: !el.balance && 'center',
                                             justifyContent: !el.balance && 'flex-end',
